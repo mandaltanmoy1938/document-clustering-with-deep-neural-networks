@@ -13,7 +13,7 @@ log.basicConfig(filename='statistics.log', level=log.DEBUG, filemode="w")
 def read_file(file_name):
     global error_file_count
     lines = []
-    with open(file_name, 'r') as f:
+    with open(file_name, 'rt', encoding="utf-8") as f:
         try:
             lines = f.readlines()
         except Exception as e:
@@ -105,7 +105,7 @@ def get_all_label_content_meta(meta_dict, label_dict_list):
                     label_content_meta[label]['space_count'] += meta_dict[path]['space_count']
                     label_content_meta[label]['total_character_count'] += meta_dict[path]['total_character_count']
                 # else:
-                    # log.debug(("mismatch path wth meta dict: ", path))
+                # log.debug(("mismatch path wth meta dict: ", path))
     return label_content_meta
 
 
@@ -223,7 +223,7 @@ def main():
                title="Average number of lines vs Classes for\n" + str(len(test_labels_by_path)) + " test documents",
                kind="bar",
                data=test_label_content_meta_pd, pad=30, plot_name="test_avg_line_count")
-    plot_chart(y="word_count", y_label="Average number of words",
+    plot_chart(y="class_avg_word", y_label="Average number of words",
                title="Average number of words vs Classes for\n" + str(len(test_labels_by_path)) + " test documents",
                kind="bar",
                data=test_label_content_meta_pd, pad=30, plot_name="test_avg_word_count")
@@ -250,7 +250,7 @@ def main():
                title="Average number of lines vs Classes for\n" + str(len(train_labels_by_path)) + " train documents",
                kind="bar",
                data=train_label_content_meta_pd, pad=30, plot_name="train_avg_line_count")
-    plot_chart(y="word_count", y_label="Average number of words",
+    plot_chart(y="class_avg_word", y_label="Average number of words",
                title="Average number of words vs Classes for\n" + str(len(train_labels_by_path)) + " train documents",
                kind="bar",
                data=train_label_content_meta_pd, pad=30, plot_name="train_avg_word_count")
@@ -277,7 +277,7 @@ def main():
                title="Average number of lines vs Classes for " + str(len(val_labels_by_path)) + " val documents",
                kind="bar",
                data=val_label_content_meta_pd, pad=30, plot_name="val_avg_line_count")
-    plot_chart(y="word_count", y_label="Average number of words",
+    plot_chart(y="class_avg_word", y_label="Average number of words",
                title="Average number of words vs Classes for " + str(len(val_labels_by_path)) + " val documents",
                kind="bar",
                data=val_label_content_meta_pd, pad=30, plot_name="val_avg_word_count")
