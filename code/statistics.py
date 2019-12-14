@@ -1,6 +1,5 @@
 import os
 import time
-import numpy as np
 import pandas as pd
 import seaborn as sns
 import logging as log
@@ -109,67 +108,6 @@ def get_all_label_content_meta(meta_dict, label_dict_list):
     return label_content_meta
 
 
-def plot_chart(all_label_content_meta):
-    labels = ['{}'.format(k) for k in range(16)]
-
-    total_line_counts = [v['total_line_count'] for l, v in all_label_content_meta.items()]
-    empty_line_counts = [v['empty_line_count'] for l, v in all_label_content_meta.items()]
-    draw_dual_grouped_bar_chart(labels, total_line_counts, empty_line_counts)
-
-    word_counts = [v['word_count'] for l, v in all_label_content_meta.items()]
-    draw_bar_chart(labels, word_counts)
-
-    space_counts = [v['space_count'] for l, v in all_label_content_meta.items()]
-    total_character_counts = [v['total_character_count'] for l, v in all_label_content_meta.items()]
-    draw_dual_grouped_bar_chart(labels, total_character_counts, space_counts)
-
-
-def draw_dual_grouped_bar_chart(labels, bar1, bar2):
-    # set width of bar
-    barWidth = 0.5
-    # Set position of bar on X axis
-    r1 = np.arange(len(labels))
-    r2 = [x + barWidth for x in r1]
-
-    plt.bar(r1, bar1, color='#7f6d5f', width=barWidth, edgecolor='white', label='Total number of lines')
-    plt.bar(r2, bar2, color='#557f2d', width=barWidth, edgecolor='white', label='Number of empty lines')
-
-    # Add xticks on the middle of the group bars
-    plt.xlabel('labels', fontweight='bold')
-    plt.xticks([r + barWidth for r in range(len(bar1))], labels)
-
-    for i, v in enumerate(r1):
-        if bar1[i] != 0:
-            plt.text(x=r1[i] - 0.25, y=bar1[i] + 0.5, s=bar1[i], size=10, rotation='vertical')
-        if bar2[i] != 0:
-            plt.text(x=r2[i] - 0.25, y=bar2[i] + 0.5, s=bar2[i], size=10, rotation='vertical')
-
-    # Create legend & Show graphic
-    plt.legend()
-    plt.show()
-
-
-def draw_bar_chart(labels, bar1):
-    # set width of bar
-    barWidth = 0.5
-    # Set position of bar on X axis
-    r1 = np.arange(len(labels))
-
-    plt.bar(r1, bar1, color='#7f6d5f', width=barWidth, edgecolor='white', label='Total number of lines')  #
-
-    # Add xticks on the middle of the group bars
-    plt.xlabel('labels', fontweight='bold')
-    plt.xticks([r + barWidth for r in range(len(bar1))], labels)
-
-    for i, v in enumerate(r1):
-        if bar1[i] != 0:
-            plt.text(x=r1[i] - 0.25, y=bar1[i] + 0.5, s=bar1[i], size=10, rotation='vertical')
-
-    # Create legend & Show graphic
-    plt.legend()
-    plt.show()
-
-
 def plot_chart(y, y_label, title, kind, data, pad, plot_name):
     sns_plot = sns.catplot(x="label", y=y, kind=kind, data=data)
     sns_plot.set_xticklabels(rotation=45, ha='right')
@@ -184,7 +122,8 @@ def plot_chart(y, y_label, title, kind, data, pad, plot_name):
 
 
 def main():
-    src_path = "G:\\UB\\5th Sem\\Individual Project\\Data\\QS-OCR-Large\\"
+    # src_path = "G:\\UB\\5th Sem\\Individual Project\\Data\\QS-OCR-Large\\"
+    src_path = "/media/remote/tmandal/document-clustering-with-deep-neural-networks/data/QS-OCR-Large/"
     test_label_file_name = "text_test.txt"
     train_label_file_name = "text_train.txt"
     val_label_file_name = "text_val.txt"
