@@ -4,23 +4,9 @@ import logging as log
 import plot_generator as pg
 import file_collector as fc
 import global_variables as gv
+import data_labeller as dl
 
 log.basicConfig(filename='statistics.log', level=log.DEBUG, filemode="w")
-
-
-def get_labels(lines, file_path):
-    paths_by_label = dict(('{}'.format(k), []) for k in range(16))
-    labels_by_path = dict()
-    log.info(("get labels from ", file_path))
-    for index, line in enumerate(lines):
-        label = line.strip('\n').split(" ")
-        if len(label) == 2:
-            paths_by_label[label[1]].append(label[0])
-            if label[1] is not "3":
-                labels_by_path[label[0]] = label[1]
-        else:
-            log.error((str(index + 1) + " : " + str(line)))
-    return paths_by_label, labels_by_path
 
 
 def get_file_content_meta(lines):
@@ -86,21 +72,21 @@ def get_all_label_content_meta(meta_dict, label_dict_list):
 
 
 def main():
-    test_paths_by_label, test_labels_by_path = get_labels(fc.read_file(gv.src_path + gv.test_label_file_name),
-                                                          gv.test_label_file_name)
+    test_paths_by_label, test_labels_by_path = dl.get_labels(fc.read_file(gv.src_path + gv.test_label_file_name),
+                                                             gv.test_label_file_name)
     log.info(("number of handwritten files in test: ", len(test_paths_by_label["3"])))
 
-    train_paths_by_label, train_labels_by_path = get_labels(fc.read_file(gv.src_path + gv.train_label_file_name),
-                                                            gv.train_label_file_name)
+    train_paths_by_label, train_labels_by_path = dl.get_labels(fc.read_file(gv.src_path + gv.train_label_file_name),
+                                                               gv.train_label_file_name)
     log.info(("number of handwritten files in train: ", len(train_paths_by_label["3"])))
 
-    val_paths_by_label, val_labels_by_path = get_labels(fc.read_file(gv.src_path + gv.val_label_file_name),
-                                                        gv.val_label_file_name)
+    val_paths_by_label, val_labels_by_path = dl.get_labels(fc.read_file(gv.src_path + gv.val_label_file_name),
+                                                           gv.val_label_file_name)
     log.info(("number of handwritten files in val: ", len(val_paths_by_label["3"])))
 
-    files_path = fc.get_all_files_from_directory(gv.src_path)
-    test_meta_dict, test_empty_file_count = get_all_file_content_meta(files_path, gv.src_path, test_paths_by_label["3"],
-                                                                      test_labels_by_path)
+    file_paths = fc.get_all_files_from_directory(gv.src_path)
+    test_meta_dict, test_empty_file_count = get_all_file_content_meta(file_paths, gv.src_path,
+                                                                      test_paths_by_label["3"], test_labels_by_path)
     test_label_content_meta = get_all_label_content_meta(test_meta_dict, [test_paths_by_label])
     del test_label_content_meta["3"]
     test_label_content_meta_pd = pd.DataFrame.from_dict(test_label_content_meta, orient='index')
@@ -111,18 +97,18 @@ def main():
     test_label_content_meta_pd = test_label_content_meta_pd.round({"class_avg_line": 0, "class_avg_word": 0})
     pg.plot_chart(y="total_line_count", y_label="Total number of lines",
                   title="Total number of lines vs Classes for\n" + str(len(test_labels_by_path)) + " test documents",
-                  kind="bar", data=test_label_content_meta_pd, pad=30, plot_name="test_total_line_count")
+                  kind="bar", data=test_label_content_meta_pd, pad=30, plot_name="test_total_line_count", fig_num=1)
     pg.plot_chart(y="word_count", y_label="Total number of words",
                   title="Total number of words vs Classes for\n" + str(len(test_labels_by_path)) + " test documents",
-                  kind="bar", data=test_label_content_meta_pd, pad=30, plot_name="test_word_count")
+                  kind="bar", data=test_label_content_meta_pd, pad=30, plot_name="test_word_count", fig_num=2)
     pg.plot_chart(y="class_avg_line", y_label="Average number of lines",
                   title="Average number of lines vs Classes for\n" + str(len(test_labels_by_path)) + " test documents",
-                  kind="bar", data=test_label_content_meta_pd, pad=30, plot_name="test_avg_line_count")
+                  kind="bar", data=test_label_content_meta_pd, pad=30, plot_name="test_avg_line_count", fig_num=3)
     pg.plot_chart(y="class_avg_word", y_label="Average number of words",
                   title="Average number of words vs Classes for\n" + str(len(test_labels_by_path)) + " test documents",
-                  kind="bar", data=test_label_content_meta_pd, pad=30, plot_name="test_avg_word_count")
+                  kind="bar", data=test_label_content_meta_pd, pad=30, plot_name="test_avg_word_count", fig_num=4)
 
-    train_meta_dict, train_empty_file_count = get_all_file_content_meta(files_path, gv.src_path,
+    train_meta_dict, train_empty_file_count = get_all_file_content_meta(file_paths, gv.src_path,
                                                                         train_paths_by_label["3"], train_labels_by_path)
     train_label_content_meta = get_all_label_content_meta(train_meta_dict, [train_paths_by_label])
     del train_label_content_meta["3"]
@@ -134,20 +120,20 @@ def main():
     train_label_content_meta_pd = train_label_content_meta_pd.round({"class_avg_line": 0, "class_avg_word": 0})
     pg.plot_chart(y="total_line_count", y_label="Total number of lines",
                   title="Total number of lines vs Classes for\n" + str(len(train_labels_by_path)) + " train documents",
-                  kind="bar", data=train_label_content_meta_pd, pad=30, plot_name="train_total_line_count")
+                  kind="bar", data=train_label_content_meta_pd, pad=30, plot_name="train_total_line_count", fig_num=5)
     pg.plot_chart(y="word_count", y_label="Total number of words",
                   title="Total number of words vs Classes for\n" + str(len(train_labels_by_path)) + " train documents",
-                  kind="bar", data=train_label_content_meta_pd, pad=30, plot_name="train_word_count")
+                  kind="bar", data=train_label_content_meta_pd, pad=30, plot_name="train_word_count", fig_num=6)
     pg.plot_chart(y="class_avg_line", y_label="Average number of lines",
                   title="Average number of lines vs Classes for\n" + str(
                       len(train_labels_by_path)) + " train documents", kind="bar", data=train_label_content_meta_pd,
-                  pad=30, plot_name="train_avg_line_count")
+                  pad=30, plot_name="train_avg_line_count", fig_num=7)
     pg.plot_chart(y="class_avg_word", y_label="Average number of words",
                   title="Average number of words vs Classes for\n" + str(
                       len(train_labels_by_path)) + " train documents", kind="bar", data=train_label_content_meta_pd,
-                  pad=30, plot_name="train_avg_word_count")
+                  pad=30, plot_name="train_avg_word_count", fig_num=8)
 
-    val_meta_dict, val_empty_file_count = get_all_file_content_meta(files_path, gv.src_path, val_paths_by_label["3"],
+    val_meta_dict, val_empty_file_count = get_all_file_content_meta(file_paths, gv.src_path, val_paths_by_label["3"],
                                                                     val_labels_by_path)
     val_label_content_meta = get_all_label_content_meta(val_meta_dict, [val_paths_by_label])
     del val_label_content_meta["3"]
@@ -159,16 +145,16 @@ def main():
     val_label_content_meta_pd = val_label_content_meta_pd.round({"class_avg_line": 0, "class_avg_word": 0})
     pg.plot_chart(y="total_line_count", y_label="Total number of lines",
                   title="Total number of lines vs Classes for " + str(len(val_labels_by_path)) + " val documents",
-                  kind="bar", data=val_label_content_meta_pd, pad=30, plot_name="val_total_line_count")
+                  kind="bar", data=val_label_content_meta_pd, pad=30, plot_name="val_total_line_count", fig_num=9)
     pg.plot_chart(y="word_count", y_label="Total number of words",
                   title="Total number of words vs Classes for " + str(len(val_labels_by_path)) + " val documents",
-                  kind="bar", data=val_label_content_meta_pd, pad=30, plot_name="val_word_count")
+                  kind="bar", data=val_label_content_meta_pd, pad=30, plot_name="val_word_count", fig_num=10)
     pg.plot_chart(y="class_avg_line", y_label="Average number of lines",
                   title="Average number of lines vs Classes for " + str(len(val_labels_by_path)) + " val documents",
-                  kind="bar", data=val_label_content_meta_pd, pad=30, plot_name="val_avg_line_count")
+                  kind="bar", data=val_label_content_meta_pd, pad=30, plot_name="val_avg_line_count", fig_num=11)
     pg.plot_chart(y="class_avg_word", y_label="Average number of words",
                   title="Average number of words vs Classes for " + str(len(val_labels_by_path)) + " val documents",
-                  kind="bar", data=val_label_content_meta_pd, pad=30, plot_name="val_avg_word_count")
+                  kind="bar", data=val_label_content_meta_pd, pad=30, plot_name="val_avg_word_count", fig_num=12)
     # plot_chart(all_label_content_meta)
 
     log.error(("Number of error file:", gv.error_file_count))
