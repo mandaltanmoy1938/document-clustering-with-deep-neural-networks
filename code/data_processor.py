@@ -8,21 +8,36 @@ import global_variables as gv
 log.basicConfig(filename='data_processor.log', level=log.DEBUG, filemode="w")
 
 
+def tokenizer(file_paths, nlp, skipped_files, required_files):
+    document_meta = dict()
+    for file_path in file_paths:
+        file_path_ = file_path.replace(gv.src_path, "").replace("\\", "/")
+        if file_path_ not in skipped_files and file_path_ in required_files:
+            lines = fc.read_file(file_path)
+            text = "".join(lines)
+            parsed_text = nlp(text)
+            document_meta['{}'.format(file_path.replace(gv.src_path, "").replace("\\", "/"))] = dict()
+            for token in parsed_text:
+                document_meta['{}'.format(file_path.replace(gv.src_path, "").replace("\\", "/"))][token.text] = 1.0
+    return document_meta
+
+
 def main():
     # test_paths_by_label, test_labels_by_path = dl.get_labels(fc.read_file(gv.src_path + gv.test_label_file_name),
     #                                                          gv.test_label_file_name)
     # train_paths_by_label, train_labels_by_path = dl.get_labels(fc.read_file(gv.src_path + gv.train_label_file_name),
     #                                                            gv.train_label_file_name)
-    # val_paths_by_label, val_labels_by_path = dl.get_labels(fc.read_file(gv.src_path + gv.val_label_file_name),
-    #                                                        gv.val_label_file_name)
+    val_paths_by_label, val_labels_by_path = dl.get_labels(fc.read_file(gv.src_path + gv.val_label_file_name),
+                                                           gv.val_label_file_name)
 
-    spacy.prefer_gpu()
     nlp = spacy.load("en_core_web_sm")
     file_paths = fc.get_all_files_from_directory(gv.src_path)
-    document_meta = dict()
-    for file_path in file_paths:
-        parsed_text = nlp(fc.read_file(file_path))
-        document_meta['{}'.format(file_path.replace(gv.src_path, "").replace("\\", "/"))] = parsed_text
+    # test_document_meta = tokenizer(file_paths=file_paths, nlp=nlp, skipped_files=test_paths_by_label["3"],
+    #                           required_files=test_labels_by_path)
+    # train_document_meta = tokenizer(file_paths=file_paths, nlp=nlp, skipped_files=train_paths_by_label["3"],
+    #                           required_files=train_labels_by_path)
+    val_document_meta = tokenizer(file_paths=file_paths, nlp=nlp, skipped_files=val_paths_by_label["3"],
+                                  required_files=val_labels_by_path)
 
 
 if __name__ == '__main__':
