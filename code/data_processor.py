@@ -8,17 +8,16 @@ import global_variables as gv
 log.basicConfig(filename='data_processor.log', level=log.DEBUG, filemode="w")
 
 
-def tokenizer(file_paths, nlp, skipped_files, required_files):
+def tokenizer(nlp, required_files):
     document_meta = dict()
-    for file_path in file_paths:
-        file_path_ = file_path.replace(gv.src_path, "").replace("\\", "/")
-        if file_path_ not in skipped_files and file_path_ in required_files:
-            lines = fc.read_file(file_path)
-            text = "".join(lines)
-            parsed_text = nlp(text)
-            document_meta['{}'.format(file_path.replace(gv.src_path, "").replace("\\", "/"))] = dict()
-            for token in parsed_text:
-                document_meta['{}'.format(file_path.replace(gv.src_path, "").replace("\\", "/"))][token.text] = 1.0
+    for file_path_ in required_files:
+        file_path = gv.src_path+file_path_
+        lines = fc.read_file(file_path)
+        text = "".join(lines)
+        parsed_text = nlp(text)
+        document_meta[file_path_] = dict()
+        for token in parsed_text:
+            document_meta[file_path_][token.text] = 1.0
     return document_meta
 
 
@@ -31,7 +30,7 @@ def main():
                                                            gv.val_label_file_name)
 
     nlp = spacy.load("en_core_web_sm")
-    file_paths = fc.get_all_files_from_directory(gv.src_path)
+    # file_paths = fc.get_all_files_from_directory(gv.src_path)
     # test_document_meta = tokenizer(file_paths=file_paths, nlp=nlp, skipped_files=test_paths_by_label["3"],
     #                           required_files=test_labels_by_path)
     # train_document_meta = tokenizer(file_paths=file_paths, nlp=nlp, skipped_files=train_paths_by_label["3"],
