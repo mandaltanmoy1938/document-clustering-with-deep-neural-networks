@@ -1,4 +1,5 @@
 import time
+import json
 import spacy
 import logging as log
 import data_labeller as dl
@@ -11,6 +12,13 @@ from sklearn.model_selection import cross_validate
 from sklearn.feature_extraction import DictVectorizer
 
 log.basicConfig(filename='data_processor.log', level=log.DEBUG, filemode="w")
+
+
+def load_stop_words():
+    stopwords_en = None
+    with open("/home/tma/project/Data/stopwords-en.txt", "rt", encoding="utf-8-sig") as infile:
+        stopwords_en = json.load(infile)["en"]
+        return stopwords_en
 
 
 def dict_vectorizer(data_dict, label_dct):
@@ -26,6 +34,8 @@ def dict_vectorizer(data_dict, label_dct):
 
 
 def tokenizer(required_files):
+    stopwords_en = load_stop_words()
+
     nlp = spacy.load("en_core_web_sm")
     document_meta = dict()
     parsed_documents = dict()
@@ -41,7 +51,7 @@ def tokenizer(required_files):
                 token_key = "<NUM>"
             else:
                 token_key = token.text.strip()
-            if len(token_key) > 0:
+            if len(token_key) > 0 and token_key not in stopwords_en:
                 document_meta[file_path_][token_key] = 1.0
     return document_meta, parsed_documents
 
