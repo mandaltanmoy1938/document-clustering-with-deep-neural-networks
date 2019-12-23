@@ -66,10 +66,10 @@ def run():
     op.save_object(test_document_meta, gv.prj_src_path + "python_objects/test_document_meta")
     op.save_object(test_parsed_documents, gv.prj_src_path + "python_objects/test_parsed_documents")
     # test dataset vectorize
-    test_document_meta = op.load_object(gv.prj_src_path + "python_objects/test_document_meta")
-    test_data_transformed, test_labels = dict_vectorizer(data_dict=test_document_meta, label_dct=test_labels_by_path)
-    op.save_object(test_data_transformed, gv.prj_src_path + "python_objects/test_data_transformed")
-    op.save_object(test_labels, gv.prj_src_path + "python_objects/test_labels")
+    # test_document_meta = op.load_object(gv.prj_src_path + "python_objects/test_document_meta")
+    # test_data_transformed, test_labels = dict_vectorizer(data_dict=test_document_meta, label_dct=test_labels_by_path)
+    # op.save_object(test_data_transformed, gv.prj_src_path + "python_objects/test_data_transformed")
+    # op.save_object(test_labels, gv.prj_src_path + "python_objects/test_labels")
 
     #############################Train#####################
     # train labels
@@ -80,11 +80,11 @@ def run():
     op.save_object(train_document_meta, gv.prj_src_path + "python_objects/train_document_meta")
     op.save_object(train_parsed_documents, gv.prj_src_path + "python_objects/train_parsed_documents")
     # train dataset vectorize
-    train_document_meta = op.load_object(gv.prj_src_path + "python_objects/train_document_meta.p")
-    train_data_transformed, train_labels = dict_vectorizer(data_dict=train_document_meta,
-                                                           label_dct=train_labels_by_path)
-    op.save_object(train_data_transformed, gv.prj_src_path + "python_objects/train_data_transformed")
-    op.save_object(train_labels, gv.prj_src_path + "python_objects/train_labels")
+    # train_document_meta = op.load_object(gv.prj_src_path + "python_objects/train_document_meta.p")
+    # train_data_transformed, train_labels = dict_vectorizer(data_dict=train_document_meta,
+    #                                                        label_dct=train_labels_by_path)
+    # op.save_object(train_data_transformed, gv.prj_src_path + "python_objects/train_data_transformed")
+    # op.save_object(train_labels, gv.prj_src_path + "python_objects/train_labels")
 
     #############################Val#####################
     # val labels
@@ -95,17 +95,10 @@ def run():
     op.save_object(val_document_meta, gv.prj_src_path + "python_objects/val_document_meta")
     op.save_object(val_parsed_documents, gv.prj_src_path + "python_objects/val_parsed_documents")
     # val dataset vectorize
-    val_document_meta = op.load_object(gv.prj_src_path + "python_objects/val_document_meta")
-    val_data_transformed, val_labels = dict_vectorizer(data_dict=val_document_meta, label_dct=val_labels_by_path)
-    op.save_object(val_data_transformed, gv.prj_src_path + "python_objects/val_data_transformed")
-    op.save_object(val_labels, gv.prj_src_path + "python_objects/val_labels")
-
-    clf = KMeans(n_clusters=15)
-    scoring = ['precision_macro', 'recall_macro', 'f1_macro', 'accuracy']
-    scores = cross_validate(clf, val_data_transformed, val_labels, scoring=scoring, cv=5, return_train_score=False)
-    for k in sorted(scores.keys()):
-        print("\t%s: %0.2f (+/- %0.2f)" % (k, scores[k].mean(), scores[k].std() * 2))
-
+    # val_document_meta = op.load_object(gv.prj_src_path + "python_objects/val_document_meta")
+    # val_data_transformed, val_labels = dict_vectorizer(data_dict=val_document_meta, label_dct=val_labels_by_path)
+    # op.save_object(val_data_transformed, gv.prj_src_path + "python_objects/val_data_transformed")
+    # op.save_object(val_labels, gv.prj_src_path + "python_objects/val_labels")
 
 def main():
     run()
