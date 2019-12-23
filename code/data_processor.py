@@ -69,21 +69,6 @@ def run():
     # op.save_object(test_data_transformed, gv.prj_src_path + "python_objects/test_data_transformed")
     # op.save_object(test_labels, gv.prj_src_path + "python_objects/test_labels")
 
-    #############################Train#####################
-    # train labels
-    train_paths_by_label, train_labels_by_path = dl.get_labels(
-        fc.read_file(gv.data_src_path + gv.train_label_file_name), gv.train_label_file_name)
-    # train dataset processing
-    train_document_meta, train_parsed_documents = tokenizer(required_files=train_labels_by_path)
-    op.save_object(train_document_meta, gv.prj_src_path + "python_objects/train_document_meta")
-    op.save_object(train_parsed_documents, gv.prj_src_path + "python_objects/train_parsed_documents")
-    # train dataset vectorize
-    # train_document_meta = op.load_object(gv.prj_src_path + "python_objects/train_document_meta.p")
-    # train_data_transformed, train_labels = dict_vectorizer(data_dict=train_document_meta,
-    #                                                        label_dct=train_labels_by_path)
-    # op.save_object(train_data_transformed, gv.prj_src_path + "python_objects/train_data_transformed")
-    # op.save_object(train_labels, gv.prj_src_path + "python_objects/train_labels")
-
     #############################Val#####################
     # val labels
     val_paths_by_label, val_labels_by_path = dl.get_labels(fc.read_file(gv.data_src_path + gv.val_label_file_name),
@@ -98,6 +83,20 @@ def run():
     # op.save_object(val_data_transformed, gv.prj_src_path + "python_objects/val_data_transformed")
     # op.save_object(val_labels, gv.prj_src_path + "python_objects/val_labels")
 
+    #############################Train#####################
+    # train labels
+    train_paths_by_label, train_labels_by_path = dl.get_labels(
+        fc.read_file(gv.data_src_path + gv.train_label_file_name), gv.train_label_file_name)
+    # train dataset processing
+    train_document_meta, train_parsed_documents = tokenizer(required_files=train_labels_by_path)
+    op.save_object(train_document_meta, gv.prj_src_path + "python_objects/train_document_meta")
+    op.save_object(train_parsed_documents, gv.prj_src_path + "python_objects/train_parsed_documents")
+    # train dataset vectorize
+    # train_document_meta = op.load_object(gv.prj_src_path + "python_objects/train_document_meta.p")
+    # train_data_transformed, train_labels = dict_vectorizer(data_dict=train_document_meta,
+    #                                                        label_dct=train_labels_by_path)
+    # op.save_object(train_data_transformed, gv.prj_src_path + "python_objects/train_data_transformed")
+    # op.save_object(train_labels, gv.prj_src_path + "python_objects/train_labels")
 
 def main():
     run()
