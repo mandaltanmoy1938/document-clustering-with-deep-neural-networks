@@ -15,8 +15,9 @@ def dict_vectorizer(data_dict, label_dct):
     labels = list()
     data = list()
     for file_path, value in data_dict.items():
-        labels.append(label_dct[file_path])
-        data.append(value)
+        if len(value) is 0:
+            labels.append(label_dct[file_path])
+            data.append(value)
     dv = DictVectorizer(sparse=False)
     data_transformed = dv.fit_transform(data)
     return data_transformed, labels
@@ -52,11 +53,12 @@ def run():
     val_paths_by_label, val_labels_by_path = dl.get_labels(fc.read_file(gv.data_src_path + gv.val_label_file_name),
                                                            gv.val_label_file_name)
 
-    nlp = spacy.load("en_core_web_sm")
+    # nlp = spacy.load("en_core_web_sm")
     # file_paths = fc.get_all_files_from_directory(gv.src_path)
-    test_document_meta, test_parsed_documents = tokenizer(nlp=nlp, required_files=test_labels_by_path)
-    op.save_object(test_document_meta, gv.prj_src_path + "python_objects/test_document_meta")
-    op.save_object(test_parsed_documents, gv.prj_src_path + "python_objects/test_parsed_documents")
+
+    # test_document_meta, test_parsed_documents = tokenizer(nlp=nlp, required_files=test_labels_by_path)
+    # op.save_object(test_document_meta, gv.prj_src_path + "python_objects/test_document_meta")
+    # op.save_object(test_parsed_documents, gv.prj_src_path + "python_objects/test_parsed_documents")
 
     # train_document_meta, train_parsed_documents = tokenizer(nlp=nlp, required_files=train_labels_by_path)
     # op.save_object(train_document_meta, gv.prj_src_path + "python_objects/train_document_meta")
@@ -66,11 +68,12 @@ def run():
     # op.save_object(val_document_meta, gv.prj_src_path + "python_objects/val_document_meta")
     # op.save_object(val_parsed_documents, gv.prj_src_path + "python_objects/val_parsed_documents")
 
-    test_document_meta = op.load_object(gv.prj_src_path + "python_objects/test_document_meta.p")
+    test_document_meta = op.load_object(gv.prj_src_path + "python_objects/test_document_meta")
     # train_document_meta = op.load_object(gv.prj_src_path+"python_objects/train_document_meta.p")
-    val_document_meta = op.load_object(gv.prj_src_path + "python_objects/val_document_meta.p")
+    val_document_meta = op.load_object(gv.prj_src_path + "python_objects/val_document_meta")
 
     test_data_transformed, test_labels = dict_vectorizer(data_dict=test_document_meta, label_dct=test_labels_by_path)
+
     # train_data_transformed, train_labels = dict_vectorizer(data_dict=train_document_meta,
     #                                                        label_dct=train_labels_by_path)
     val_data_transformed, val_labels = dict_vectorizer(data_dict=val_document_meta, label_dct=val_labels_by_path)
