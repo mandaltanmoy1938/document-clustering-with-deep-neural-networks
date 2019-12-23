@@ -6,8 +6,6 @@ import data_labeller as dl
 import file_collector as fc
 import object_pickler as op
 import global_variables as gv
-from sklearn.cluster import KMeans
-from sklearn.model_selection import cross_validate
 
 from sklearn.feature_extraction import DictVectorizer
 
@@ -99,6 +97,7 @@ def run():
     # val_data_transformed, val_labels = dict_vectorizer(data_dict=val_document_meta, label_dct=val_labels_by_path)
     # op.save_object(val_data_transformed, gv.prj_src_path + "python_objects/val_data_transformed")
     # op.save_object(val_labels, gv.prj_src_path + "python_objects/val_labels")
+
 
 def main():
     run()
