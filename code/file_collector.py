@@ -6,13 +6,17 @@ import global_variables as gv
 def read_file(file_name):
     # global error_file_count
     lines = []
-    with open(file_name, 'rt', encoding="utf-8") as f:
-        try:
-            lines = f.readlines()
-        except Exception as e:
-            gv.error_file_count += 1
-            log.warning(("Error file: ", file_name))
-            log.error(e)
+    try:
+        with open(file_name, 'rt', encoding="utf-8") as f:
+            try:
+                lines = f.readlines()
+            except Exception as e:
+                gv.error_file_count += 1
+                log.warning(("Error file: ", file_name))
+                log.error(e)
+    except Exception as ex:
+        log.warning(("Error file: ", file_name))
+        log.error(ex)
     return lines
 
 

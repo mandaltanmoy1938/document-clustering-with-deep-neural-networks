@@ -72,20 +72,20 @@ def get_all_label_content_meta(meta_dict, label_dict_list):
 
 
 def main():
-    test_paths_by_label, test_labels_by_path = dl.get_labels(fc.read_file(gv.src_path + gv.test_label_file_name),
+    test_paths_by_label, test_labels_by_path = dl.getpy_labels(fc.read_file(gv.data_src_path + gv.test_label_file_name),
                                                              gv.test_label_file_name)
     log.info(("number of handwritten files in test: ", len(test_paths_by_label["3"])))
 
-    train_paths_by_label, train_labels_by_path = dl.get_labels(fc.read_file(gv.src_path + gv.train_label_file_name),
+    train_paths_by_label, train_labels_by_path = dl.get_labels(fc.read_file(gv.data_src_path + gv.train_label_file_name),
                                                                gv.train_label_file_name)
     log.info(("number of handwritten files in train: ", len(train_paths_by_label["3"])))
 
-    val_paths_by_label, val_labels_by_path = dl.get_labels(fc.read_file(gv.src_path + gv.val_label_file_name),
+    val_paths_by_label, val_labels_by_path = dl.get_labels(fc.read_file(gv.data_src_path + gv.val_label_file_name),
                                                            gv.val_label_file_name)
     log.info(("number of handwritten files in val: ", len(val_paths_by_label["3"])))
 
-    file_paths = fc.get_all_files_from_directory(gv.src_path)
-    test_meta_dict, test_empty_file_count = get_all_file_content_meta(file_paths, gv.src_path,
+    file_paths = fc.get_all_files_from_directory(gv.data_src_path)
+    test_meta_dict, test_empty_file_count = get_all_file_content_meta(file_paths, gv.data_src_path,
                                                                       test_paths_by_label["3"], test_labels_by_path)
     test_label_content_meta = get_all_label_content_meta(test_meta_dict, [test_paths_by_label])
     del test_label_content_meta["3"]
@@ -108,7 +108,7 @@ def main():
                   title="Average number of words vs Classes for\n" + str(len(test_labels_by_path)) + " test documents",
                   kind="bar", data=test_label_content_meta_pd, pad=30, plot_name="test_avg_word_count", fig_num=4)
 
-    train_meta_dict, train_empty_file_count = get_all_file_content_meta(file_paths, gv.src_path,
+    train_meta_dict, train_empty_file_count = get_all_file_content_meta(file_paths, gv.data_src_path,
                                                                         train_paths_by_label["3"], train_labels_by_path)
     train_label_content_meta = get_all_label_content_meta(train_meta_dict, [train_paths_by_label])
     del train_label_content_meta["3"]
@@ -133,7 +133,7 @@ def main():
                       len(train_labels_by_path)) + " train documents", kind="bar", data=train_label_content_meta_pd,
                   pad=30, plot_name="train_avg_word_count", fig_num=8)
 
-    val_meta_dict, val_empty_file_count = get_all_file_content_meta(file_paths, gv.src_path, val_paths_by_label["3"],
+    val_meta_dict, val_empty_file_count = get_all_file_content_meta(file_paths, gv.data_src_path, val_paths_by_label["3"],
                                                                     val_labels_by_path)
     val_label_content_meta = get_all_label_content_meta(val_meta_dict, [val_paths_by_label])
     del val_label_content_meta["3"]
