@@ -14,7 +14,7 @@ log.basicConfig(filename='data_processor.log', level=log.DEBUG, filemode="w")
 
 def load_stop_words():
     stopwords_en = None
-    with open("/home/tma/project/Data/stopwords-en.txt", "rt", encoding="utf-8-sig") as infile:
+    with open(gv.prj_src_path + "data/stopwords-en.txt", "rt", encoding="utf-8-sig") as infile:
         stopwords_en = json.load(infile)["en"]
         return stopwords_en
 
@@ -62,7 +62,7 @@ def run():
     # test dataset processing
     test_document_meta, test_parsed_documents = tokenizer(required_files=test_labels_by_path)
     op.save_object(test_document_meta, gv.prj_src_path + "python_objects/test_document_meta")
-    op.save_object(test_parsed_documents, gv.prj_src_path + "python_objects/test_parsed_documents")
+    # op.save_object(test_parsed_documents, gv.prj_src_path + "python_objects/test_parsed_documents")
     # test dataset vectorize
     # test_document_meta = op.load_object(gv.prj_src_path + "python_objects/test_document_meta")
     # test_data_transformed, test_labels = dict_vectorizer(data_dict=test_document_meta, label_dct=test_labels_by_path)
@@ -76,7 +76,7 @@ def run():
     # val dataset processing
     val_document_meta, val_parsed_documents = tokenizer(required_files=val_labels_by_path)
     op.save_object(val_document_meta, gv.prj_src_path + "python_objects/val_document_meta")
-    op.save_object(val_parsed_documents, gv.prj_src_path + "python_objects/val_parsed_documents")
+    # op.save_object(val_parsed_documents, gv.prj_src_path + "python_objects/val_parsed_documents")
     # val dataset vectorize
     # val_document_meta = op.load_object(gv.prj_src_path + "python_objects/val_document_meta")
     # val_data_transformed, val_labels = dict_vectorizer(data_dict=val_document_meta, label_dct=val_labels_by_path)
@@ -90,13 +90,14 @@ def run():
     # train dataset processing
     train_document_meta, train_parsed_documents = tokenizer(required_files=train_labels_by_path)
     op.save_object(train_document_meta, gv.prj_src_path + "python_objects/train_document_meta")
-    op.save_object(train_parsed_documents, gv.prj_src_path + "python_objects/train_parsed_documents")
+    # op.save_object(train_parsed_documents, gv.prj_src_path + "python_objects/train_parsed_documents")
     # train dataset vectorize
     # train_document_meta = op.load_object(gv.prj_src_path + "python_objects/train_document_meta.p")
     # train_data_transformed, train_labels = dict_vectorizer(data_dict=train_document_meta,
     #                                                        label_dct=train_labels_by_path)
     # op.save_object(train_data_transformed, gv.prj_src_path + "python_objects/train_data_transformed")
     # op.save_object(train_labels, gv.prj_src_path + "python_objects/train_labels")
+
 
 def main():
     run()
