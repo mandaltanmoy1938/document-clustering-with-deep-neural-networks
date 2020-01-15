@@ -38,7 +38,7 @@ def dict_vectorizer(data_dict, label_dict):
         if len(value) is not 0:
             labels.append(label_dict[file_path])
             data.append(value)
-    dv = DictVectorizer(sparse=False)
+    dv = DictVectorizer(sparse=True)
     data_transformed = dv.fit_transform(data)
     return data_transformed, labels
 
@@ -65,7 +65,7 @@ def tokenizer(required_files):
                 token_key = token.text.strip()
             if len(token_key) > 0 and token_key not in stopwords_en:
                 document_meta[file_path_][token_key] = 1.0
-        modified_texts[file_path] = text
+        modified_texts[file_path_] = text
     return document_meta, parsed_documents, modified_texts
 
 
@@ -77,7 +77,7 @@ def run():
         gv.test_label_file_name)
     # test dataset processing
     test_document_meta, test_parsed_documents, test_modified_texts = tokenizer(required_files=test_labels_by_path)
-    # op.save_object(test_document_meta, gv.prj_src_path + "python_objects/test_document_meta")
+    op.save_object(test_document_meta, gv.prj_src_path + "python_objects/test_document_meta")
     # op.save_object(test_parsed_documents, gv.prj_src_path + "python_objects/test_parsed_documents")
 
     stopwords_en = load_stop_words()
@@ -85,10 +85,11 @@ def run():
     test_data_transformed, test_labels = hashing_vectorizer(data_dict=test_modified_texts,
                                                             label_dict=test_labels_by_path, lower_case=True,
                                                             stop_words=stopwords_en, n_features=2 ** 20)
+    op.save_object(test_data_transformed, gv.prj_src_path + "python_objects/test_data_hash_transformed")
     # dict_vectorizer
-    # test_document_meta = op.load_object(gv.prj_src_path + "python_objects/test_document_meta")
-    # test_data_transformed, test_labels = dict_vectorizer(data_dict=test_document_meta,
-    #                                                      label_dct=test_labels_by_path)
+    test_document_meta = op.load_object(gv.prj_src_path + "python_objects/test_document_meta")
+    test_data_transformed, test_labels = dict_vectorizer(data_dict=test_document_meta,
+                                                          label_dict=test_labels_by_path)
     op.save_object(test_data_transformed, gv.prj_src_path + "python_objects/test_data_transformed")
     op.save_object(test_labels, gv.prj_src_path + "python_objects/test_labels")
 
@@ -98,15 +99,16 @@ def run():
                                                            gv.val_label_file_name)
     # val dataset processing
     val_document_meta, val_parsed_documents, val_modified_texts = tokenizer(required_files=val_labels_by_path)
-    # op.save_object(val_document_meta, gv.prj_src_path + "python_objects/val_document_meta")
+    op.save_object(val_document_meta, gv.prj_src_path + "python_objects/val_document_meta")
     # op.save_object(val_parsed_documents, gv.prj_src_path + "python_objects/val_parsed_documents")
     # val dataset vectorize
     val_data_transformed, val_labels = hashing_vectorizer(data_dict=val_modified_texts,
                                                           label_dict=val_labels_by_path, lower_case=True,
                                                           stop_words=stopwords_en, n_features=2 ** 20)
+    op.save_object(val_data_transformed, gv.prj_src_path + "python_objects/val_data_hash_transformed")
     # dict_vectorizer
-    # val_document_meta = op.load_object(gv.prj_src_path + "python_objects/val_document_meta")
-    # val_data_transformed, val_labels = dict_vectorizer(data_dict=val_document_meta, label_dct=val_labels_by_path)
+    val_document_meta = op.load_object(gv.prj_src_path + "python_objects/val_document_meta")
+    val_data_transformed, val_labels = dict_vectorizer(data_dict=val_document_meta, label_dict=val_labels_by_path)
     op.save_object(val_data_transformed, gv.prj_src_path + "python_objects/val_data_transformed")
     op.save_object(val_labels, gv.prj_src_path + "python_objects/val_labels")
 
@@ -116,16 +118,17 @@ def run():
         fc.read_file(gv.data_src_path + gv.train_label_file_name), gv.train_label_file_name)
     # train dataset processing
     train_document_meta, train_parsed_documents, train_modified_texts = tokenizer(required_files=train_labels_by_path)
-    # op.save_object(train_document_meta, gv.prj_src_path + "python_objects/train_document_meta")
+    op.save_object(train_document_meta, gv.prj_src_path + "python_objects/train_document_meta")
     # op.save_object(train_parsed_documents, gv.prj_src_path + "python_objects/train_parsed_documents")
     # train dataset vectorize
     train_data_transformed, train_labels = hashing_vectorizer(data_dict=train_modified_texts,
                                                               label_dict=train_labels_by_path, lower_case=True,
                                                               stop_words=stopwords_en, n_features=2 ** 20)
+    op.save_object(train_data_transformed, gv.prj_src_path + "python_objects/train_data_hash_transformed")
     # dict_vectorizer
-    # train_document_meta = op.load_object(gv.prj_src_path + "python_objects/train_document_meta.p")
-    # train_data_transformed, train_labels = dict_vectorizer(data_dict=train_document_meta,
-    #                                                        label_dct=train_labels_by_path)
+    train_document_meta = op.load_object(gv.prj_src_path + "python_objects/train_document_meta.p")
+    train_data_transformed, train_labels = dict_vectorizer(data_dict=train_document_meta,
+                                                           label_dict=train_labels_by_path)
     op.save_object(train_data_transformed, gv.prj_src_path + "python_objects/train_data_transformed")
     op.save_object(train_labels, gv.prj_src_path + "python_objects/train_labels")
 
