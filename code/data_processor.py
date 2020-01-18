@@ -126,7 +126,7 @@ def run():
                                                               stop_words=stopwords_en, n_features=2 ** 20)
     op.save_object(train_data_transformed, gv.prj_src_path + "python_objects/train_data_hash_transformed")
     # dict_vectorizer
-    train_document_meta = op.load_object(gv.prj_src_path + "python_objects/train_document_meta.p")
+    train_document_meta = op.load_object(gv.prj_src_path + "python_objects/train_document_meta")
     train_data_transformed, train_labels = dict_vectorizer(data_dict=train_document_meta,
                                                            label_dict=train_labels_by_path)
     op.save_object(train_data_transformed, gv.prj_src_path + "python_objects/train_data_transformed")
