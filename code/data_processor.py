@@ -6,8 +6,8 @@ import data_labeller as dl
 import file_collector as fc
 import object_pickler as op
 import global_variables as gv
-from sklearn.feature_extraction.text import HashingVectorizer
 
+from sklearn.feature_extraction.text import HashingVectorizer
 from sklearn.feature_extraction import DictVectorizer
 
 log.basicConfig(filename='data_processor.log', level=log.DEBUG, filemode="w")

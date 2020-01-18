@@ -48,16 +48,13 @@ def get_all_file_content_meta(file_paths, src_path, skipped_files, required_file
 
 
 def get_all_label_content_meta(meta_dict, label_dict_list):
-    label_name = {"0": "Letter", "1": "Form", "2": "Email", "3": "", "4": "Advertisement", "5": "Scientific report",
-                  "6": "Scientific publication", "7": "Specification", "8": "File folder", "9": "News article",
-                  "10": "Budget", "11": "Invoice", "12": "Presentation", "13": "Questionnaire", "14": "Resume",
-                  "15": "Memo"}
+
     label_content_meta = dict(('{}'.format(k),
                                {"total_line_count": 0, "empty_line_count": 0, "word_count": 0, "space_count": 0,
                                 "total_character_count": 0}) for k in range(16))
     for label_dict in label_dict_list:
         for label, paths in label_dict.items():
-            label_content_meta[label]['label'] = label_name[label]
+            label_content_meta[label]['label'] = gv.label_name[label]
             label_content_meta[label]['number_of_documents'] = len(paths)
             for path in paths:
                 if path in meta_dict:
