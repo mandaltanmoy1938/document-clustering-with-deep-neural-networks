@@ -27,15 +27,17 @@ def cross_validation():
                   {"data": "test_data_transformed", "label": "test_labels"},
                   {"data": "test_data_hash_transformed", "label": "test_labels"}]
 
+    try_algorithms = {"KMeans": KMeans(n_clusters=15), "AffinityPropagation": AffinityPropagation(),
+                      "MeanShift": MeanShift(), "SVC": svm.SVC(kernel='linear', C=1, random_state=0),
+                      "NB": MultinomialNB(), "LogisticRegression": LogisticRegression(),
+                      "SGDClassifier": SGDClassifier()}
+
     for dl in data_label:
         data = loadPickle(dl["data"])
         labels = loadPickle(dl["label"])
         labels = [gv.translation[x] for x in labels]
 
-        try_algorithms = {"KMeans": KMeans(n_clusters=15), "AffinityPropagation": AffinityPropagation(),
-                          "MeanShift": MeanShift(), "SVC": svm.SVC(kernel='linear', C=1, random_state=0),
-                          "NB": MultinomialNB(), "LogisticRegression": LogisticRegression(),
-                          "SGDClassifier": SGDClassifier()}
+        log.info("data: %s" % (dl["data"]))
         for algo, clf in try_algorithms.items():
             scoring = ['precision_macro', 'recall_macro', 'f1_macro', 'accuracy']
             scores = cross_validate(clf, data, labels, scoring=scoring, cv=2,
