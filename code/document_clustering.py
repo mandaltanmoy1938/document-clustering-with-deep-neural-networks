@@ -46,20 +46,20 @@ def cross_validation():
                 log.debug(
                     "\t%s %s %s: %0.2f (+/- %0.2f)" % (dl["data"], algo, k, scores[k].mean(), scores[k].std() * 2))
 
-    def plot_cluster():
-        data = loadPickle("test_data_transformed")
-        labels = loadPickle("test_labels")
-        data_by_labels = dict()
-
-        for index, l in enumerate(labels):
-            data_by_labels[l] = data.get(index)
-
-        data_by_labels = pd.DataFrame.from_dict(data_by_labels)
-
-    def cluster():
-        data = loadPickle("train_data_transformed")
-        try_algorithms = {"KMeans": KMeans(n_clusters=15), "AffinityPropagation": AffinityPropagation(),
-                          "MeanShift": MeanShift()}
+    # def plot_cluster():
+    #     data = loadPickle("test_data_transformed")
+    #     labels = loadPickle("test_labels")
+    #     data_by_labels = dict()
+    #
+    #     for index, l in enumerate(labels):
+    #         data_by_labels[l] = data.get(index)
+    #
+    #     data_by_labels = pd.DataFrame.from_dict(data_by_labels)
+    #
+    # def cluster():
+    #     data = loadPickle("train_data_transformed")
+    #     try_algorithms = {"KMeans": KMeans(n_clusters=15), "AffinityPropagation": AffinityPropagation(),
+    #                       "MeanShift": MeanShift()}
 
     def run():
         cross_validation()
