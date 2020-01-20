@@ -46,34 +46,37 @@ def cross_validation():
                 log.debug(
                     "\t%s %s %s: %0.2f (+/- %0.2f)" % (dl["data"], algo, k, scores[k].mean(), scores[k].std() * 2))
 
-    # def plot_cluster():
-    #     data = loadPickle("test_data_transformed")
-    #     labels = loadPickle("test_labels")
-    #     data_by_labels = dict()
-    #
-    #     for index, l in enumerate(labels):
-    #         data_by_labels[l] = data.get(index)
-    #
-    #     data_by_labels = pd.DataFrame.from_dict(data_by_labels)
-    #
-    # def cluster():
-    #     data = loadPickle("train_data_transformed")
-    #     try_algorithms = {"KMeans": KMeans(n_clusters=15), "AffinityPropagation": AffinityPropagation(),
-    #                       "MeanShift": MeanShift()}
 
-    def run():
-        cross_validation()
+# def plot_cluster():
+#     data = loadPickle("test_data_transformed")
+#     labels = loadPickle("test_labels")
+#     data_by_labels = dict()
+#
+#     for index, l in enumerate(labels):
+#         data_by_labels[l] = data.get(index)
+#
+#     data_by_labels = pd.DataFrame.from_dict(data_by_labels)
+#
+# def cluster():
+#     data = loadPickle("train_data_transformed")
+#     try_algorithms = {"KMeans": KMeans(n_clusters=15), "AffinityPropagation": AffinityPropagation(),
+#                       "MeanShift": MeanShift()}
 
-    def main():
-        run()
+def run():
+    cross_validation()
 
-    if __name__ == '__main__':
-        start_time = time.time()
-        log.info(("Document clustering started: ", time.localtime(start_time)))
-        main()
-        end_time = time.time()
-        log.info(("Data processor ended: ", time.localtime(end_time)))
-        execution_time = end_time - start_time
-        hours, rem = divmod(execution_time, 3600)
-        minutes, seconds = divmod(rem, 60)
-        log.info(("Data processor executed for {:0>2}:{:0>2}:{:05.2f}".format(int(hours), int(minutes), seconds)))
+
+def main():
+    run()
+
+
+if __name__ == '__main__':
+    start_time = time.time()
+    log.info(("Document clustering started: ", time.localtime(start_time)))
+    main()
+    end_time = time.time()
+    log.info(("Data processor ended: ", time.localtime(end_time)))
+    execution_time = end_time - start_time
+    hours, rem = divmod(execution_time, 3600)
+    minutes, seconds = divmod(rem, 60)
+    log.info(("Data processor executed for {:0>2}:{:0>2}:{:05.2f}".format(int(hours), int(minutes), seconds)))
