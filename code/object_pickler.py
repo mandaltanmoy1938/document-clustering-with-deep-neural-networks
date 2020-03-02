@@ -1,5 +1,7 @@
 import pickle
+import os
 import logging as log
+from os import path
 
 
 def load_object(file_name):
@@ -19,6 +21,9 @@ def load_object(file_name):
 
 def save_object(object, file_name):
     try:
+        if not path.exists(file_name):
+            os.mknod(file_name)
+
         with open(file_name + '.p', 'wb+') as fp:
             try:
                 pickle.dump(object, fp, protocol=pickle.HIGHEST_PROTOCOL)
