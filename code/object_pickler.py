@@ -21,8 +21,8 @@ def load_object(file_name):
 
 def save_object(object, file_name):
     try:
-        if not path.exists(file_name):
-            os.mknod(file_name)
+        if not path.exists(file_name + '.p'):
+            os.mknod(file_name + '.p')
 
         with open(file_name + '.p', 'wb+') as fp:
             try:
