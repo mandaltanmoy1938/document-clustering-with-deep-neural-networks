@@ -41,7 +41,7 @@ def train_test():
             s_u_time = time.time()
             log.info("%s  starts at %s" % (s_u, time.localtime(s_u_time)))
 
-            for algo, clf in algos:
+            for algo, clf in algos.items():
                 algo_time = time.time()
                 log.info("\tAlgorithm: %s \n\t\ttraining starts at %s" % (algo, time.localtime(algo_time)))
                 clf.fit(data, labels)
