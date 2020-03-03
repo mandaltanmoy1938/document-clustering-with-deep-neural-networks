@@ -28,9 +28,10 @@ def train_test():
     try_algorithms = {"supervised": {"SVC": svm.SVC(kernel='linear', C=1, random_state=0),
                                      "NB": MultinomialNB(),
                                      "LogisticRegression": LogisticRegression()},
-                      "unsupervised": {"KMeans": KMeans(n_clusters=15),
-                                       "AffinityPropagation": AffinityPropagation(),
-                                       "MeanShift": MeanShift()}}
+                      #"unsupervised": {"KMeans": KMeans(n_clusters=15),
+                      #                "AffinityPropagation": AffinityPropagation(),
+                      #               "MeanShift": MeanShift()}
+                      }
     for dl in data_label:
         data = loadPickle(dl["data"])
         labels = loadPickle(dl["label"])
