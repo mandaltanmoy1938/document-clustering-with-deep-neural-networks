@@ -34,6 +34,7 @@ def train_test():
                       }
     for dl in data_label:
         data = loadPickle(dl["data"])
+        test_data = loadPickle(dl["test_data"])
         labels = loadPickle(dl["label"])
         labels = [gv.translation[x] for x in labels]
 
@@ -49,7 +50,7 @@ def train_test():
 
                 predict_time = time.time()
                 log.info("\t\t%s predict starts at %s" % (algo, time.localtime(predict_time)))
-                predict = clf.predict(dl["test_data"])
+                predict = clf.predict(test_data)
                 time_executed(predict_time, "\t\tpredict")
                 op.save_object(predict, gv.prj_src_path + "python_objects/%s_%s_predict" % (algo, dl["test_data"]))
 
@@ -124,4 +125,4 @@ if __name__ == '__main__':
         main()
     except Exception as ex:
         log.error(ex)
-    time_executed(start, "Data processor")
+    time_executed(start, "Document cLustering")
