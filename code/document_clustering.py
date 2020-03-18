@@ -1,8 +1,8 @@
 import time
-import pandas as pd
 import logging as log
 import object_pickler as op
 import global_variables as gv
+import timer
 
 from sklearn import svm
 from sklearn.linear_model import LogisticRegression
@@ -46,12 +46,12 @@ def train_test():
                 algo_time = time.time()
                 log.info("\tAlgorithm: %s \n\t\ttraining starts at %s" % (algo, time.localtime(algo_time)))
                 clf.fit(data, labels)
-                time_executed(algo_time, "\t\ttraining")
+                timer.time_executed(algo_time, "\t\ttraining")
 
                 predict_time = time.time()
                 log.info("\t\t%s predict starts at %s" % (algo, time.localtime(predict_time)))
                 predict = clf.predict(test_data)
-                time_executed(predict_time, "\t\tpredict")
+                timer.time_executed(predict_time, "\t\tpredict")
                 op.save_object(predict, gv.prj_src_path + "python_objects/%s_%s_predict" % (algo, dl["test_data"]))
 
 
@@ -100,14 +100,6 @@ def cross_validation():
 #     try_algorithms = {"KMeans": KMeans(n_clusters=15), "AffinityPropagation": AffinityPropagation(),
 #                       "MeanShift": MeanShift()}
 
-def time_executed(start_time, process_name):
-    end_time = time.time()
-    log.info("%s ended: %s" % (process_name, time.localtime(end_time)))
-    execution_time = end_time - start_time
-    hours, rem = divmod(execution_time, 3600)
-    minutes, seconds = divmod(rem, 60)
-    log.info((process_name, " executed for {:0>2}:{:0>2}:{:05.2f}".format(int(hours), int(minutes), seconds)))
-
 
 def run():
     # cross_validation()
@@ -125,4 +117,4 @@ if __name__ == '__main__':
         main()
     except Exception as ex:
         log.error(ex)
-    time_executed(start, "Document clustering")
+    time.time_executed(start, "Document clustering")
