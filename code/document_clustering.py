@@ -19,6 +19,42 @@ def loadPickle(filename):
     return op.load_object(gv.prj_src_path + "python_objects/" + filename)
 
 
+def train_test():
+    data_label = [{"data": "train_data_transformed", "label": "train_labels",
+                   "test_data": "test_data_transformed", "test_label": "test_labels"},
+                  {"data": "train_data_hash_transformed", "label": "train_labels",
+                   "test_data": "test_data_hash_transformed", "test_label": "test_labels"}]
+
+    try_algorithms = {"supervised": {"SVC": svm.SVC(kernel='linear', C=1, random_state=0),
+                                     "NB": MultinomialNB(),
+                                     "LogisticRegression": LogisticRegression()},
+                      #"unsupervised": {"KMeans": KMeans(n_clusters=15),
+                      #                "AffinityPropagation": AffinityPropagation(),
+                      #               "MeanShift": MeanShift()}
+                      }
+    for dl in data_label:
+        data = loadPickle(dl["data"])
+        test_data = loadPickle(dl["test_data"])
+        labels = loadPickle(dl["label"])
+        labels = [gv.translation[x] for x in labels]
+
+        for s_u, algos in try_algorithms.items():
+            s_u_time = time.time()
+            log.info("%s  starts at %s" % (s_u, time.localtime(s_u_time)))
+
+            for algo, clf in algos.items():
+                algo_time = time.time()
+                log.info("\tAlgorithm: %s \n\t\ttraining starts at %s" % (algo, time.localtime(algo_time)))
+                clf.fit(data, labels)
+                time_executed(algo_time, "\t\ttraining")
+
+                predict_time = time.time()
+                log.info("\t\t%s predict starts at %s" % (algo, time.localtime(predict_time)))
+                predict = clf.predict(test_data)
+                time_executed(predict_time, "\t\tpredict")
+                op.save_object(predict, gv.prj_src_path + "python_objects/%s_%s_predict" % (algo, dl["test_data"]))
+
+
 def cross_validation():
     data_label = [{"data": "train_data_transformed", "label": "train_labels"},
                   {"data": "train_data_hash_transformed", "label": "train_labels"},
@@ -64,8 +100,18 @@ def cross_validation():
 #     try_algorithms = {"KMeans": KMeans(n_clusters=15), "AffinityPropagation": AffinityPropagation(),
 #                       "MeanShift": MeanShift()}
 
+def time_executed(start_time, process_name):
+    end_time = time.time()
+    log.info("%s ended: %s" % (process_name, time.localtime(end_time)))
+    execution_time = end_time - start_time
+    hours, rem = divmod(execution_time, 3600)
+    minutes, seconds = divmod(rem, 60)
+    log.info((process_name, " executed for {:0>2}:{:0>2}:{:05.2f}".format(int(hours), int(minutes), seconds)))
+
+
 def run():
-    cross_validation()
+    # cross_validation()
+    train_test()
 
 
 def main():
@@ -73,12 +119,10 @@ def main():
 
 
 if __name__ == '__main__':
-    start_time = time.time()
-    log.info(("Document clustering started: ", time.localtime(start_time)))
-    main()
-    end_time = time.time()
-    log.info(("Data processor ended: ", time.localtime(end_time)))
-    execution_time = end_time - start_time
-    hours, rem = divmod(execution_time, 3600)
-    minutes, seconds = divmod(rem, 60)
-    log.info(("Data processor executed for {:0>2}:{:0>2}:{:05.2f}".format(int(hours), int(minutes), seconds)))
+    start = time.time()
+    log.info(("Document clustering started: ", time.localtime(start)))
+    try:
+        main()
+    except Exception as ex:
+        log.error(ex)
+    time_executed(start, "Document clustering")
