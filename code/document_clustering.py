@@ -21,16 +21,18 @@ def loadPickle(filename):
 
 def train_test():
     data_label = [{"data": "train_data_transformed", "label": "train_labels",
-                   "test_data": "test_data_transformed", "test_label": "test_labels"},
-                  {"data": "train_data_hash_transformed", "label": "train_labels",
-                   "test_data": "test_data_hash_transformed", "test_label": "test_labels"}]
+                   "test_data": "test_data_transformed", "test_label": "test_labels"}
+                  #{"data": "train_data_hash_transformed", "label": "train_labels",
+                   #"test_data": "test_data_hash_transformed", "test_label": "test_labels"}
+                  ]
 
-    try_algorithms = {"supervised": {"SVC": svm.SVC(kernel='linear', C=1, random_state=0),
-                                     "NB": MultinomialNB(),
-                                     "LogisticRegression": LogisticRegression()},
-                      #"unsupervised": {"KMeans": KMeans(n_clusters=15),
-                      #                "AffinityPropagation": AffinityPropagation(),
-                      #               "MeanShift": MeanShift()}
+    try_algorithms = {
+        # "supervised": {"SVC": svm.SVC(kernel='linear', C=1, random_state=0),
+                                     # "NB": MultinomialNB(),
+                                     # "LogisticRegression": LogisticRegression()},
+                      "unsupervised": {"KMeans": KMeans(n_clusters=15),
+                                      "AffinityPropagation": AffinityPropagation(),
+                                     "MeanShift": MeanShift()}
                       }
     for dl in data_label:
         data = loadPickle(dl["data"])
