@@ -19,7 +19,8 @@ def run():
     predicted_label = [{"unsupervised": ["KMeans_"],
                         "supervised": ["LogisticRegression_", "NB_", "SVC_"]}]
 
-    y_true = loadPickle("test_labels")
+    test_labels = loadPickle("test_labels")
+    y_true = [gv.translation[x] for x in test_labels]
     for algo in predicted_label["supervised"]:
         predict = loadPickle(algo + "test_data_transformed_predict")
         accuracy = accuracy_score(y_true, predict)
