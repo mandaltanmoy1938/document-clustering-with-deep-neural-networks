@@ -16,8 +16,8 @@ def loadPickle(filename):
 
 
 def run():
-    predicted_label = [{"unsupervised": ["KMeans_"],
-                        "supervised": ["LogisticRegression_", "NB_", "SVC_"]}]
+    predicted_label = {"unsupervised": ["KMeans_"],
+                       "supervised": ["LogisticRegression_", "NB_", "SVC_"]}
 
     test_labels = loadPickle("test_labels")
     y_true = [gv.translation[x] for x in test_labels]
