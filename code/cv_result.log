@@ -1,0 +1,31 @@
+INFO:root:('Document clustering started: ', time.struct_time(tm_year=2020, tm_mon=1, tm_mday=21, tm_hour=18, tm_min=55, tm_sec=29, tm_wday=1, tm_yday=21, tm_isdst=0))
+INFO:root:data: train_data_transformed
+INFO:root:algo: SVC
+DEBUG:root:	train_data_transformed SVC fit_time: 15500.38 (+/- 40.69)
+DEBUG:root:	train_data_transformed SVC score_time: 11982.47 (+/- 138.26)
+DEBUG:root:	train_data_transformed SVC test_accuracy: 0.78 (+/- 0.00)
+DEBUG:root:	train_data_transformed SVC test_f1_macro: 0.78 (+/- 0.00)
+DEBUG:root:	train_data_transformed SVC test_precision_macro: 0.79 (+/- 0.00)
+DEBUG:root:	train_data_transformed SVC test_recall_macro: 0.78 (+/- 0.00)
+INFO:root:algo: NB
+DEBUG:root:	train_data_transformed NB fit_time: 3.61 (+/- 0.13)
+DEBUG:root:	train_data_transformed NB score_time: 2.18 (+/- 0.03)
+DEBUG:root:	train_data_transformed NB test_accuracy: 0.66 (+/- 0.00)
+DEBUG:root:	train_data_transformed NB test_f1_macro: 0.61 (+/- 0.00)
+DEBUG:root:	train_data_transformed NB test_precision_macro: 0.71 (+/- 0.00)
+DEBUG:root:	train_data_transformed NB test_recall_macro: 0.64 (+/- 0.00)
+INFO:root:algo: LogisticRegression
+DEBUG:root:	train_data_transformed LogisticRegression fit_time: 1594.40 (+/- 2.17)
+DEBUG:root:	train_data_transformed LogisticRegression score_time: 2.16 (+/- 0.07)
+DEBUG:root:	train_data_transformed LogisticRegression test_accuracy: 0.82 (+/- 0.00)
+DEBUG:root:	train_data_transformed LogisticRegression test_f1_macro: 0.82 (+/- 0.00)
+DEBUG:root:	train_data_transformed LogisticRegression test_precision_macro: 0.83 (+/- 0.00)
+DEBUG:root:	train_data_transformed LogisticRegression test_recall_macro: 0.82 (+/- 0.00)
+INFO:root:algo: KMeans
+DEBUG:root:	train_data_transformed KMeans fit_time: 31733.93 (+/- 1586.35)
+DEBUG:root:	train_data_transformed KMeans score_time: 5.69 (+/- 2.16)
+DEBUG:root:	train_data_transformed KMeans test_accuracy: 0.03 (+/- 0.03)
+DEBUG:root:	train_data_transformed KMeans test_f1_macro: 0.01 (+/- 0.01)
+DEBUG:root:	train_data_transformed KMeans test_precision_macro: 0.01 (+/- 0.01)
+DEBUG:root:	train_data_transformed KMeans test_recall_macro: 0.03 (+/- 0.03)
+INFO:root:algo: AffinityPropagation

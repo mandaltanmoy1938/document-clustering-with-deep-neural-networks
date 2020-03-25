@@ -1,0 +1,29 @@
+INFO:root:('Document clustering started: ', time.struct_time(tm_year=2020, tm_mon=3, tm_mday=13, tm_hour=16, tm_min=43, tm_sec=16, tm_wday=4, tm_yday=73, tm_isdst=0))
+INFO:root:supervised  starts at time.struct_time(tm_year=2020, tm_mon=3, tm_mday=13, tm_hour=16, tm_min=43, tm_sec=16, tm_wday=4, tm_yday=73, tm_isdst=0)
+INFO:root:	Algorithm: SVC 
+		training starts at time.struct_time(tm_year=2020, tm_mon=3, tm_mday=13, tm_hour=16, tm_min=43, tm_sec=16, tm_wday=4, tm_yday=73, tm_isdst=0)
+INFO:root:		training ended: time.struct_time(tm_year=2020, tm_mon=3, tm_mday=14, tm_hour=8, tm_min=45, tm_sec=46, tm_wday=5, tm_yday=74, tm_isdst=0)
+INFO:root:('\t\ttraining', ' executed for 16:02:29.92')
+INFO:root:		SVC predict starts at time.struct_time(tm_year=2020, tm_mon=3, tm_mday=14, tm_hour=8, tm_min=45, tm_sec=46, tm_wday=5, tm_yday=74, tm_isdst=0)
+INFO:root:		predict ended: time.struct_time(tm_year=2020, tm_mon=3, tm_mday=14, tm_hour=9, tm_min=44, tm_sec=15, tm_wday=5, tm_yday=74, tm_isdst=0)
+INFO:root:('\t\tpredict', ' executed for 00:58:29.19')
+INFO:root:	Algorithm: NB 
+		training starts at time.struct_time(tm_year=2020, tm_mon=3, tm_mday=14, tm_hour=9, tm_min=44, tm_sec=16, tm_wday=5, tm_yday=74, tm_isdst=0)
+INFO:root:		training ended: time.struct_time(tm_year=2020, tm_mon=3, tm_mday=14, tm_hour=9, tm_min=44, tm_sec=19, tm_wday=5, tm_yday=74, tm_isdst=0)
+INFO:root:('\t\ttraining', ' executed for 00:00:03.21')
+INFO:root:		NB predict starts at time.struct_time(tm_year=2020, tm_mon=3, tm_mday=14, tm_hour=9, tm_min=44, tm_sec=19, tm_wday=5, tm_yday=74, tm_isdst=0)
+INFO:root:		predict ended: time.struct_time(tm_year=2020, tm_mon=3, tm_mday=14, tm_hour=9, tm_min=44, tm_sec=19, tm_wday=5, tm_yday=74, tm_isdst=0)
+INFO:root:('\t\tpredict', ' executed for 00:00:00.32')
+INFO:root:	Algorithm: LogisticRegression 
+		training starts at time.struct_time(tm_year=2020, tm_mon=3, tm_mday=14, tm_hour=9, tm_min=44, tm_sec=19, tm_wday=5, tm_yday=74, tm_isdst=0)
+INFO:root:		training ended: time.struct_time(tm_year=2020, tm_mon=3, tm_mday=14, tm_hour=10, tm_min=7, tm_sec=32, tm_wday=5, tm_yday=74, tm_isdst=0)
+INFO:root:('\t\ttraining', ' executed for 00:23:12.70')
+INFO:root:		LogisticRegression predict starts at time.struct_time(tm_year=2020, tm_mon=3, tm_mday=14, tm_hour=10, tm_min=7, tm_sec=32, tm_wday=5, tm_yday=74, tm_isdst=0)
+INFO:root:		predict ended: time.struct_time(tm_year=2020, tm_mon=3, tm_mday=14, tm_hour=10, tm_min=7, tm_sec=32, tm_wday=5, tm_yday=74, tm_isdst=0)
+INFO:root:('\t\tpredict', ' executed for 00:00:00.32')
+INFO:root:supervised  starts at time.struct_time(tm_year=2020, tm_mon=3, tm_mday=14, tm_hour=10, tm_min=7, tm_sec=32, tm_wday=5, tm_yday=74, tm_isdst=0)
+INFO:root:	Algorithm: SVC 
+		training starts at time.struct_time(tm_year=2020, tm_mon=3, tm_mday=14, tm_hour=10, tm_min=7, tm_sec=32, tm_wday=5, tm_yday=74, tm_isdst=0)
+ERROR:root:Found input variables with inconsistent numbers of samples: [299966, 290651]
+INFO:root:Document cLustering ended: time.struct_time(tm_year=2020, tm_mon=3, tm_mday=14, tm_hour=10, tm_min=7, tm_sec=32, tm_wday=5, tm_yday=74, tm_isdst=0)
+INFO:root:('Document cLustering', ' executed for 17:24:16.59')
