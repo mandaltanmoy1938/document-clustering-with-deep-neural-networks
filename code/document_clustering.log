@@ -1,0 +1,12 @@
+INFO:root:('Document clustering started: ', time.struct_time(tm_year=2020, tm_mon=3, tm_mday=23, tm_hour=16, tm_min=53, tm_sec=33, tm_wday=0, tm_yday=83, tm_isdst=0))
+INFO:root:unsupervised  starts at time.struct_time(tm_year=2020, tm_mon=3, tm_mday=23, tm_hour=16, tm_min=53, tm_sec=34, tm_wday=0, tm_yday=83, tm_isdst=0)
+INFO:root:	Algorithm: KMeans 
+		training starts at time.struct_time(tm_year=2020, tm_mon=3, tm_mday=23, tm_hour=16, tm_min=53, tm_sec=34, tm_wday=0, tm_yday=83, tm_isdst=0)
+INFO:root:		training ended: time.struct_time(tm_year=2020, tm_mon=3, tm_mday=24, tm_hour=3, tm_min=29, tm_sec=16, tm_wday=1, tm_yday=84, tm_isdst=0)
+INFO:root:('\t\ttraining', ' executed for 10:35:41.90')
+INFO:root:		KMeans predict starts at time.struct_time(tm_year=2020, tm_mon=3, tm_mday=24, tm_hour=3, tm_min=29, tm_sec=16, tm_wday=1, tm_yday=84, tm_isdst=0)
+INFO:root:		predict ended: time.struct_time(tm_year=2020, tm_mon=3, tm_mday=24, tm_hour=3, tm_min=29, tm_sec=16, tm_wday=1, tm_yday=84, tm_isdst=0)
+INFO:root:('\t\tpredict', ' executed for 00:00:00.55')
+INFO:root:	Algorithm: AffinityPropagation 
+		training starts at time.struct_time(tm_year=2020, tm_mon=3, tm_mday=24, tm_hour=3, tm_min=29, tm_sec=16, tm_wday=1, tm_yday=84, tm_isdst=0)
+ERROR:root:Unable to allocate 591. GiB for an array with shape (79351530565,) and data type int64
