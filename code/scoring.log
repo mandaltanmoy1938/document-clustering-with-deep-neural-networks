@@ -1,0 +1,24 @@
+INFO:root:('Scoring started: ', time.struct_time(tm_year=2020, tm_mon=3, tm_mday=25, tm_hour=11, tm_min=7, tm_sec=20, tm_wday=2, tm_yday=85, tm_isdst=0))
+INFO:root:Algorithm supervised: LogisticRegression_ 
+	accuracy:	0.8365458750963762
+	 f1_macro:	0.8359109347525362
+	recall_macro:	0.8361890745983673
+	precision_macro:	0.841774430114439
+INFO:root:Algorithm supervised: NB_ 
+	accuracy:	0.6763685427910563
+	 f1_macro:	0.6370125538810422
+	recall_macro:	0.663409981284189
+	precision_macro:	0.7310997381880961
+INFO:root:Algorithm supervised: SVC_ 
+	accuracy:	0.8031170833792268
+	 f1_macro:	0.801932795169922
+	recall_macro:	0.8029272570054437
+	precision_macro:	0.8075884348235082
+INFO:root:Algorithm unsupervised: KMeans_ 
+	homogeneity:	0.22557109728047411
+	 completeness:	0.4043371622995279
+	v_measure:	0.2895874946360943
+	adjusted_rand:	0.10804917436339435
+	adjusted_mutual_info:	0.28912031504145286
+INFO:root:Scoring ended: time.struct_time(tm_year=2020, tm_mon=3, tm_mday=25, tm_hour=11, tm_min=7, tm_sec=21, tm_wday=2, tm_yday=85, tm_isdst=0)
+INFO:root:('Scoring', ' executed for 00:00:01.03')
