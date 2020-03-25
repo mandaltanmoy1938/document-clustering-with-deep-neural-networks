@@ -119,4 +119,4 @@ if __name__ == '__main__':
         main()
     except Exception as ex:
         log.error(ex)
-    time.time_executed(start, "Document clustering")
+    timer.time_executed(start, "Document clustering")
