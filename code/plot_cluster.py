@@ -38,9 +38,7 @@ def run():
 
 
 def main():
-    df = pd.DataFrame([[-25.799351, 11.152683], [-111.820992, -62.871471]], columns=["x", "y"])
-    df['label'] = [0, 1]
-    gg.plot_cluster("", df, 10, "a", 1)
+    run()
 
 
 if __name__ == '__main__':
