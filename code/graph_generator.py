@@ -17,10 +17,7 @@ def plot_chart(y, y_label, title, kind, data, pad, plot_name, fig_num):
 
 
 def plot_cluster(title, data, pad, plot_name, fig_num):
-    #plt.title(title, pad=pad)
-    plt.figure(num=fig_num, figsize=(16, 10))
     num_classes = data['label'].unique().shape[0]
-    print(num_classes)
     sns_plot = sns.scatterplot(
         x="x", y="y",
         hue="label",
@@ -29,4 +26,9 @@ def plot_cluster(title, data, pad, plot_name, fig_num):
         legend="full"
     )
 
-    sns_plot.savefig(plot_name + ".png")
+    plt.title(title, pad=pad)
+    plt.figure(num=fig_num, figsize=(16, 10))
+
+    sns_plot.figure.savefig(plot_name + ".png")
+    # plt.figure(fig_num)
+    # plt.show()
