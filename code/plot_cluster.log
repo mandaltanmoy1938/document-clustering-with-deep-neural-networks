@@ -1,4 +1,18 @@
-INFO:root:('PLot cluster started: ', time.struct_time(tm_year=2020, tm_mon=3, tm_mday=28, tm_hour=17, tm_min=8, tm_sec=35, tm_wday=5, tm_yday=88, tm_isdst=0))
+INFO:root:('PLot cluster started: ', time.struct_time(tm_year=2020, tm_mon=3, tm_mday=28, tm_hour=17, tm_min=20, tm_sec=59, tm_wday=5, tm_yday=88, tm_isdst=0))
+DEBUG:root:LogisticRegression__num_classes:15
+DEBUG:root:['LogisticRegression__classes:Resume' 'LogisticRegression__classes:Email'
+ 'LogisticRegression__classes:News article'
+ 'LogisticRegression__classes:Questionnaire'
+ 'LogisticRegression__classes:File folder'
+ 'LogisticRegression__classes:Letter'
+ 'LogisticRegression__classes:Specification'
+ 'LogisticRegression__classes:Invoice' 'LogisticRegression__classes:Form'
+ 'LogisticRegression__classes:Memo'
+ 'LogisticRegression__classes:Presentation'
+ 'LogisticRegression__classes:Scientific report'
+ 'LogisticRegression__classes:Scientific publication'
+ 'LogisticRegression__classes:Budget'
+ 'LogisticRegression__classes:Advertisement']
 DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=12.0.
 DEBUG:matplotlib.font_manager:findfont: score(<Font 'STIXNonUnicode' (STIXNonUni.ttf) normal normal regular normal>) = 10.05
 DEBUG:matplotlib.font_manager:findfont: score(<Font 'STIXSizeThreeSym' (STIXSizThreeSymReg.ttf) normal normal regular normal>) = 10.05
@@ -1725,5 +1739,23 @@ DEBUG:matplotlib.font_manager:findfont: score(<Font 'Rachana' (Rachana-Regular.t
 DEBUG:matplotlib.font_manager:findfont: score(<Font 'Pothana2000' (Pothana2000.ttf) normal normal 400 normal>) = 10.05
 DEBUG:matplotlib.font_manager:findfont: score(<Font 'Noto Sans Osmanya' (NotoSansOsmanya-Regular.ttf) normal normal regular normal>) = 10.05
 DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/media/remote/tmandal/document-clustering-with-deep-neural-networks/code/.venv/lib/python3.6/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
-INFO:root:Plot cluster ended: time.struct_time(tm_year=2020, tm_mon=3, tm_mday=28, tm_hour=17, tm_min=8, tm_sec=54, tm_wday=5, tm_yday=88, tm_isdst=0)
-INFO:root:('Plot cluster', ' executed for 00:00:19.03')
+DEBUG:root:NB__num_classes:15
+DEBUG:root:['NB__classes:Resume' 'NB__classes:Email' 'NB__classes:News article'
+ 'NB__classes:Questionnaire' 'NB__classes:Letter'
+ 'NB__classes:Specification' 'NB__classes:Scientific publication'
+ 'NB__classes:Form' 'NB__classes:Memo' 'NB__classes:Invoice'
+ 'NB__classes:Budget' 'NB__classes:Scientific report'
+ 'NB__classes:Presentation' 'NB__classes:Advertisement'
+ 'NB__classes:File folder']
+DEBUG:root:SVC__num_classes:15
+DEBUG:root:['SVC__classes:Resume' 'SVC__classes:Email' 'SVC__classes:News article'
+ 'SVC__classes:Questionnaire' 'SVC__classes:File folder'
+ 'SVC__classes:Letter' 'SVC__classes:Specification' 'SVC__classes:Form'
+ 'SVC__classes:Memo' 'SVC__classes:Budget'
+ 'SVC__classes:Scientific publication' 'SVC__classes:Scientific report'
+ 'SVC__classes:Invoice' 'SVC__classes:Advertisement'
+ 'SVC__classes:Presentation']
+DEBUG:root:KMeans__num_classes:8
+ERROR:root:ufunc 'add' did not contain a loop with signature matching types (dtype('<U21'), dtype('<U21')) -> dtype('<U21')
+INFO:root:Plot cluster ended: time.struct_time(tm_year=2020, tm_mon=3, tm_mday=28, tm_hour=17, tm_min=21, tm_sec=7, tm_wday=5, tm_yday=88, tm_isdst=0)
+INFO:root:('Plot cluster', ' executed for 00:00:08.15')
