@@ -5,7 +5,7 @@ import global_variables as gv
 import timer
 from sklearn.metrics import homogeneity_score, completeness_score, v_measure_score, adjusted_rand_score, \
     adjusted_mutual_info_score, silhouette_score
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import classification_report, accuracy_score, precision_score, recall_score, f1_score
 
 log.basicConfig(filename='scoring.log', level=log.DEBUG, filemode="w")
 
@@ -30,6 +30,9 @@ def run():
         log.info("Algorithm supervised: %s \n\taccuracy:\t%s"
                  "\n\t f1_macro:\t%s\n\trecall_macro:\t%s\n\tprecision_macro:\t%s" %
                  (algo, accuracy, f1, recall, precision))
+        target_names = [gv.label_name[gv.translation_rev[p]] for p in predict]
+        cr = classification_report(y_true=y_true, y_pred=predict, target_names=target_names)
+        log.info(cr)
 
     for algo in predicted_label["unsupervised"]:
         predict = loadPickle(algo + "test_data_transformed_predict")
