@@ -28,25 +28,23 @@ def run():
 
     df = pd.DataFrame(test_embedded, columns=["x", "y"])
     for algo in predicted_label["supervised"]:
-        df["label"] = []
         predict = loadPickle(algo + "test_data_transformed_predict")
-        df["label"] = [target_names[p] for p in predict]
+        df[algo + "prediction"] = [target_names[p] for p in predict]
         gg.plot_cluster(title=algo, data=df, pad=30, plot_name=gv.prj_src_path + "generated_plots/" + algo, fig_num=1,
-                        l_col=3)
+                        l_col=3, hue=algo + "prediction")
 
     for algo in predicted_label["unsupervised"]:
         predict = loadPickle(algo + "test_data_transformed_predict")
-        df["label"] = []
-        df["label"] = predict
+        df[algo + "prediction"] = predict
         gg.plot_cluster(title=algo, data=df, pad=30, plot_name=gv.prj_src_path + "generated_plots/" + algo, fig_num=1,
-                        l_col=2)
+                        l_col=2, hue=algo + "prediction")
 
         labels = loadPickle("test_labels")
         labels = [gv.translation[x] for x in labels]
-        df["label"] = []
-        df["label"] = [target_names[l] for l in labels]
+        df["ground_truth"] = [target_names[l] for l in labels]
         gg.plot_cluster(title="Ground truth", data=df, pad=30,
-                        plot_name=gv.prj_src_path + "generated_plots/ground_truth", fig_num=1, l_col=3)
+                        plot_name=gv.prj_src_path + "generated_plots/ground_truth", fig_num=1, l_col=3,
+                        hue="ground_truth")
 
 
 def main():

@@ -17,19 +17,14 @@ def plot_chart(y, y_label, title, kind, data, pad, plot_name, fig_num):
     plt.show()
 
 
-def plot_cluster(title, data, pad, plot_name, fig_num, l_col):
+def plot_cluster(title, data, pad, plot_name, fig_num, l_col, hue):
     classes = data['label'].unique()
     num_classes = classes.shape[0]
     log.debug(title + "num_classes:" + str(num_classes))
     log.debug(title + "classes:")
     log.debug(classes)
-    sns_plot = sns.scatterplot(
-        x="x", y="y",
-        hue="label",
-        palette=sns.color_palette("bright", num_classes),
-        data=data,
-        legend="full"
-    )
+    sns_plot = sns.scatterplot(x="x", y="y", hue=hue, palette=sns.color_palette("bright", num_classes), data=data,
+                               legend="full")
 
     plt.title(title, pad=pad)
     plt.figure(num=fig_num)
