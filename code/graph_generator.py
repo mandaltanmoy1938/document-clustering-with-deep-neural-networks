@@ -17,7 +17,7 @@ def plot_chart(y, y_label, title, kind, data, pad, plot_name, fig_num):
     plt.show()
 
 
-def plot_cluster(title, data, pad, plot_name, fig_num):
+def plot_cluster(title, data, pad, plot_name, fig_num, l_col):
     classes = data['label'].unique()
     num_classes = classes.shape[0]
     log.debug(title + "num_classes:" + str(num_classes))
@@ -34,7 +34,7 @@ def plot_cluster(title, data, pad, plot_name, fig_num):
     plt.title(title, pad=pad)
     plt.figure(num=fig_num)
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.1),
-               ncol=5, fancybox=True, shadow=True)
+               ncol=l_col, fancybox=True, shadow=True)
     sns_plot.figure.savefig(plot_name + ".png")
     # plt.figure(fig_num)
     # plt.show()
