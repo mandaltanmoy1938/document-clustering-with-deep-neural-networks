@@ -1,24 +1,90 @@
-INFO:root:('Scoring started: ', time.struct_time(tm_year=2020, tm_mon=3, tm_mday=25, tm_hour=11, tm_min=7, tm_sec=20, tm_wday=2, tm_yday=85, tm_isdst=0))
+INFO:root:('Scoring started: ', time.struct_time(tm_year=2020, tm_mon=3, tm_mday=28, tm_hour=13, tm_min=8, tm_sec=28, tm_wday=5, tm_yday=88, tm_isdst=0))
 INFO:root:Algorithm supervised: LogisticRegression_ 
 	accuracy:	0.8365458750963762
 	 f1_macro:	0.8359109347525362
 	recall_macro:	0.8361890745983673
 	precision_macro:	0.841774430114439
+INFO:root:                        precision    recall  f1-score   support
+
+                Letter       0.85      0.81      0.83      2444
+                  Form       0.80      0.79      0.79      2485
+                 Email       0.95      0.92      0.94      2514
+         Advertisement       0.74      0.70      0.72      2241
+     Scientific report       0.82      0.76      0.79      2471
+Scientific publication       0.90      0.87      0.89      2558
+         Specification       0.94      0.90      0.92      2459
+           File folder       0.55      0.89      0.68      1930
+          News article       0.81      0.82      0.81      2447
+                Budget       0.83      0.81      0.82      2457
+               Invoice       0.88      0.86      0.87      2450
+          Presentation       0.76      0.74      0.75      2471
+         Questionnaire       0.90      0.87      0.88      2394
+                Resume       0.99      0.96      0.98      2532
+                  Memo       0.90      0.85      0.87      2463
+
+              accuracy                           0.84     36316
+             macro avg       0.84      0.84      0.84     36316
+          weighted avg       0.85      0.84      0.84     36316
+
 INFO:root:Algorithm supervised: NB_ 
 	accuracy:	0.6763685427910563
 	 f1_macro:	0.6370125538810422
 	recall_macro:	0.663409981284189
 	precision_macro:	0.7310997381880961
+INFO:root:                        precision    recall  f1-score   support
+
+                Letter       0.62      0.74      0.68      2444
+                  Form       0.60      0.71      0.65      2485
+                 Email       0.75      0.83      0.79      2514
+         Advertisement       0.94      0.24      0.38      2241
+     Scientific report       0.75      0.53      0.62      2471
+Scientific publication       0.65      0.88      0.74      2558
+         Specification       0.75      0.89      0.82      2459
+           File folder       1.00      0.01      0.02      1930
+          News article       0.45      0.88      0.59      2447
+                Budget       0.79      0.64      0.70      2457
+               Invoice       0.74      0.79      0.76      2450
+          Presentation       0.77      0.37      0.50      2471
+         Questionnaire       0.67      0.79      0.72      2394
+                Resume       0.84      0.93      0.88      2532
+                  Memo       0.66      0.72      0.69      2463
+
+              accuracy                           0.68     36316
+             macro avg       0.73      0.66      0.64     36316
+          weighted avg       0.73      0.68      0.65     36316
+
 INFO:root:Algorithm supervised: SVC_ 
 	accuracy:	0.8031170833792268
 	 f1_macro:	0.801932795169922
 	recall_macro:	0.8029272570054437
 	precision_macro:	0.8075884348235082
+INFO:root:                        precision    recall  f1-score   support
+
+                Letter       0.76      0.81      0.79      2444
+                  Form       0.75      0.76      0.75      2485
+                 Email       0.90      0.92      0.91      2514
+         Advertisement       0.67      0.69      0.68      2241
+     Scientific report       0.75      0.74      0.75      2471
+Scientific publication       0.86      0.82      0.84      2558
+         Specification       0.87      0.89      0.88      2459
+           File folder       0.55      0.87      0.67      1930
+          News article       0.77      0.73      0.75      2447
+                Budget       0.84      0.74      0.79      2457
+               Invoice       0.85      0.82      0.84      2450
+          Presentation       0.79      0.68      0.73      2471
+         Questionnaire       0.91      0.80      0.85      2394
+                Resume       0.97      0.96      0.96      2532
+                  Memo       0.87      0.82      0.84      2463
+
+              accuracy                           0.80     36316
+             macro avg       0.81      0.80      0.80     36316
+          weighted avg       0.81      0.80      0.80     36316
+
 INFO:root:Algorithm unsupervised: KMeans_ 
 	homogeneity:	0.22557109728047411
 	 completeness:	0.4043371622995279
 	v_measure:	0.2895874946360943
 	adjusted_rand:	0.10804917436339435
 	adjusted_mutual_info:	0.28912031504145286
-INFO:root:Scoring ended: time.struct_time(tm_year=2020, tm_mon=3, tm_mday=25, tm_hour=11, tm_min=7, tm_sec=21, tm_wday=2, tm_yday=85, tm_isdst=0)
-INFO:root:('Scoring', ' executed for 00:00:01.03')
+INFO:root:Scoring ended: time.struct_time(tm_year=2020, tm_mon=3, tm_mday=28, tm_hour=13, tm_min=8, tm_sec=29, tm_wday=5, tm_yday=88, tm_isdst=0)
+INFO:root:('Scoring', ' executed for 00:00:00.93')
