@@ -1,4 +1,4 @@
-INFO:root:('PLot cluster started: ', time.struct_time(tm_year=2020, tm_mon=3, tm_mday=28, tm_hour=16, tm_min=2, tm_sec=8, tm_wday=5, tm_yday=88, tm_isdst=0))
+INFO:root:('PLot cluster started: ', time.struct_time(tm_year=2020, tm_mon=3, tm_mday=28, tm_hour=16, tm_min=57, tm_sec=29, tm_wday=5, tm_yday=88, tm_isdst=0))
 DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=12.0.
 DEBUG:matplotlib.font_manager:findfont: score(<Font 'STIXNonUnicode' (STIXNonUni.ttf) normal normal regular normal>) = 10.05
 DEBUG:matplotlib.font_manager:findfont: score(<Font 'STIXSizeThreeSym' (STIXSizThreeSymReg.ttf) normal normal regular normal>) = 10.05
@@ -1725,5 +1725,5 @@ DEBUG:matplotlib.font_manager:findfont: score(<Font 'Rachana' (Rachana-Regular.t
 DEBUG:matplotlib.font_manager:findfont: score(<Font 'Pothana2000' (Pothana2000.ttf) normal normal 400 normal>) = 10.05
 DEBUG:matplotlib.font_manager:findfont: score(<Font 'Noto Sans Osmanya' (NotoSansOsmanya-Regular.ttf) normal normal regular normal>) = 10.05
 DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/media/remote/tmandal/document-clustering-with-deep-neural-networks/code/.venv/lib/python3.6/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
-INFO:root:Plot cluster ended: time.struct_time(tm_year=2020, tm_mon=3, tm_mday=28, tm_hour=16, tm_min=7, tm_sec=3, tm_wday=5, tm_yday=88, tm_isdst=0)
-INFO:root:('Plot cluster', ' executed for 00:04:54.75')
+INFO:root:Plot cluster ended: time.struct_time(tm_year=2020, tm_mon=3, tm_mday=28, tm_hour=16, tm_min=57, tm_sec=51, tm_wday=5, tm_yday=88, tm_isdst=0)
+INFO:root:('Plot cluster', ' executed for 00:00:21.92')
