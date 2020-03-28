@@ -28,7 +28,8 @@ def plot_cluster(title, data, pad, plot_name, fig_num):
 
     plt.title(title, pad=pad)
     plt.figure(num=fig_num, figsize=(16, 10))
-
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, 2),
+               ncol=5, fancybox=True, shadow=True)
     sns_plot.figure.savefig(plot_name + ".png")
     # plt.figure(fig_num)
     # plt.show()
