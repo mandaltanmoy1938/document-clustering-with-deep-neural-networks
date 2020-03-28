@@ -20,7 +20,7 @@ def plot_chart(y, y_label, title, kind, data, pad, plot_name, fig_num):
 def plot_cluster(title, data, pad, plot_name, fig_num):
     classes = data['label'].unique()
     num_classes = classes.shape[0]
-    log.debug(title + "_num_classes:" + num_classes)
+    log.debug(title + "_num_classes:" + str(num_classes))
     log.debug(title + "_classes:" + classes)
     sns_plot = sns.scatterplot(
         x="x", y="y",
