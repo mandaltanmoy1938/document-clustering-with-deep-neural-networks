@@ -1,7 +1,7 @@
 import time
 import pandas as pd
 import logging as log
-import plot_generator as pg
+import graph_generator as gg
 import file_collector as fc
 import global_variables as gv
 import data_labeller as dl
@@ -92,16 +92,16 @@ def main():
     test_label_content_meta_pd["class_avg_word"] = test_label_content_meta_pd["word_count"] / \
                                                    test_label_content_meta_pd["number_of_documents"]
     test_label_content_meta_pd = test_label_content_meta_pd.round({"class_avg_line": 0, "class_avg_word": 0})
-    pg.plot_chart(y="total_line_count", y_label="Total number of lines",
+    gg.plot_chart(y="total_line_count", y_label="Total number of lines",
                   title="Total number of lines vs Classes for\n" + str(len(test_labels_by_path)) + " test documents",
                   kind="bar", data=test_label_content_meta_pd, pad=30, plot_name="test_total_line_count", fig_num=1)
-    pg.plot_chart(y="word_count", y_label="Total number of words",
+    gg.plot_chart(y="word_count", y_label="Total number of words",
                   title="Total number of words vs Classes for\n" + str(len(test_labels_by_path)) + " test documents",
                   kind="bar", data=test_label_content_meta_pd, pad=30, plot_name="test_word_count", fig_num=2)
-    pg.plot_chart(y="class_avg_line", y_label="Average number of lines",
+    gg.plot_chart(y="class_avg_line", y_label="Average number of lines",
                   title="Average number of lines vs Classes for\n" + str(len(test_labels_by_path)) + " test documents",
                   kind="bar", data=test_label_content_meta_pd, pad=30, plot_name="test_avg_line_count", fig_num=3)
-    pg.plot_chart(y="class_avg_word", y_label="Average number of words",
+    gg.plot_chart(y="class_avg_word", y_label="Average number of words",
                   title="Average number of words vs Classes for\n" + str(len(test_labels_by_path)) + " test documents",
                   kind="bar", data=test_label_content_meta_pd, pad=30, plot_name="test_avg_word_count", fig_num=4)
 
@@ -115,17 +115,17 @@ def main():
     train_label_content_meta_pd["class_avg_word"] = train_label_content_meta_pd["word_count"] / \
                                                     train_label_content_meta_pd["number_of_documents"]
     train_label_content_meta_pd = train_label_content_meta_pd.round({"class_avg_line": 0, "class_avg_word": 0})
-    pg.plot_chart(y="total_line_count", y_label="Total number of lines",
+    gg.plot_chart(y="total_line_count", y_label="Total number of lines",
                   title="Total number of lines vs Classes for\n" + str(len(train_labels_by_path)) + " train documents",
                   kind="bar", data=train_label_content_meta_pd, pad=30, plot_name="train_total_line_count", fig_num=5)
-    pg.plot_chart(y="word_count", y_label="Total number of words",
+    gg.plot_chart(y="word_count", y_label="Total number of words",
                   title="Total number of words vs Classes for\n" + str(len(train_labels_by_path)) + " train documents",
                   kind="bar", data=train_label_content_meta_pd, pad=30, plot_name="train_word_count", fig_num=6)
-    pg.plot_chart(y="class_avg_line", y_label="Average number of lines",
+    gg.plot_chart(y="class_avg_line", y_label="Average number of lines",
                   title="Average number of lines vs Classes for\n" + str(
                       len(train_labels_by_path)) + " train documents", kind="bar", data=train_label_content_meta_pd,
                   pad=30, plot_name="train_avg_line_count", fig_num=7)
-    pg.plot_chart(y="class_avg_word", y_label="Average number of words",
+    gg.plot_chart(y="class_avg_word", y_label="Average number of words",
                   title="Average number of words vs Classes for\n" + str(
                       len(train_labels_by_path)) + " train documents", kind="bar", data=train_label_content_meta_pd,
                   pad=30, plot_name="train_avg_word_count", fig_num=8)
@@ -140,16 +140,16 @@ def main():
     val_label_content_meta_pd["class_avg_word"] = val_label_content_meta_pd["word_count"] / val_label_content_meta_pd[
         "number_of_documents"]
     val_label_content_meta_pd = val_label_content_meta_pd.round({"class_avg_line": 0, "class_avg_word": 0})
-    pg.plot_chart(y="total_line_count", y_label="Total number of lines",
+    gg.plot_chart(y="total_line_count", y_label="Total number of lines",
                   title="Total number of lines vs Classes for " + str(len(val_labels_by_path)) + " val documents",
                   kind="bar", data=val_label_content_meta_pd, pad=30, plot_name="val_total_line_count", fig_num=9)
-    pg.plot_chart(y="word_count", y_label="Total number of words",
+    gg.plot_chart(y="word_count", y_label="Total number of words",
                   title="Total number of words vs Classes for " + str(len(val_labels_by_path)) + " val documents",
                   kind="bar", data=val_label_content_meta_pd, pad=30, plot_name="val_word_count", fig_num=10)
-    pg.plot_chart(y="class_avg_line", y_label="Average number of lines",
+    gg.plot_chart(y="class_avg_line", y_label="Average number of lines",
                   title="Average number of lines vs Classes for " + str(len(val_labels_by_path)) + " val documents",
                   kind="bar", data=val_label_content_meta_pd, pad=30, plot_name="val_avg_line_count", fig_num=11)
-    pg.plot_chart(y="class_avg_word", y_label="Average number of words",
+    gg.plot_chart(y="class_avg_word", y_label="Average number of words",
                   title="Average number of words vs Classes for " + str(len(val_labels_by_path)) + " val documents",
                   kind="bar", data=val_label_content_meta_pd, pad=30, plot_name="val_avg_word_count", fig_num=12)
     # plot_chart(all_label_content_meta)

@@ -13,6 +13,7 @@ from sklearn.feature_extraction import DictVectorizer
 log.basicConfig(filename='data_processor.log', level=log.DEBUG, filemode="w")
 
 
+# !vectorizer is must transform the test and val data not fit transform!
 def load_stop_words():
     with open(gv.prj_src_path + "data/stopwords-en.txt", "rt", encoding="utf-8-sig") as infile:
         stopwords_en = json.load(infile)["en"]
