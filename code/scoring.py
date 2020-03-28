@@ -21,6 +21,7 @@ def run():
 
     test_labels = loadPickle("test_labels")
     y_true = [gv.translation[x] for x in test_labels]
+    target_names = [gv.label_name[i] for i in gv.translation_rev]
     for algo in predicted_label["supervised"]:
         predict = loadPickle(algo + "test_data_transformed_predict")
         accuracy = accuracy_score(y_true, predict)
@@ -30,7 +31,6 @@ def run():
         log.info("Algorithm supervised: %s \n\taccuracy:\t%s"
                  "\n\t f1_macro:\t%s\n\trecall_macro:\t%s\n\tprecision_macro:\t%s" %
                  (algo, accuracy, f1, recall, precision))
-        target_names = [gv.label_name[gv.translation_rev[p]] for p in predict]
         cr = classification_report(y_true=y_true, y_pred=predict, target_names=target_names)
         log.info(cr)
 
