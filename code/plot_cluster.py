@@ -8,6 +8,7 @@ import graph_generator as gg
 
 from sklearn.manifold import TSNE
 
+log.basicConfig(filename='plot_cluster.log', level=log.DEBUG, filemode="w")
 
 def loadPickle(filename):
     # filename without extension
