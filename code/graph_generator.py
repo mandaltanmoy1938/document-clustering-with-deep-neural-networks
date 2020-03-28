@@ -18,7 +18,7 @@ def plot_chart(y, y_label, title, kind, data, pad, plot_name, fig_num):
 
 
 def plot_cluster(title, data, pad, plot_name, fig_num, l_col, hue):
-    classes = data['label'].unique()
+    classes = data[hue].unique()
     num_classes = classes.shape[0]
     log.debug(title + "num_classes:" + str(num_classes))
     log.debug(title + "classes:")
