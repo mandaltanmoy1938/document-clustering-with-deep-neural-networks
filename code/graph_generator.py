@@ -1,3 +1,4 @@
+import logging as log
 import seaborn as sns
 import matplotlib.pyplot as plt
 
@@ -17,7 +18,10 @@ def plot_chart(y, y_label, title, kind, data, pad, plot_name, fig_num):
 
 
 def plot_cluster(title, data, pad, plot_name, fig_num):
-    num_classes = data['label'].unique().shape[0]
+    classes = data['label'].unique()
+    num_classes = classes.shape[0]
+    log.debug("num_classes:" + num_classes)
+    log.debug("classes:" + classes)
     sns_plot = sns.scatterplot(
         x="x", y="y",
         hue="label",
