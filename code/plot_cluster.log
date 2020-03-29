@@ -1,4 +1,4 @@
-INFO:root:('PLot cluster started: ', time.struct_time(tm_year=2020, tm_mon=3, tm_mday=29, tm_hour=13, tm_min=9, tm_sec=42, tm_wday=6, tm_yday=89, tm_isdst=1))
+INFO:root:('PLot cluster started: ', time.struct_time(tm_year=2020, tm_mon=3, tm_mday=29, tm_hour=13, tm_min=11, tm_sec=31, tm_wday=6, tm_yday=89, tm_isdst=1))
 DEBUG:root:LogisticRegression_num_classes:15
 DEBUG:root:LogisticRegression_classes:
 DEBUG:root:['Resume' 'Email' 'News article' 'Questionnaire' 'File folder' 'Letter'
@@ -1749,5 +1749,5 @@ DEBUG:root:['Resume' 'Email' 'News article' 'Questionnaire' 'File folder' 'Lette
  'Specification' 'Scientific report' 'Form' 'Memo'
  'Scientific publication' 'Invoice' 'Budget' 'Presentation'
  'Advertisement']
-INFO:root:Plot cluster ended: time.struct_time(tm_year=2020, tm_mon=3, tm_mday=29, tm_hour=13, tm_min=9, tm_sec=58, tm_wday=6, tm_yday=89, tm_isdst=1)
-INFO:root:('Plot cluster', ' executed for 00:00:15.68')
+INFO:root:Plot cluster ended: time.struct_time(tm_year=2020, tm_mon=3, tm_mday=29, tm_hour=13, tm_min=11, tm_sec=47, tm_wday=6, tm_yday=89, tm_isdst=1)
+INFO:root:('Plot cluster', ' executed for 00:00:15.55')
