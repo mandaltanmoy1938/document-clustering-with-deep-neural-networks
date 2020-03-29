@@ -27,7 +27,7 @@ def plot_cluster(title, data, pad, plot_name, fig_num, l_col, hue):
     plt.title(title, pad=pad)
     sns_plot = sns.scatterplot(x="x", y="y", hue=hue, palette=sns.color_palette("bright", num_classes), data=data,
                                legend="full")
-    plt.legend(loc='upper left', bbox_to_anchor=(0.65, 1.13),
+    plt.legend(loc='upper left', bbox_to_anchor=(0.6, 1.13),
                ncol=l_col, fancybox=True, shadow=True)
     sns_plot.figure.savefig(plot_name + ".png")
     # plt.show()
