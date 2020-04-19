@@ -1,6 +1,7 @@
 import time
 import json
 import spacy
+import timer
 import logging as log
 import data_labeller as dl
 import file_collector as fc
@@ -12,10 +13,24 @@ from gensim.models.doc2vec import Doc2Vec
 
 log.basicConfig(filename='data_processor.log', level=log.DEBUG, filemode="w")
 
+
 def load_stop_words():
     with open(gv.prj_src_path + "data/stopwords-en.txt", "rt", encoding="utf-8-sig") as infile:
         stopwords_en = json.load(infile)["en"]
         return stopwords_en
+
+
+def load_doc2vec_model():
+    return Doc2Vec.load(gv.prj_src_path + "python_objects/doc2vec_model")
+
+
+def generate_doc2vec_model(train_corpus_dict):
+    train_corpus = [tcd for tcd in train_corpus_dict]
+
+    doc2vec_model = Doc2Vec(size=50, iter=55)
+    doc2vec_model.build_vocab(train_corpus)
+    doc2vec_model.train(train_corpus, total_examples=doc2vec_model.corpus_count, epochs=doc2vec_model.iter)
+    doc2vec_model.save(gv.prj_src_path + "python_objects/doc2vec_model")
 
 
 def dict_vectorizer(data_dict, label_dict, test_data_dict, test_label_dict, val_data_dict, val_label_dict):
@@ -75,34 +90,51 @@ def tokenizer(required_files):
 
 def run():
     # train labels
+    label_start = time.time()
+    log.info(("Get train labels: ", time.localtime(label_start)))
     train_paths_by_label, train_labels_by_path = dl.get_labels(
         fc.read_file(gv.data_src_path + gv.train_label_file_name), gv.train_label_file_name)
-
+    timer.time_executed(label_start, "Get train labels")
     # test labels
+    label_start = time.time()
+    log.info(("Get test labels: ", time.localtime(label_start)))
     test_paths_by_label, test_labels_by_path = dl.get_labels(
         fc.read_file(gv.data_src_path + gv.test_label_file_name),
         gv.test_label_file_name)
+    timer.time_executed(label_start, "Get test labels")
 
     # val labels
+    label_start = time.time()
+    log.info(("Get val labels: ", time.localtime(label_start)))
     val_paths_by_label, val_labels_by_path = dl.get_labels(fc.read_file(gv.data_src_path + gv.val_label_file_name),
                                                            gv.val_label_file_name)
+    timer.time_executed(label_start, "Get val labels")
 
     # train dataset processing
+    process_start = time.time()
+    log.info(("Process train data: ", time.localtime(process_start)))
     train_document_meta, train_modified_texts = tokenizer(required_files=train_labels_by_path)
+    timer.time_executed(process_start, "Process train data")
     op.save_object(train_document_meta, gv.prj_src_path + "python_objects/train_document_meta")
-    op.save_object(train_document_meta, gv.prj_src_path + "python_objects/train_modified_texts")
+    op.save_object(train_modified_texts, gv.prj_src_path + "python_objects/train_modified_texts")
 
     # test dataset processing
+    process_start = time.time()
+    log.info(("Process test data: ", time.localtime(process_start)))
     test_document_meta, test_modified_texts = tokenizer(required_files=test_labels_by_path)
+    timer.time_executed(process_start, "Process test data")
     op.save_object(test_document_meta, gv.prj_src_path + "python_objects/test_document_meta")
-    op.save_object(test_document_meta, gv.prj_src_path + "python_objects/test_modified_texts")
+    op.save_object(test_modified_texts, gv.prj_src_path + "python_objects/test_modified_texts")
 
     # val dataset processing
+    process_start = time.time()
+    log.info(("Process val data: ", time.localtime(process_start)))
     val_document_meta, val_modified_texts = tokenizer(required_files=val_labels_by_path)
+    timer.time_executed(process_start, "Process val data")
     op.save_object(val_document_meta, gv.prj_src_path + "python_objects/val_document_meta")
-    op.save_object(val_document_meta, gv.prj_src_path + "python_objects/val_modified_texts")
+    op.save_object(val_modified_texts, gv.prj_src_path + "python_objects/val_modified_texts")
 
-    stopwords_en = load_stop_words()
+    # stopwords_en = load_stop_words()
 
     # load document meta
     train_document_meta = op.load_object(gv.prj_src_path + "python_objects/train_document_meta")
@@ -110,9 +142,12 @@ def run():
     val_document_meta = op.load_object(gv.prj_src_path + "python_objects/val_document_meta")
 
     # dict_vectorizer
+    process_start = time.time()
+    log.info(("Dictvectorizer: ", time.localtime(process_start)))
     train_data_transformed, train_labels, test_data_transformed, test_labels, val_data_transformed, val_labels = dict_vectorizer(
         data_dict=train_document_meta, label_dict=train_labels_by_path, test_data_dict=test_document_meta,
         test_label_dict=test_labels_by_path, val_data_dict=val_document_meta, val_label_dict=val_labels_by_path)
+    timer.time_executed(process_start, "Dictvectorizer")
 
     op.save_object(train_data_transformed, gv.prj_src_path + "python_objects/train_data_transformed")
     op.save_object(train_labels, gv.prj_src_path + "python_objects/train_labels")
@@ -123,6 +158,17 @@ def run():
     op.save_object(val_data_transformed, gv.prj_src_path + "python_objects/val_data_transformed")
     op.save_object(val_labels, gv.prj_src_path + "python_objects/val_labels")
 
+    # load modified texts
+    train_modified_texts = op.load_object(gv.prj_src_path + "python_objects/train_modified_texts")
+    test_modified_texts = op.load_object(gv.prj_src_path + "python_objects/test_modified_texts")
+    val_modified_texts = op.load_object(gv.prj_src_path + "python_objects/val_modified_texts")
+
+    # generate doc2vec
+    process_start = time.time()
+    log.info(("Doc2Vec: ", time.localtime(process_start)))
+    generate_doc2vec_model(train_modified_texts)
+    timer.time_executed(process_start, "Doc2Vec")
+
 
 def main():
     run()
@@ -131,10 +177,8 @@ def main():
 if __name__ == '__main__':
     start_time = time.time()
     log.info(("Data processor started: ", time.localtime(start_time)))
-    main()
-    end_time = time.time()
-    log.info(("Data processor ended: ", time.localtime(end_time)))
-    execution_time = end_time - start_time
-    hours, rem = divmod(execution_time, 3600)
-    minutes, seconds = divmod(rem, 60)
-    log.info(("Data processor executed for {:0>2}:{:0>2}:{:05.2f}".format(int(hours), int(minutes), seconds)))
+    try:
+        main()
+    except Exception as ex:
+        log.exception(ex)
+    timer.time_executed(start_time, "Data processor")

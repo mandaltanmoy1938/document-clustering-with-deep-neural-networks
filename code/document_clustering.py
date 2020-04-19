@@ -6,10 +6,8 @@ import timer
 
 from sklearn import svm
 from sklearn.linear_model import LogisticRegression
-from sklearn.linear_model import SGDClassifier
 from sklearn.naive_bayes import MultinomialNB
-from sklearn.model_selection import cross_validate
-from sklearn.cluster import KMeans, AffinityPropagation, MeanShift
+from sklearn.cluster import KMeans, MeanShift
 
 log.basicConfig(filename='document_clustering.log', level=log.DEBUG, filemode="w")
 
@@ -21,18 +19,11 @@ def loadPickle(filename):
 
 def train_test():
     data_label = [{"data": "train_data_transformed", "label": "train_labels",
-                   "test_data": "test_data_transformed", "test_label": "test_labels"}
-                  #{"data": "train_data_hash_transformed", "label": "train_labels",
-                   #"test_data": "test_data_hash_transformed", "test_label": "test_labels"}
-                  ]
+                   "test_data": "test_data_transformed", "test_label": "test_labels"}]
 
-    try_algorithms = {
-        # "supervised": {"SVC": svm.SVC(kernel='linear', C=1, random_state=0),
-                                     # "NB": MultinomialNB(),
-                                     # "LogisticRegression": LogisticRegression()},
-                      "unsupervised": {"KMeans": KMeans(n_clusters=15),
-                                      "AffinityPropagation": AffinityPropagation(),
-                                     "MeanShift": MeanShift()}
+    try_algorithms = {"supervised": {"SVC": svm.SVC(kernel='linear', C=1, random_state=0), "NB": MultinomialNB(),
+                                     "LogisticRegression": LogisticRegression()},
+                      "unsupervised": {"KMeans": KMeans(n_clusters=15), "MeanShift": MeanShift()}
                       }
     for dl in data_label:
         data = loadPickle(dl["data"])
@@ -57,54 +48,7 @@ def train_test():
                 op.save_object(predict, gv.prj_src_path + "python_objects/%s_%s_predict" % (algo, dl["test_data"]))
 
 
-def cross_validation():
-    data_label = [{"data": "train_data_transformed", "label": "train_labels"},
-                  {"data": "train_data_hash_transformed", "label": "train_labels"},
-                  {"data": "val_data_transformed", "label": "val_labels"},
-                  {"data": "val_data_hash_transformed", "label": "val_labels"},
-                  {"data": "test_data_transformed", "label": "test_labels"},
-                  {"data": "test_data_hash_transformed", "label": "test_labels"}]
-
-    try_algorithms = {"KMeans": KMeans(n_clusters=15), "AffinityPropagation": AffinityPropagation(),
-                      "MeanShift": MeanShift(), "SVC": svm.SVC(kernel='linear', C=1, random_state=0),
-                      "NB": MultinomialNB(), "LogisticRegression": LogisticRegression(),
-                      "SGDClassifier": SGDClassifier()}
-
-    for dl in data_label:
-        data = loadPickle(dl["data"])
-        labels = loadPickle(dl["label"])
-        labels = [gv.translation[x] for x in labels]
-
-        log.info("data: %s" % (dl["data"]))
-        for algo, clf in try_algorithms.items():
-            scoring = ['precision_macro', 'recall_macro', 'f1_macro', 'accuracy']
-            scores = cross_validate(clf, data, labels, scoring=scoring, cv=2,
-                                    return_train_score=False)
-
-            for k in sorted(scores.keys()):
-                print("\t%s %s %s: %0.2f (+/- %0.2f)" % (dl["data"], algo, k, scores[k].mean(), scores[k].std() * 2))
-                log.debug(
-                    "\t%s %s %s: %0.2f (+/- %0.2f)" % (dl["data"], algo, k, scores[k].mean(), scores[k].std() * 2))
-
-
-# def plot_cluster():
-#     data = loadPickle("test_data_transformed")
-#     labels = loadPickle("test_labels")
-#     data_by_labels = dict()
-#
-#     for index, l in enumerate(labels):
-#         data_by_labels[l] = data.get(index)
-#
-#     data_by_labels = pd.DataFrame.from_dict(data_by_labels)
-#
-# def cluster():
-#     data = loadPickle("train_data_transformed")
-#     try_algorithms = {"KMeans": KMeans(n_clusters=15), "AffinityPropagation": AffinityPropagation(),
-#                       "MeanShift": MeanShift()}
-
-
 def run():
-    # cross_validation()
     train_test()
 
 
