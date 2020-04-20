@@ -2,12 +2,12 @@ import time
 import json
 import spacy
 import timer
+import gensim
 import logging as log
 import data_labeller as dl
 import file_collector as fc
 import object_pickler as op
 import global_variables as gv
-
 from sklearn.feature_extraction import DictVectorizer
 from gensim.models.doc2vec import Doc2Vec
 
@@ -24,9 +24,17 @@ def load_doc2vec_model():
     return Doc2Vec.load(gv.prj_src_path + "python_objects/doc2vec_model")
 
 
-def generate_doc2vec_model(train_corpus_dict):
-    train_corpus = [tcd for tcd in train_corpus_dict]
+def preprocess_doc2vec(train_corpus_list, tokens_only=False):
+    for i, tcd in enumerate(train_corpus_list):
+        doc = gensim.utils.simple_preprocess(tcd)
+        if tokens_only:
+            yield doc
+        else:
+            # For training data, add tags
+            yield gensim.models.doc2vec.TaggedDocument(doc, [i])
 
+
+def generate_doc2vec_model(train_corpus):
     doc2vec_model = Doc2Vec(size=50, iter=55)
     doc2vec_model.build_vocab(train_corpus)
     doc2vec_model.train(train_corpus, total_examples=doc2vec_model.corpus_count, epochs=doc2vec_model.iter)
@@ -89,84 +97,108 @@ def tokenizer(required_files):
 
 
 def run():
-    # train labels
-    label_start = time.time()
-    log.info(("Get train labels: ", time.localtime(label_start)))
-    train_paths_by_label, train_labels_by_path = dl.get_labels(
-        fc.read_file(gv.data_src_path + gv.train_label_file_name), gv.train_label_file_name)
-    timer.time_executed(label_start, "Get train labels")
-    # test labels
-    label_start = time.time()
-    log.info(("Get test labels: ", time.localtime(label_start)))
-    test_paths_by_label, test_labels_by_path = dl.get_labels(
-        fc.read_file(gv.data_src_path + gv.test_label_file_name),
-        gv.test_label_file_name)
-    timer.time_executed(label_start, "Get test labels")
-
-    # val labels
-    label_start = time.time()
-    log.info(("Get val labels: ", time.localtime(label_start)))
-    val_paths_by_label, val_labels_by_path = dl.get_labels(fc.read_file(gv.data_src_path + gv.val_label_file_name),
-                                                           gv.val_label_file_name)
-    timer.time_executed(label_start, "Get val labels")
-
-    # train dataset processing
-    process_start = time.time()
-    log.info(("Process train data: ", time.localtime(process_start)))
-    train_document_meta, train_modified_texts = tokenizer(required_files=train_labels_by_path)
-    timer.time_executed(process_start, "Process train data")
-    op.save_object(train_document_meta, gv.prj_src_path + "python_objects/train_document_meta")
-    op.save_object(train_modified_texts, gv.prj_src_path + "python_objects/train_modified_texts")
-
-    # test dataset processing
-    process_start = time.time()
-    log.info(("Process test data: ", time.localtime(process_start)))
-    test_document_meta, test_modified_texts = tokenizer(required_files=test_labels_by_path)
-    timer.time_executed(process_start, "Process test data")
-    op.save_object(test_document_meta, gv.prj_src_path + "python_objects/test_document_meta")
-    op.save_object(test_modified_texts, gv.prj_src_path + "python_objects/test_modified_texts")
-
-    # val dataset processing
-    process_start = time.time()
-    log.info(("Process val data: ", time.localtime(process_start)))
-    val_document_meta, val_modified_texts = tokenizer(required_files=val_labels_by_path)
-    timer.time_executed(process_start, "Process val data")
-    op.save_object(val_document_meta, gv.prj_src_path + "python_objects/val_document_meta")
-    op.save_object(val_modified_texts, gv.prj_src_path + "python_objects/val_modified_texts")
-
-    # stopwords_en = load_stop_words()
-
-    # load document meta
-    train_document_meta = op.load_object(gv.prj_src_path + "python_objects/train_document_meta")
-    test_document_meta = op.load_object(gv.prj_src_path + "python_objects/test_document_meta")
-    val_document_meta = op.load_object(gv.prj_src_path + "python_objects/val_document_meta")
-
-    # dict_vectorizer
-    process_start = time.time()
-    log.info(("Dictvectorizer: ", time.localtime(process_start)))
-    train_data_transformed, train_labels, test_data_transformed, test_labels, val_data_transformed, val_labels = dict_vectorizer(
-        data_dict=train_document_meta, label_dict=train_labels_by_path, test_data_dict=test_document_meta,
-        test_label_dict=test_labels_by_path, val_data_dict=val_document_meta, val_label_dict=val_labels_by_path)
-    timer.time_executed(process_start, "Dictvectorizer")
-
-    op.save_object(train_data_transformed, gv.prj_src_path + "python_objects/train_data_transformed")
-    op.save_object(train_labels, gv.prj_src_path + "python_objects/train_labels")
-
-    op.save_object(test_data_transformed, gv.prj_src_path + "python_objects/test_data_transformed")
-    op.save_object(test_labels, gv.prj_src_path + "python_objects/test_labels")
-
-    op.save_object(val_data_transformed, gv.prj_src_path + "python_objects/val_data_transformed")
-    op.save_object(val_labels, gv.prj_src_path + "python_objects/val_labels")
+    # # train labels
+    # label_start = time.time()
+    # log.info(("Get train labels: ", time.localtime(label_start)))
+    # train_paths_by_label, train_labels_by_path = dl.get_labels(
+    #     fc.read_file(gv.data_src_path + gv.train_label_file_name), gv.train_label_file_name)
+    # timer.time_executed(label_start, "Get train labels")
+    # # test labels
+    # label_start = time.time()
+    # log.info(("Get test labels: ", time.localtime(label_start)))
+    # test_paths_by_label, test_labels_by_path = dl.get_labels(
+    #     fc.read_file(gv.data_src_path + gv.test_label_file_name),
+    #     gv.test_label_file_name)
+    # timer.time_executed(label_start, "Get test labels")
+    #
+    # # val labels
+    # label_start = time.time()
+    # log.info(("Get val labels: ", time.localtime(label_start)))
+    # val_paths_by_label, val_labels_by_path = dl.get_labels(fc.read_file(gv.data_src_path + gv.val_label_file_name),
+    #                                                        gv.val_label_file_name)
+    # timer.time_executed(label_start, "Get val labels")
+    #
+    # # train dataset processing
+    # process_start = time.time()
+    # log.info(("Process train data: ", time.localtime(process_start)))
+    # train_document_meta, train_modified_texts = tokenizer(required_files=train_labels_by_path)
+    # timer.time_executed(process_start, "Process train data")
+    # op.save_object(train_document_meta, gv.prj_src_path + "python_objects/train_document_meta")
+    # op.save_object(train_modified_texts, gv.prj_src_path + "python_objects/train_modified_texts")
+    #
+    # # test dataset processing
+    # process_start = time.time()
+    # log.info(("Process test data: ", time.localtime(process_start)))
+    # test_document_meta, test_modified_texts = tokenizer(required_files=test_labels_by_path)
+    # timer.time_executed(process_start, "Process test data")
+    # op.save_object(test_document_meta, gv.prj_src_path + "python_objects/test_document_meta")
+    # op.save_object(test_modified_texts, gv.prj_src_path + "python_objects/test_modified_texts")
+    #
+    # # val dataset processing
+    # process_start = time.time()
+    # log.info(("Process val data: ", time.localtime(process_start)))
+    # val_document_meta, val_modified_texts = tokenizer(required_files=val_labels_by_path)
+    # timer.time_executed(process_start, "Process val data")
+    # op.save_object(val_document_meta, gv.prj_src_path + "python_objects/val_document_meta")
+    # op.save_object(val_modified_texts, gv.prj_src_path + "python_objects/val_modified_texts")
+    #
+    # # stopwords_en = load_stop_words()
+    #
+    # # load document meta
+    # train_document_meta = op.load_object(gv.prj_src_path + "python_objects/train_document_meta")
+    # test_document_meta = op.load_object(gv.prj_src_path + "python_objects/test_document_meta")
+    # val_document_meta = op.load_object(gv.prj_src_path + "python_objects/val_document_meta")
+    #
+    # # dict_vectorizer
+    # process_start = time.time()
+    # log.info(("Dictvectorizer: ", time.localtime(process_start)))
+    # train_data_transformed, train_labels, test_data_transformed, test_labels, val_data_transformed, val_labels = dict_vectorizer(
+    #     data_dict=train_document_meta, label_dict=train_labels_by_path, test_data_dict=test_document_meta,
+    #     test_label_dict=test_labels_by_path, val_data_dict=val_document_meta, val_label_dict=val_labels_by_path)
+    # timer.time_executed(process_start, "Dictvectorizer")
+    #
+    # op.save_object(train_data_transformed, gv.prj_src_path + "python_objects/train_data_transformed")
+    # op.save_object(train_labels, gv.prj_src_path + "python_objects/train_labels")
+    #
+    # op.save_object(test_data_transformed, gv.prj_src_path + "python_objects/test_data_transformed")
+    # op.save_object(test_labels, gv.prj_src_path + "python_objects/test_labels")
+    #
+    # op.save_object(val_data_transformed, gv.prj_src_path + "python_objects/val_data_transformed")
+    # op.save_object(val_labels, gv.prj_src_path + "python_objects/val_labels")
 
     # load modified texts
     train_modified_texts = op.load_object(gv.prj_src_path + "python_objects/train_modified_texts")
     test_modified_texts = op.load_object(gv.prj_src_path + "python_objects/test_modified_texts")
     val_modified_texts = op.load_object(gv.prj_src_path + "python_objects/val_modified_texts")
 
+    # generate train corpus
+    process_start = time.time()
+    log.info(("Train corpus: ", time.localtime(process_start)))
+    train_corpus_list = [tcd for tcd in train_modified_texts]
+    train_corpus = preprocess_doc2vec(train_corpus_list)
+    op.save_object(train_corpus, gv.prj_src_path + "python_objects/train_corpus")
+    timer.time_executed(process_start, "Train corpus")
+
+    # generate Test corpus
+    process_start = time.time()
+    log.info(("Test corpus: ", time.localtime(process_start)))
+    test_corpus_list = [tcd for tcd in test_modified_texts]
+    test_corpus = preprocess_doc2vec(test_corpus_list)
+    op.save_object(test_corpus, gv.prj_src_path + "python_objects/test_corpus")
+    timer.time_executed(process_start, "Test corpus")
+
+    # generate val corpus
+    process_start = time.time()
+    log.info(("Val corpus: ", time.localtime(process_start)))
+    val_corpus_list = [tcd for tcd in val_modified_texts]
+    val_corpus = preprocess_doc2vec(val_corpus_list)
+    op.save_object(val_corpus, gv.prj_src_path + "python_objects/val_corpus")
+    timer.time_executed(process_start, "Val corpus")
+
     # generate doc2vec
     process_start = time.time()
     log.info(("Doc2Vec: ", time.localtime(process_start)))
-    generate_doc2vec_model(train_modified_texts)
+    generate_doc2vec_model(train_corpus)
     timer.time_executed(process_start, "Doc2Vec")
 
 
