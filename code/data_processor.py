@@ -183,7 +183,7 @@ def run():
     process_start = time.time()
     log.info(("Test corpus: ", time.localtime(process_start)))
     test_corpus_list = [tcd for tcd in test_modified_texts]
-    test_corpus = preprocess_doc2vec(test_corpus_list)
+    test_corpus = preprocess_doc2vec(test_corpus_list, tokens_only=True)
     op.save_object(test_corpus, gv.prj_src_path + "python_objects/test_corpus")
     timer.time_executed(process_start, "Test corpus")
 
@@ -191,7 +191,7 @@ def run():
     process_start = time.time()
     log.info(("Val corpus: ", time.localtime(process_start)))
     val_corpus_list = [tcd for tcd in val_modified_texts]
-    val_corpus = preprocess_doc2vec(val_corpus_list)
+    val_corpus = preprocess_doc2vec(val_corpus_list, tokens_only=True)
     op.save_object(val_corpus, gv.prj_src_path + "python_objects/val_corpus")
     timer.time_executed(process_start, "Val corpus")
 
