@@ -35,10 +35,11 @@ def preprocess_doc2vec(train_corpus_list, tokens_only=False):
 
 
 def generate_doc2vec_model(train_corpus):
-    doc2vec_model = Doc2Vec(size=50, iter=55)
+    log.info(("train_corpus size: ", len(train_corpus)))
+    doc2vec_model = Doc2Vec(vector_size=300, min_count=2, epochs=50)
     doc2vec_model.build_vocab(train_corpus)
     doc2vec_model.train(train_corpus, total_examples=doc2vec_model.corpus_count, epochs=doc2vec_model.iter)
-    doc2vec_model.save(gv.prj_src_path + "python_objects/doc2vec_model")
+    doc2vec_model.save(gv.prj_src_path + "python_objects/document_model.doc2vec")
 
 
 def dict_vectorizer(data_dict, label_dict, test_data_dict, test_label_dict, val_data_dict, val_label_dict):
@@ -171,35 +172,73 @@ def run():
     test_modified_texts = op.load_object(gv.prj_src_path + "python_objects/test_modified_texts")
     val_modified_texts = op.load_object(gv.prj_src_path + "python_objects/val_modified_texts")
 
-    # generate train corpus
+    # generate preprocessed train corpus
     process_start = time.time()
     log.info(("Train corpus: ", time.localtime(process_start)))
     train_corpus_list = [tcd for tcd in train_modified_texts]
-    train_corpus = preprocess_doc2vec(train_corpus_list)
-    op.save_object(train_corpus, gv.prj_src_path + "python_objects/train_corpus")
+    train_corpus_preprocessed = preprocess_doc2vec(train_corpus_list)
+    op.save_object(train_corpus_preprocessed, gv.prj_src_path + "python_objects/train_corpus_preprocessed")
     timer.time_executed(process_start, "Train corpus")
 
-    # generate Test corpus
+    # generate tokens only train corpus
+    process_start = time.time()
+    log.info(("Train corpus: ", time.localtime(process_start)))
+    train_corpus_list = [tcd for tcd in train_modified_texts]
+    train_corpus_tokens_only = preprocess_doc2vec(train_corpus_list, tokens_only=True)
+    op.save_object(train_corpus_tokens_only, gv.prj_src_path + "python_objects/train_corpus_tokens_only")
+    timer.time_executed(process_start, "Train corpus")
+
+    # generate tokens only Test corpus
     process_start = time.time()
     log.info(("Test corpus: ", time.localtime(process_start)))
     test_corpus_list = [tcd for tcd in test_modified_texts]
-    test_corpus = preprocess_doc2vec(test_corpus_list, tokens_only=True)
-    op.save_object(test_corpus, gv.prj_src_path + "python_objects/test_corpus")
+    test_corpus_tokens_only = preprocess_doc2vec(test_corpus_list, tokens_only=True)
+    op.save_object(test_corpus_tokens_only, gv.prj_src_path + "python_objects/test_corpus_tokens_only")
     timer.time_executed(process_start, "Test corpus")
 
-    # generate val corpus
+    # generate tokens only val corpus
     process_start = time.time()
     log.info(("Val corpus: ", time.localtime(process_start)))
     val_corpus_list = [tcd for tcd in val_modified_texts]
-    val_corpus = preprocess_doc2vec(val_corpus_list, tokens_only=True)
-    op.save_object(val_corpus, gv.prj_src_path + "python_objects/val_corpus")
+    val_corpus_tokens_only = preprocess_doc2vec(val_corpus_list, tokens_only=True)
+    op.save_object(val_corpus_tokens_only, gv.prj_src_path + "python_objects/val_corpus_tokens_only")
     timer.time_executed(process_start, "Val corpus")
 
-    # generate doc2vec
+    # load corpus
+    train_corpus_preprocessed = op.load_object(gv.prj_src_path + "python_objects/train_corpus_preprocessed")
+    train_corpus_tokens_only = op.load_object(gv.prj_src_path + "python_objects/train_corpus_tokens_only")
+    test_corpus_tokens_only = op.load_object(gv.prj_src_path + "python_objects/test_corpus_tokens_only")
+    val_corpus_tokens_only = op.load_object(gv.prj_src_path + "python_objects/val_corpus_tokens_only")
+
+    # generate doc2vec model
     process_start = time.time()
     log.info(("Doc2Vec: ", time.localtime(process_start)))
-    generate_doc2vec_model(train_corpus)
+    generate_doc2vec_model(train_corpus_preprocessed)
     timer.time_executed(process_start, "Doc2Vec")
+
+    # load doc2vec model
+    model = Doc2Vec.load(gv.prj_src_path + "python_objects/document_model.doc2vec")
+
+    # get train vector from the doc2vec
+    infer_vector_start = time.time()
+    log.info(("Infer vector train: ", time.localtime(process_start)))
+    train_vector = model.infer_vector(train_corpus_tokens_only)
+    timer.time_executed(infer_vector_start, "Infer vector train")
+    op.save_object(train_vector, gv.prj_src_path + "python_objects/train_vector")
+
+    # get test vector from the doc2vec
+    infer_vector_start = time.time()
+    log.info(("Infer vector test: ", time.localtime(process_start)))
+    test_vector = model.infer_vector(test_corpus_tokens_only)
+    timer.time_executed(infer_vector_start, "Infer vector test")
+    op.save_object(test_vector, gv.prj_src_path + "python_objects/test_vector")
+
+    # get val vector from the doc2vec
+    infer_vector_start = time.time()
+    log.info(("Infer vector val: ", time.localtime(process_start)))
+    val_vector = model.infer_vector(val_corpus_tokens_only)
+    timer.time_executed(infer_vector_start, "Infer vector val")
+    op.save_object(val_vector, gv.prj_src_path + "python_objects/val_vector")
 
 
 def main():

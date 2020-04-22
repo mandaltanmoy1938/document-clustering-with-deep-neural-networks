@@ -24,6 +24,7 @@ def run():
     target_names = [gv.label_name[i] for i in gv.translation_rev]
     for algo in predicted_label["supervised"]:
         predict = loadPickle(algo + "test_data_transformed_predict")
+        # predict = loadPickle(algo + "test_vector")
         accuracy = accuracy_score(y_true, predict)
         f1 = f1_score(y_true, predict, average='macro')
         recall = recall_score(y_true, predict, average='macro')
@@ -36,6 +37,7 @@ def run():
 
     for algo in predicted_label["unsupervised"]:
         predict = loadPickle(algo + "test_data_transformed_predict")
+        # predict = loadPickle(algo + "test_vector")
         score_h = homogeneity_score(y_true, predict)
         score_c = completeness_score(y_true, predict)
         score_v = v_measure_score(y_true, predict)
