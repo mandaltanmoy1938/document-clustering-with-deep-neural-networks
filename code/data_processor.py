@@ -35,7 +35,7 @@ def preprocess_doc2vec(train_corpus_list, tokens_only=False):
 
 
 def generate_doc2vec_model(train_corpus):
-    log.info(("train_corpus size: ", len(train_corpus)))
+    log.info(("train_corpus size: ", type(train_corpus)))
     doc2vec_model = Doc2Vec(vector_size=300, min_count=2, epochs=50)
     doc2vec_model.build_vocab(train_corpus)
     doc2vec_model.train(train_corpus, total_examples=doc2vec_model.corpus_count, epochs=doc2vec_model.iter)
