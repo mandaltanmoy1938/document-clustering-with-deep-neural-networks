@@ -1,12 +1,52 @@
-INFO:root:('Document clustering started: ', time.struct_time(tm_year=2020, tm_mon=3, tm_mday=23, tm_hour=16, tm_min=53, tm_sec=33, tm_wday=0, tm_yday=83, tm_isdst=0))
-INFO:root:unsupervised  starts at time.struct_time(tm_year=2020, tm_mon=3, tm_mday=23, tm_hour=16, tm_min=53, tm_sec=34, tm_wday=0, tm_yday=83, tm_isdst=0)
+INFO:root:('Document clustering started: ', time.struct_time(tm_year=2020, tm_mon=4, tm_mday=21, tm_hour=10, tm_min=34, tm_sec=15, tm_wday=1, tm_yday=112, tm_isdst=1))
+INFO:root:supervised  starts at time.struct_time(tm_year=2020, tm_mon=4, tm_mday=21, tm_hour=10, tm_min=34, tm_sec=16, tm_wday=1, tm_yday=112, tm_isdst=1)
+INFO:root:	Algorithm: SVC 
+		training starts at time.struct_time(tm_year=2020, tm_mon=4, tm_mday=21, tm_hour=10, tm_min=34, tm_sec=16, tm_wday=1, tm_yday=112, tm_isdst=1)
+INFO:root:		training ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=22, tm_hour=7, tm_min=15, tm_sec=55, tm_wday=2, tm_yday=113, tm_isdst=1)
+INFO:root:('\t\ttraining', ' executed for 20:41:38.86')
+INFO:root:		SVC predict starts at time.struct_time(tm_year=2020, tm_mon=4, tm_mday=22, tm_hour=7, tm_min=15, tm_sec=55, tm_wday=2, tm_yday=113, tm_isdst=1)
+INFO:root:		predict ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=22, tm_hour=18, tm_min=0, tm_sec=42, tm_wday=2, tm_yday=113, tm_isdst=1)
+INFO:root:('\t\tpredict', ' executed for 10:44:47.18')
+INFO:root:	Algorithm: NB 
+		training starts at time.struct_time(tm_year=2020, tm_mon=4, tm_mday=22, tm_hour=18, tm_min=0, tm_sec=42, tm_wday=2, tm_yday=113, tm_isdst=1)
+INFO:root:		training ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=22, tm_hour=18, tm_min=0, tm_sec=46, tm_wday=2, tm_yday=113, tm_isdst=1)
+INFO:root:('\t\ttraining', ' executed for 00:00:04.05')
+INFO:root:		NB predict starts at time.struct_time(tm_year=2020, tm_mon=4, tm_mday=22, tm_hour=18, tm_min=0, tm_sec=46, tm_wday=2, tm_yday=113, tm_isdst=1)
+INFO:root:		predict ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=22, tm_hour=18, tm_min=0, tm_sec=48, tm_wday=2, tm_yday=113, tm_isdst=1)
+INFO:root:('\t\tpredict', ' executed for 00:00:01.97')
+INFO:root:	Algorithm: LogisticRegression 
+		training starts at time.struct_time(tm_year=2020, tm_mon=4, tm_mday=22, tm_hour=18, tm_min=0, tm_sec=48, tm_wday=2, tm_yday=113, tm_isdst=1)
+INFO:root:		training ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=22, tm_hour=18, tm_min=28, tm_sec=43, tm_wday=2, tm_yday=113, tm_isdst=1)
+INFO:root:('\t\ttraining', ' executed for 00:27:54.54')
+INFO:root:		LogisticRegression predict starts at time.struct_time(tm_year=2020, tm_mon=4, tm_mday=22, tm_hour=18, tm_min=28, tm_sec=43, tm_wday=2, tm_yday=113, tm_isdst=1)
+INFO:root:		predict ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=22, tm_hour=18, tm_min=28, tm_sec=45, tm_wday=2, tm_yday=113, tm_isdst=1)
+INFO:root:('\t\tpredict', ' executed for 00:00:01.93')
+INFO:root:unsupervised  starts at time.struct_time(tm_year=2020, tm_mon=4, tm_mday=22, tm_hour=18, tm_min=28, tm_sec=45, tm_wday=2, tm_yday=113, tm_isdst=1)
 INFO:root:	Algorithm: KMeans 
-		training starts at time.struct_time(tm_year=2020, tm_mon=3, tm_mday=23, tm_hour=16, tm_min=53, tm_sec=34, tm_wday=0, tm_yday=83, tm_isdst=0)
-INFO:root:		training ended: time.struct_time(tm_year=2020, tm_mon=3, tm_mday=24, tm_hour=3, tm_min=29, tm_sec=16, tm_wday=1, tm_yday=84, tm_isdst=0)
-INFO:root:('\t\ttraining', ' executed for 10:35:41.90')
-INFO:root:		KMeans predict starts at time.struct_time(tm_year=2020, tm_mon=3, tm_mday=24, tm_hour=3, tm_min=29, tm_sec=16, tm_wday=1, tm_yday=84, tm_isdst=0)
-INFO:root:		predict ended: time.struct_time(tm_year=2020, tm_mon=3, tm_mday=24, tm_hour=3, tm_min=29, tm_sec=16, tm_wday=1, tm_yday=84, tm_isdst=0)
-INFO:root:('\t\tpredict', ' executed for 00:00:00.55')
-INFO:root:	Algorithm: AffinityPropagation 
-		training starts at time.struct_time(tm_year=2020, tm_mon=3, tm_mday=24, tm_hour=3, tm_min=29, tm_sec=16, tm_wday=1, tm_yday=84, tm_isdst=0)
-ERROR:root:Unable to allocate 591. GiB for an array with shape (79351530565,) and data type int64
+		training starts at time.struct_time(tm_year=2020, tm_mon=4, tm_mday=22, tm_hour=18, tm_min=28, tm_sec=45, tm_wday=2, tm_yday=113, tm_isdst=1)
+INFO:root:		training ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=23, tm_hour=5, tm_min=37, tm_sec=47, tm_wday=3, tm_yday=114, tm_isdst=1)
+INFO:root:('\t\ttraining', ' executed for 11:09:02.20')
+INFO:root:		KMeans predict starts at time.struct_time(tm_year=2020, tm_mon=4, tm_mday=23, tm_hour=5, tm_min=37, tm_sec=47, tm_wday=3, tm_yday=114, tm_isdst=1)
+INFO:root:		predict ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=23, tm_hour=5, tm_min=37, tm_sec=52, tm_wday=3, tm_yday=114, tm_isdst=1)
+INFO:root:('\t\tpredict', ' executed for 00:00:04.77')
+INFO:root:	Algorithm: MeanShift 
+		training starts at time.struct_time(tm_year=2020, tm_mon=4, tm_mday=23, tm_hour=5, tm_min=37, tm_sec=52, tm_wday=3, tm_yday=114, tm_isdst=1)
+ERROR:root:A sparse matrix was passed, but dense data is required. Use X.toarray() to convert to a dense numpy array.
+Traceback (most recent call last):
+  File "document_clustering.py", line 63, in <module>
+    main()
+  File "document_clustering.py", line 56, in main
+    run()
+  File "document_clustering.py", line 52, in run
+    train_test()
+  File "document_clustering.py", line 41, in train_test
+    clf.fit(data, labels)
+  File "/media/remote/tmandal/document-clustering-with-deep-neural-networks/code/.venv/lib/python3.6/site-packages/sklearn/cluster/_mean_shift.py", line 370, in fit
+    X = check_array(X)
+  File "/media/remote/tmandal/document-clustering-with-deep-neural-networks/code/.venv/lib/python3.6/site-packages/sklearn/utils/validation.py", line 511, in check_array
+    accept_large_sparse=accept_large_sparse)
+  File "/media/remote/tmandal/document-clustering-with-deep-neural-networks/code/.venv/lib/python3.6/site-packages/sklearn/utils/validation.py", line 306, in _ensure_sparse_format
+    raise TypeError('A sparse matrix was passed, but dense '
+TypeError: A sparse matrix was passed, but dense data is required. Use X.toarray() to convert to a dense numpy array.
+INFO:root:Document clustering ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=23, tm_hour=5, tm_min=37, tm_sec=53, tm_wday=3, tm_yday=114, tm_isdst=1)
+INFO:root:('Document clustering', ' executed for 43:03:37.74')
