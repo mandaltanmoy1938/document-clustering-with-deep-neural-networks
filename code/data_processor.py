@@ -177,7 +177,7 @@ def run():
     log.info(("Train corpus: ", time.localtime(process_start)))
     train_corpus_list = [tcd for tcd in train_modified_texts]
     train_corpus_preprocessed = preprocess_doc2vec(train_corpus_list)
-    op.save_object(train_corpus_preprocessed, gv.prj_src_path + "python_objects/train_corpus_preprocessed")
+    # op.save_object(train_corpus_preprocessed, gv.prj_src_path + "python_objects/train_corpus_preprocessed")
     timer.time_executed(process_start, "Train corpus")
 
     # generate tokens only train corpus
@@ -185,7 +185,6 @@ def run():
     log.info(("Train corpus: ", time.localtime(process_start)))
     train_corpus_list = [tcd for tcd in train_modified_texts]
     train_corpus_tokens_only = preprocess_doc2vec(train_corpus_list, tokens_only=True)
-    op.save_object(train_corpus_tokens_only, gv.prj_src_path + "python_objects/train_corpus_tokens_only")
     timer.time_executed(process_start, "Train corpus")
 
     # generate tokens only Test corpus
@@ -193,7 +192,6 @@ def run():
     log.info(("Test corpus: ", time.localtime(process_start)))
     test_corpus_list = [tcd for tcd in test_modified_texts]
     test_corpus_tokens_only = preprocess_doc2vec(test_corpus_list, tokens_only=True)
-    op.save_object(test_corpus_tokens_only, gv.prj_src_path + "python_objects/test_corpus_tokens_only")
     timer.time_executed(process_start, "Test corpus")
 
     # generate tokens only val corpus
@@ -201,14 +199,7 @@ def run():
     log.info(("Val corpus: ", time.localtime(process_start)))
     val_corpus_list = [tcd for tcd in val_modified_texts]
     val_corpus_tokens_only = preprocess_doc2vec(val_corpus_list, tokens_only=True)
-    op.save_object(val_corpus_tokens_only, gv.prj_src_path + "python_objects/val_corpus_tokens_only")
     timer.time_executed(process_start, "Val corpus")
-
-    # load corpus
-    train_corpus_preprocessed = op.load_object(gv.prj_src_path + "python_objects/train_corpus_preprocessed")
-    train_corpus_tokens_only = op.load_object(gv.prj_src_path + "python_objects/train_corpus_tokens_only")
-    test_corpus_tokens_only = op.load_object(gv.prj_src_path + "python_objects/test_corpus_tokens_only")
-    val_corpus_tokens_only = op.load_object(gv.prj_src_path + "python_objects/val_corpus_tokens_only")
 
     # generate doc2vec model
     process_start = time.time()
