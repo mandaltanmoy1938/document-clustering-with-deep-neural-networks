@@ -4,10 +4,11 @@ import spacy
 import timer
 import gensim
 import logging as log
-import data_labeller as dl
 import file_collector as fc
 import object_pickler as op
 import global_variables as gv
+
+from random import randrange
 from sklearn.feature_extraction import DictVectorizer
 from gensim.models.doc2vec import Doc2Vec
 
@@ -26,16 +27,15 @@ def load_doc2vec_model():
 
 def preprocess_doc2vec(train_corpus_list, tokens_only=False):
     for i, tcd in enumerate(train_corpus_list):
-        doc = gensim.utils.simple_preprocess(tcd)
+        tokens = gensim.utils.simple_preprocess(tcd)
         if tokens_only:
-            yield doc
+            yield tokens
         else:
             # For training data, add tags
-            yield gensim.models.doc2vec.TaggedDocument(doc, [i])
+            yield gensim.models.doc2vec.TaggedDocument(tokens, [i])
 
 
 def generate_doc2vec_model(train_corpus):
-    log.info(("train_corpus size: ", type(train_corpus)))
     doc2vec_model = Doc2Vec(vector_size=300, min_count=2, epochs=50)
     doc2vec_model.build_vocab(train_corpus)
     doc2vec_model.train(train_corpus, total_examples=doc2vec_model.corpus_count, epochs=doc2vec_model.iter)
@@ -177,7 +177,7 @@ def run():
     log.info(("Train corpus: ", time.localtime(process_start)))
     train_corpus_list = [tcd for tcd in train_modified_texts]
     train_corpus_preprocessed = preprocess_doc2vec(train_corpus_list)
-    # op.save_object(train_corpus_preprocessed, gv.prj_src_path + "python_objects/train_corpus_preprocessed")
+    log.info("train_corpus size: ", len(train_corpus_list))
     timer.time_executed(process_start, "Train corpus")
 
     # generate tokens only train corpus
@@ -213,21 +213,27 @@ def run():
     # get train vector from the doc2vec
     infer_vector_start = time.time()
     log.info(("Infer vector train: ", time.localtime(process_start)))
-    train_vector = model.infer_vector(train_corpus_tokens_only)
+    train_vector = list(map(model.infer_vector, train_corpus_tokens_only))
+    log.info("train_vector size: ", len(train_vector))
+    log.info("train_vector feature size: ", len(train_vector[randrange(len(train_vector)) - 1]))
     timer.time_executed(infer_vector_start, "Infer vector train")
     op.save_object(train_vector, gv.prj_src_path + "python_objects/train_vector")
 
     # get test vector from the doc2vec
     infer_vector_start = time.time()
     log.info(("Infer vector test: ", time.localtime(process_start)))
-    test_vector = model.infer_vector(test_corpus_tokens_only)
+    test_vector = list(map(model.infer_vector, test_corpus_tokens_only))
+    log.info("test_vector size: ", len(test_vector))
+    log.info("test_vector feature size: ", len(test_vector[randrange(len(test_vector)) - 1]))
     timer.time_executed(infer_vector_start, "Infer vector test")
     op.save_object(test_vector, gv.prj_src_path + "python_objects/test_vector")
 
     # get val vector from the doc2vec
     infer_vector_start = time.time()
     log.info(("Infer vector val: ", time.localtime(process_start)))
-    val_vector = model.infer_vector(val_corpus_tokens_only)
+    val_vector = list(map(model.infer_vector, val_corpus_tokens_only))
+    log.info("val_vector size: ", len(val_vector))
+    log.info("val_vector feature size: ", len(val_vector[randrange(len(val_vector)) - 1]))
     timer.time_executed(infer_vector_start, "Infer vector val")
     op.save_object(val_vector, gv.prj_src_path + "python_objects/val_vector")
 
