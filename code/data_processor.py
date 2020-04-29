@@ -177,7 +177,7 @@ def run():
     log.info(("Train corpus: ", time.localtime(process_start)))
     train_corpus_list = [tcd for tcd in train_modified_texts]
     train_corpus_preprocessed = preprocess_doc2vec(train_corpus_list)
-    log.info("train_corpus size: ", len(train_corpus_list))
+    log.info("train_corpus size: ", str(len(train_corpus_list)))
     timer.time_executed(process_start, "Train corpus")
 
     # generate tokens only train corpus
@@ -214,8 +214,8 @@ def run():
     infer_vector_start = time.time()
     log.info(("Infer vector train: ", time.localtime(process_start)))
     train_vector = list(map(model.infer_vector, train_corpus_tokens_only))
-    log.info("train_vector size: ", len(train_vector))
-    log.info("train_vector feature size: ", len(train_vector[randrange(len(train_vector)) - 1]))
+    log.info("train_vector size: ", str(len(train_vector)))
+    log.info("train_vector feature size: ", str(len(train_vector[randrange(len(train_vector)) - 1])))
     timer.time_executed(infer_vector_start, "Infer vector train")
     op.save_object(train_vector, gv.prj_src_path + "python_objects/train_vector")
 
@@ -223,8 +223,8 @@ def run():
     infer_vector_start = time.time()
     log.info(("Infer vector test: ", time.localtime(process_start)))
     test_vector = list(map(model.infer_vector, test_corpus_tokens_only))
-    log.info("test_vector size: ", len(test_vector))
-    log.info("test_vector feature size: ", len(test_vector[randrange(len(test_vector)) - 1]))
+    log.info("test_vector size: ", str(len(test_vector)))
+    log.info("test_vector feature size: ", str(len(test_vector[randrange(len(test_vector)) - 1])))
     timer.time_executed(infer_vector_start, "Infer vector test")
     op.save_object(test_vector, gv.prj_src_path + "python_objects/test_vector")
 
@@ -232,8 +232,8 @@ def run():
     infer_vector_start = time.time()
     log.info(("Infer vector val: ", time.localtime(process_start)))
     val_vector = list(map(model.infer_vector, val_corpus_tokens_only))
-    log.info("val_vector size: ", len(val_vector))
-    log.info("val_vector feature size: ", len(val_vector[randrange(len(val_vector)) - 1]))
+    log.info("val_vector size: ", str(len(val_vector)))
+    log.info("val_vector feature size: ", str(len(val_vector[randrange(len(val_vector)) - 1])))
     timer.time_executed(infer_vector_start, "Infer vector val")
     op.save_object(val_vector, gv.prj_src_path + "python_objects/val_vector")
 
