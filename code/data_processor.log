@@ -1,49 +1,49 @@
-INFO:root:('Data processor started: ', time.struct_time(tm_year=2020, tm_mon=4, tm_mday=24, tm_hour=9, tm_min=13, tm_sec=0, tm_wday=4, tm_yday=115, tm_isdst=1))
-INFO:root:('Train corpus: ', time.struct_time(tm_year=2020, tm_mon=4, tm_mday=24, tm_hour=9, tm_min=13, tm_sec=2, tm_wday=4, tm_yday=115, tm_isdst=1))
-INFO:root:Train corpus ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=24, tm_hour=9, tm_min=13, tm_sec=2, tm_wday=4, tm_yday=115, tm_isdst=1)
-INFO:root:('Train corpus', ' executed for 00:00:00.02')
-INFO:root:('Train corpus: ', time.struct_time(tm_year=2020, tm_mon=4, tm_mday=24, tm_hour=9, tm_min=13, tm_sec=2, tm_wday=4, tm_yday=115, tm_isdst=1))
-INFO:root:Train corpus ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=24, tm_hour=9, tm_min=13, tm_sec=2, tm_wday=4, tm_yday=115, tm_isdst=1)
-INFO:root:('Train corpus', ' executed for 00:00:00.02')
-INFO:root:('Test corpus: ', time.struct_time(tm_year=2020, tm_mon=4, tm_mday=24, tm_hour=9, tm_min=13, tm_sec=2, tm_wday=4, tm_yday=115, tm_isdst=1))
-INFO:root:Test corpus ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=24, tm_hour=9, tm_min=13, tm_sec=2, tm_wday=4, tm_yday=115, tm_isdst=1)
+INFO:root:('Data processor started: ', time.struct_time(tm_year=2020, tm_mon=4, tm_mday=29, tm_hour=15, tm_min=32, tm_sec=15, tm_wday=2, tm_yday=120, tm_isdst=1))
+INFO:root:('Train corpus: ', time.struct_time(tm_year=2020, tm_mon=4, tm_mday=29, tm_hour=15, tm_min=32, tm_sec=16, tm_wday=2, tm_yday=120, tm_isdst=1))
+INFO:root:train_corpus size: 299966
+INFO:root:Train corpus ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=29, tm_hour=15, tm_min=32, tm_sec=16, tm_wday=2, tm_yday=120, tm_isdst=1)
+INFO:root:('Train corpus', ' executed for 00:00:00.01')
+INFO:root:('Train corpus: ', time.struct_time(tm_year=2020, tm_mon=4, tm_mday=29, tm_hour=15, tm_min=32, tm_sec=16, tm_wday=2, tm_yday=120, tm_isdst=1))
+INFO:root:Train corpus ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=29, tm_hour=15, tm_min=32, tm_sec=16, tm_wday=2, tm_yday=120, tm_isdst=1)
+INFO:root:('Train corpus', ' executed for 00:00:00.01')
+INFO:root:('Test corpus: ', time.struct_time(tm_year=2020, tm_mon=4, tm_mday=29, tm_hour=15, tm_min=32, tm_sec=16, tm_wday=2, tm_yday=120, tm_isdst=1))
+INFO:root:Test corpus ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=29, tm_hour=15, tm_min=32, tm_sec=16, tm_wday=2, tm_yday=120, tm_isdst=1)
 INFO:root:('Test corpus', ' executed for 00:00:00.00')
-INFO:root:('Val corpus: ', time.struct_time(tm_year=2020, tm_mon=4, tm_mday=24, tm_hour=9, tm_min=13, tm_sec=2, tm_wday=4, tm_yday=115, tm_isdst=1))
-INFO:root:Val corpus ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=24, tm_hour=9, tm_min=13, tm_sec=2, tm_wday=4, tm_yday=115, tm_isdst=1)
+INFO:root:('Val corpus: ', time.struct_time(tm_year=2020, tm_mon=4, tm_mday=29, tm_hour=15, tm_min=32, tm_sec=16, tm_wday=2, tm_yday=120, tm_isdst=1))
+INFO:root:Val corpus ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=29, tm_hour=15, tm_min=32, tm_sec=16, tm_wday=2, tm_yday=120, tm_isdst=1)
 INFO:root:('Val corpus', ' executed for 00:00:00.00')
-INFO:root:('Doc2Vec: ', time.struct_time(tm_year=2020, tm_mon=4, tm_mday=24, tm_hour=9, tm_min=13, tm_sec=2, tm_wday=4, tm_yday=115, tm_isdst=1))
-INFO:root:('train_corpus size: ', <class 'generator'>)
+INFO:root:('Doc2Vec: ', time.struct_time(tm_year=2020, tm_mon=4, tm_mday=29, tm_hour=15, tm_min=32, tm_sec=16, tm_wday=2, tm_yday=120, tm_isdst=1))
 INFO:gensim.models.doc2vec:collecting all words and their counts
 INFO:gensim.models.doc2vec:PROGRESS: at example #0, processed 0 words (0/s), 0 word types, 0 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #10000, processed 30718 words (110777/s), 7575 word types, 10000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #20000, processed 61477 words (114140/s), 11730 word types, 20000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #30000, processed 92203 words (115530/s), 14102 word types, 30000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #40000, processed 122969 words (115300/s), 15334 word types, 40000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #50000, processed 153736 words (116769/s), 16004 word types, 50000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #60000, processed 184533 words (117257/s), 16405 word types, 60000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #70000, processed 215251 words (114748/s), 16601 word types, 70000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #80000, processed 246018 words (115351/s), 16720 word types, 80000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #90000, processed 276777 words (110736/s), 16787 word types, 90000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #100000, processed 307563 words (116681/s), 16817 word types, 100000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #110000, processed 338310 words (118466/s), 16840 word types, 110000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #120000, processed 369069 words (116094/s), 16843 word types, 120000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #130000, processed 399802 words (118853/s), 16847 word types, 130000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #140000, processed 430501 words (118523/s), 16848 word types, 140000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #150000, processed 461198 words (118131/s), 16853 word types, 150000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #160000, processed 491927 words (118265/s), 16857 word types, 160000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #170000, processed 522645 words (118135/s), 16858 word types, 170000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #180000, processed 553442 words (113444/s), 16861 word types, 180000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #190000, processed 584176 words (118354/s), 16861 word types, 190000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #200000, processed 614924 words (118610/s), 16864 word types, 200000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #210000, processed 645652 words (118486/s), 16866 word types, 210000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #220000, processed 676425 words (115939/s), 16866 word types, 220000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #230000, processed 707180 words (115921/s), 16866 word types, 230000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #240000, processed 737938 words (114829/s), 16866 word types, 240000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #250000, processed 768713 words (114683/s), 16869 word types, 250000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #260000, processed 799427 words (117486/s), 16870 word types, 260000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #270000, processed 830157 words (113208/s), 16870 word types, 270000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #280000, processed 860929 words (118669/s), 16870 word types, 280000 tags
-INFO:gensim.models.doc2vec:PROGRESS: at example #290000, processed 891676 words (115930/s), 16871 word types, 290000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #10000, processed 30718 words (137439/s), 7575 word types, 10000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #20000, processed 61477 words (137712/s), 11730 word types, 20000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #30000, processed 92203 words (138384/s), 14102 word types, 30000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #40000, processed 122969 words (138964/s), 15334 word types, 40000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #50000, processed 153736 words (134848/s), 16004 word types, 50000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #60000, processed 184533 words (139237/s), 16405 word types, 60000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #70000, processed 215251 words (139176/s), 16601 word types, 70000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #80000, processed 246018 words (139495/s), 16720 word types, 80000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #90000, processed 276777 words (139710/s), 16787 word types, 90000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #100000, processed 307563 words (139893/s), 16817 word types, 100000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #110000, processed 338310 words (139633/s), 16840 word types, 110000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #120000, processed 369069 words (139659/s), 16843 word types, 120000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #130000, processed 399802 words (140179/s), 16847 word types, 130000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #140000, processed 430501 words (139751/s), 16848 word types, 140000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #150000, processed 461198 words (139745/s), 16853 word types, 150000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #160000, processed 491927 words (139890/s), 16857 word types, 160000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #170000, processed 522645 words (139680/s), 16858 word types, 170000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #180000, processed 553442 words (136012/s), 16861 word types, 180000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #190000, processed 584176 words (138024/s), 16861 word types, 190000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #200000, processed 614924 words (137324/s), 16864 word types, 200000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #210000, processed 645652 words (137151/s), 16866 word types, 210000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #220000, processed 676425 words (137675/s), 16866 word types, 220000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #230000, processed 707180 words (138169/s), 16866 word types, 230000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #240000, processed 737938 words (139056/s), 16866 word types, 240000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #250000, processed 768713 words (138724/s), 16869 word types, 250000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #260000, processed 799427 words (136534/s), 16870 word types, 260000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #270000, processed 830157 words (137875/s), 16870 word types, 270000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #280000, processed 860929 words (137710/s), 16870 word types, 280000 tags
+INFO:gensim.models.doc2vec:PROGRESS: at example #290000, processed 891676 words (135967/s), 16871 word types, 290000 tags
 INFO:gensim.models.doc2vec:collected 16871 word types and 299966 unique tags from a corpus of 299966 examples and 922289 words
 INFO:gensim.models.word2vec:Loading a fresh vocabulary
 INFO:gensim.models.word2vec:effective_min_count=2 retains 16847 unique words (99% of original 16871, drops 24)
@@ -58,8 +58,8 @@ WARNING:gensim.models.base_any2vec:train() called with an empty iterator (if not
 DEBUG:gensim.models.base_any2vec:job loop exiting, total 0 jobs
 DEBUG:gensim.models.base_any2vec:worker exiting, processed 0 jobs
 DEBUG:gensim.models.base_any2vec:worker exiting, processed 0 jobs
-DEBUG:gensim.models.base_any2vec:worker exiting, processed 0 jobs
 INFO:gensim.models.base_any2vec:worker thread finished; awaiting finish of 2 more threads
+DEBUG:gensim.models.base_any2vec:worker exiting, processed 0 jobs
 INFO:gensim.models.base_any2vec:worker thread finished; awaiting finish of 1 more threads
 INFO:gensim.models.base_any2vec:worker thread finished; awaiting finish of 0 more threads
 INFO:gensim.models.base_any2vec:EPOCH - 1 : training on 0 raw words (0 effective words) took 0.0s, 0 effective words/s
@@ -468,8 +468,8 @@ WARNING:gensim.models.base_any2vec:train() called with an empty iterator (if not
 DEBUG:gensim.models.base_any2vec:job loop exiting, total 0 jobs
 DEBUG:gensim.models.base_any2vec:worker exiting, processed 0 jobs
 DEBUG:gensim.models.base_any2vec:worker exiting, processed 0 jobs
-DEBUG:gensim.models.base_any2vec:worker exiting, processed 0 jobs
 INFO:gensim.models.base_any2vec:worker thread finished; awaiting finish of 2 more threads
+DEBUG:gensim.models.base_any2vec:worker exiting, processed 0 jobs
 INFO:gensim.models.base_any2vec:worker thread finished; awaiting finish of 1 more threads
 INFO:gensim.models.base_any2vec:worker thread finished; awaiting finish of 0 more threads
 INFO:gensim.models.base_any2vec:EPOCH - 42 : training on 0 raw words (0 effective words) took 0.0s, 0 effective words/s
@@ -478,8 +478,8 @@ WARNING:gensim.models.base_any2vec:train() called with an empty iterator (if not
 DEBUG:gensim.models.base_any2vec:job loop exiting, total 0 jobs
 DEBUG:gensim.models.base_any2vec:worker exiting, processed 0 jobs
 DEBUG:gensim.models.base_any2vec:worker exiting, processed 0 jobs
-DEBUG:gensim.models.base_any2vec:worker exiting, processed 0 jobs
 INFO:gensim.models.base_any2vec:worker thread finished; awaiting finish of 2 more threads
+DEBUG:gensim.models.base_any2vec:worker exiting, processed 0 jobs
 INFO:gensim.models.base_any2vec:worker thread finished; awaiting finish of 1 more threads
 INFO:gensim.models.base_any2vec:worker thread finished; awaiting finish of 0 more threads
 INFO:gensim.models.base_any2vec:EPOCH - 43 : training on 0 raw words (0 effective words) took 0.0s, 0 effective words/s
@@ -488,8 +488,8 @@ WARNING:gensim.models.base_any2vec:train() called with an empty iterator (if not
 DEBUG:gensim.models.base_any2vec:job loop exiting, total 0 jobs
 DEBUG:gensim.models.base_any2vec:worker exiting, processed 0 jobs
 DEBUG:gensim.models.base_any2vec:worker exiting, processed 0 jobs
-DEBUG:gensim.models.base_any2vec:worker exiting, processed 0 jobs
 INFO:gensim.models.base_any2vec:worker thread finished; awaiting finish of 2 more threads
+DEBUG:gensim.models.base_any2vec:worker exiting, processed 0 jobs
 INFO:gensim.models.base_any2vec:worker thread finished; awaiting finish of 1 more threads
 INFO:gensim.models.base_any2vec:worker thread finished; awaiting finish of 0 more threads
 INFO:gensim.models.base_any2vec:EPOCH - 44 : training on 0 raw words (0 effective words) took 0.0s, 0 effective words/s
@@ -518,8 +518,8 @@ WARNING:gensim.models.base_any2vec:train() called with an empty iterator (if not
 DEBUG:gensim.models.base_any2vec:job loop exiting, total 0 jobs
 DEBUG:gensim.models.base_any2vec:worker exiting, processed 0 jobs
 DEBUG:gensim.models.base_any2vec:worker exiting, processed 0 jobs
-INFO:gensim.models.base_any2vec:worker thread finished; awaiting finish of 2 more threads
 DEBUG:gensim.models.base_any2vec:worker exiting, processed 0 jobs
+INFO:gensim.models.base_any2vec:worker thread finished; awaiting finish of 2 more threads
 INFO:gensim.models.base_any2vec:worker thread finished; awaiting finish of 1 more threads
 INFO:gensim.models.base_any2vec:worker thread finished; awaiting finish of 0 more threads
 INFO:gensim.models.base_any2vec:EPOCH - 47 : training on 0 raw words (0 effective words) took 0.0s, 0 effective words/s
@@ -560,8 +560,8 @@ INFO:gensim.utils:saving Doc2Vec object under /media/remote/tmandal/document-clu
 INFO:gensim.utils:storing np array 'vectors_docs' to /media/remote/tmandal/document-clustering-with-deep-neural-networks/python_objects/document_model.doc2vec.docvecs.vectors_docs.npy
 DEBUG:smart_open.smart_open_lib:{'transport_params': None, 'ignore_ext': False, 'opener': None, 'closefd': True, 'newline': None, 'errors': None, 'encoding': None, 'buffering': -1, 'mode': 'wb', 'uri': '/media/remote/tmandal/document-clustering-with-deep-neural-networks/python_objects/document_model.doc2vec'}
 INFO:gensim.utils:saved /media/remote/tmandal/document-clustering-with-deep-neural-networks/python_objects/document_model.doc2vec
-INFO:root:Doc2Vec ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=24, tm_hour=9, tm_min=15, tm_sec=22, tm_wday=4, tm_yday=115, tm_isdst=1)
-INFO:root:('Doc2Vec', ' executed for 00:02:20.17')
+INFO:root:Doc2Vec ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=29, tm_hour=15, tm_min=34, tm_sec=13, tm_wday=2, tm_yday=120, tm_isdst=1)
+INFO:root:('Doc2Vec', ' executed for 00:01:56.57')
 INFO:gensim.utils:loading Doc2Vec object from /media/remote/tmandal/document-clustering-with-deep-neural-networks/python_objects/document_model.doc2vec
 DEBUG:smart_open.smart_open_lib:{'transport_params': None, 'ignore_ext': False, 'opener': None, 'closefd': True, 'newline': None, 'errors': None, 'encoding': None, 'buffering': -1, 'mode': 'rb', 'uri': '/media/remote/tmandal/document-clustering-with-deep-neural-networks/python_objects/document_model.doc2vec'}
 INFO:gensim.utils:loading vocabulary recursively from /media/remote/tmandal/document-clustering-with-deep-neural-networks/python_objects/document_model.doc2vec.vocabulary.* with mmap=None
@@ -570,19 +570,20 @@ INFO:gensim.utils:loading wv recursively from /media/remote/tmandal/document-clu
 INFO:gensim.utils:loading docvecs recursively from /media/remote/tmandal/document-clustering-with-deep-neural-networks/python_objects/document_model.doc2vec.docvecs.* with mmap=None
 INFO:gensim.utils:loading vectors_docs from /media/remote/tmandal/document-clustering-with-deep-neural-networks/python_objects/document_model.doc2vec.docvecs.vectors_docs.npy with mmap=None
 INFO:gensim.utils:loaded /media/remote/tmandal/document-clustering-with-deep-neural-networks/python_objects/document_model.doc2vec
-INFO:root:('Infer vector train: ', time.struct_time(tm_year=2020, tm_mon=4, tm_mday=24, tm_hour=9, tm_min=13, tm_sec=2, tm_wday=4, tm_yday=115, tm_isdst=1))
-ERROR:root:sequence item 0: expected str instance, list found
-Traceback (most recent call last):
-  File "data_processor.py", line 243, in <module>
-    main()
-  File "data_processor.py", line 236, in main
-    run()
-  File "data_processor.py", line 216, in run
-    train_vector = model.infer_vector(train_corpus_tokens_only)
-  File "/media/remote/tmandal/document-clustering-with-deep-neural-networks/code/.venv/lib/python3.6/site-packages/gensim/models/doc2vec.py", line 924, in infer_vector
-    doctag_vectors, doctag_locks = self.trainables.get_doctag_trainables(doc_words, self.docvecs.vector_size)
-  File "/media/remote/tmandal/document-clustering-with-deep-neural-networks/code/.venv/lib/python3.6/site-packages/gensim/models/doc2vec.py", line 1475, in get_doctag_trainables
-    doctag_vectors[0] = self.seeded_vector(' '.join(doc_words), vector_size)
-TypeError: sequence item 0: expected str instance, list found
-INFO:root:Data processor ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=24, tm_hour=9, tm_min=15, tm_sec=29, tm_wday=4, tm_yday=115, tm_isdst=1)
-INFO:root:('Data processor', ' executed for 00:02:29.17')
+INFO:root:('Infer vector train: ', time.struct_time(tm_year=2020, tm_mon=4, tm_mday=29, tm_hour=15, tm_min=32, tm_sec=16, tm_wday=2, tm_yday=120, tm_isdst=1))
+INFO:root:train_vector size: 299966
+INFO:root:train_vector feature size: 300
+INFO:root:Infer vector train ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=29, tm_hour=16, tm_min=3, tm_sec=56, tm_wday=2, tm_yday=120, tm_isdst=1)
+INFO:root:('Infer vector train', ' executed for 00:29:38.32')
+INFO:root:('Infer vector test: ', time.struct_time(tm_year=2020, tm_mon=4, tm_mday=29, tm_hour=15, tm_min=32, tm_sec=16, tm_wday=2, tm_yday=120, tm_isdst=1))
+INFO:root:test_vector size: 37467
+INFO:root:test_vector feature size: 300
+INFO:root:Infer vector test ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=29, tm_hour=16, tm_min=7, tm_sec=49, tm_wday=2, tm_yday=120, tm_isdst=1)
+INFO:root:('Infer vector test', ' executed for 00:03:43.52')
+INFO:root:('Infer vector val: ', time.struct_time(tm_year=2020, tm_mon=4, tm_mday=29, tm_hour=15, tm_min=32, tm_sec=16, tm_wday=2, tm_yday=120, tm_isdst=1))
+INFO:root:val_vector size: 37566
+INFO:root:val_vector feature size: 300
+INFO:root:Infer vector val ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=29, tm_hour=16, tm_min=11, tm_sec=31, tm_wday=2, tm_yday=120, tm_isdst=1)
+INFO:root:('Infer vector val', ' executed for 00:03:41.38')
+INFO:root:Data processor ended: time.struct_time(tm_year=2020, tm_mon=4, tm_mday=29, tm_hour=16, tm_min=11, tm_sec=33, tm_wday=2, tm_yday=120, tm_isdst=1)
+INFO:root:('Data processor', ' executed for 00:39:17.84')
