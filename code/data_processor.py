@@ -215,7 +215,9 @@ def run():
     log.info(("Infer vector train: ", time.localtime(process_start)))
     train_vector = list(map(model.infer_vector, train_corpus_tokens_only))
     log.info("train_vector size: " + str(len(train_vector)))
-    log.info("train_vector feature size: " + str(len(train_vector[randrange(len(train_vector)) - 1])))
+    rand_index = randrange(len(train_vector))
+    log.info("train_vector[" + str(rand_index) + "] feature size: " + str(len(train_vector[rand_index - 1])))
+    log.info(train_vector[rand_index])
     timer.time_executed(infer_vector_start, "Infer vector train")
     op.save_object(train_vector, gv.prj_src_path + "python_objects/train_vector")
 
@@ -224,7 +226,9 @@ def run():
     log.info(("Infer vector test: ", time.localtime(process_start)))
     test_vector = list(map(model.infer_vector, test_corpus_tokens_only))
     log.info("test_vector size: " + str(len(test_vector)))
-    log.info("test_vector feature size: " + str(len(test_vector[randrange(len(test_vector)) - 1])))
+    rand_index = randrange(len(test_vector))
+    log.info("test_vector[" + str(rand_index) + "] feature size: " + str(len(test_vector[rand_index - 1])))
+    log.info(test_vector[rand_index])
     timer.time_executed(infer_vector_start, "Infer vector test")
     op.save_object(test_vector, gv.prj_src_path + "python_objects/test_vector")
 
@@ -233,7 +237,9 @@ def run():
     log.info(("Infer vector val: ", time.localtime(process_start)))
     val_vector = list(map(model.infer_vector, val_corpus_tokens_only))
     log.info("val_vector size: " + str(len(val_vector)))
-    log.info("val_vector feature size: " + str(len(val_vector[randrange(len(val_vector)) - 1])))
+    rand_index = randrange(len(val_vector))
+    log.info("val_vector[" + str(rand_index) + "] feature size: " + str(len(val_vector[rand_index - 1])))
+    log.info(val_vector[rand_index])
     timer.time_executed(infer_vector_start, "Infer vector val")
     op.save_object(val_vector, gv.prj_src_path + "python_objects/val_vector")
 
