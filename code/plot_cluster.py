@@ -17,9 +17,10 @@ def loadPickle(filename):
 
 
 def run():
-    predicted_label = {"unsupervised": ["KMeans_"],
-                       "supervised": ["LogisticRegression_", "NB_", "SVC_"]}
+    # predicted_label = {"unsupervised": ["KMeans_"],
+    #                    "supervised": ["LogisticRegression_", "NB_", "SVC_"]}
     target_names = [gv.label_name[i] for i in gv.translation_rev]
+    log.debug(target_names)
 
     # dimension reduction
     # test_transformed = loadPickle("test_data_transformed")
@@ -50,6 +51,7 @@ def run():
 
     labels = loadPickle("test_labels")
     labels = [gv.translation[x] for x in labels]
+    log.debug(set(labels))
     df["ground_truth"] = [target_names[l] for l in labels]
     fig_num += 1
     gg.plot_cluster(title="Ground truth Doc2Vec", data=df, pad=30,
