@@ -21,6 +21,7 @@ def run():
     #                    "supervised": ["LogisticRegression_", "NB_", "SVC_"]}
     target_names = [gv.label_name[i] for i in gv.translation_rev]
     log.debug(target_names)
+    log.debug(len(target_names))
 
     # dimension reduction
     # test_transformed = loadPickle("test_data_transformed")
@@ -51,7 +52,9 @@ def run():
 
     labels = loadPickle("test_labels")
     labels = [gv.translation[x] for x in labels]
+    log.debug(len(labels))
     log.debug(set(labels))
+    log.debug(len(set(labels)))
     df["ground_truth"] = [target_names[l] for l in labels]
     fig_num += 1
     gg.plot_cluster(title="Ground truth Doc2Vec", data=df, pad=30,
