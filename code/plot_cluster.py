@@ -22,9 +22,9 @@ def run():
     target_names = [gv.label_name[i] for i in gv.translation_rev]
 
     # dimension reduction
-    test_transformed = loadPickle("test_data_transformed")
-    test_transformed_embedded = TSNE(n_components=2).fit_transform(test_transformed)
-    op.save_object(test_transformed_embedded, gv.prj_src_path + "python_objects/test_2d_data_transformed")
+    # test_transformed = loadPickle("test_data_transformed")
+    # test_transformed_embedded = TSNE(n_components=2).fit_transform(test_transformed)
+    # op.save_object(test_transformed_embedded, gv.prj_src_path + "python_objects/test_2d_data_transformed")
 
     test_vector = loadPickle("test_vector")
     test_vector_embedded = TSNE(n_components=2).fit_transform(test_vector)
