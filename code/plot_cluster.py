@@ -55,6 +55,7 @@ def run():
     log.debug(len(labels))
     log.debug(set(labels))
     log.debug(len(set(labels)))
+    log.debug(df.shape)
     df["ground_truth"] = [target_names[l] for l in labels]
     fig_num += 1
     gg.plot_cluster(title="Ground truth Doc2Vec", data=df, pad=30,
