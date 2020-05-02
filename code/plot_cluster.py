@@ -27,9 +27,9 @@ def run():
     # test_transformed_embedded = TSNE(n_components=2).fit_transform(test_transformed)
     # op.save_object(test_transformed_embedded, gv.prj_src_path + "python_objects/test_2d_data_transformed")
 
-    test_vector = loadPickle("test_vector")
-    test_vector_embedded = TSNE(n_components=2).fit_transform(test_vector)
-    op.save_object(test_vector_embedded, gv.prj_src_path + "python_objects/test_2d_data_vector")
+    # test_vector = loadPickle("test_vector")
+    # test_vector_embedded = TSNE(n_components=2).fit_transform(test_vector)
+    # op.save_object(test_vector_embedded, gv.prj_src_path + "python_objects/test_2d_data_vector")
 
     # test_embedded = loadPickle("test_2d_data_transformed")
     test_embedded = loadPickle("test_2d_data_vector")
