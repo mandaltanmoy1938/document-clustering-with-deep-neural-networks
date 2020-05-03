@@ -53,19 +53,16 @@ def dict_vectorizer(data_dict, label_dict, test_data_dict, test_label_dict, val_
     test_data = list()
     val_data = list()
     for file_path, value in data_dict.items():
-        value = value.strip()
         if len(value) is not 0:
             labels.append(label_dict[file_path])
             data.append(value)
 
     for file_path, value in test_data_dict.items():
-        value = value.strip()
         if len(value) is not 0:
             test_labels.append(test_label_dict[file_path])
             test_data.append(value)
 
     for file_path, value in val_data_dict.items():
-        value = value.strip()
         if len(value) is not 0:
             val_labels.append(val_label_dict[file_path])
             val_data.append(value)
@@ -170,9 +167,10 @@ def run():
     # dict_vectorizer
     process_start = time.time()
     log.info(("Dictvectorizer: ", time.localtime(process_start)))
-    train_data_transformed, train_labels, test_data_transformed, test_labels, val_data_transformed, val_labels = dict_vectorizer(
-        data_dict=train_document_meta, label_dict=train_labels_by_path, test_data_dict=test_document_meta,
-        test_label_dict=test_labels_by_path, val_data_dict=val_document_meta, val_label_dict=val_labels_by_path)
+    train_data_transformed, train_labels, test_data_transformed, test_labels, val_data_transformed, val_labels = \
+        dict_vectorizer(data_dict=train_document_meta, label_dict=train_labels_by_path,
+                        test_data_dict=test_document_meta, test_label_dict=test_labels_by_path,
+                        val_data_dict=val_document_meta, val_label_dict=val_labels_by_path)
     log.debug("train_data_transformed: " + str(len(train_data_transformed)))
     log.debug("train_labels: " + str(len(train_labels)))
     log.debug("test_data_transformed: " + str(len(test_data_transformed)))
