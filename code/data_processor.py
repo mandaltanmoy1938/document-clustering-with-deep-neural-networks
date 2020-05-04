@@ -171,11 +171,8 @@ def run():
         dict_vectorizer(data_dict=train_document_meta, label_dict=train_labels_by_path,
                         test_data_dict=test_document_meta, test_label_dict=test_labels_by_path,
                         val_data_dict=val_document_meta, val_label_dict=val_labels_by_path)
-    log.debug("train_data_transformed: " + str(len(train_data_transformed)))
     log.debug("train_labels: " + str(len(train_labels)))
-    log.debug("test_data_transformed: " + str(len(test_data_transformed)))
     log.debug("test_labels: " + str(len(test_labels)))
-    log.debug("val_data_transformed: " + str(len(val_data_transformed)))
     log.debug("val_labels: " + str(len(val_labels)))
     timer.time_executed(process_start, "Dictvectorizer")
 
