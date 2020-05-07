@@ -2,13 +2,12 @@ import time
 import json
 import spacy
 import timer
-import gensim
 import logging as log
 import file_collector as fc
 import object_pickler as op
 import global_variables as gv
 import data_labeller as dl
-
+import PreprocessGenerator
 from random import randrange
 from sklearn.feature_extraction import DictVectorizer
 from gensim.models.doc2vec import Doc2Vec
@@ -24,18 +23,6 @@ def load_stop_words():
 
 def load_doc2vec_model():
     return Doc2Vec.load(gv.prj_src_path + "python_objects/doc2vec_model")
-
-
-def preprocess_doc2vec(train_corpus_list, tokens_only=False):
-    for i, tcd in enumerate(train_corpus_list):
-        tokens = gensim.utils.simple_preprocess(tcd)
-        tcd = tcd.strip()
-        if len(tcd) is not 0:
-            if tokens_only:
-                yield tokens
-            else:
-                # For training data, add tags
-                yield gensim.models.doc2vec.TaggedDocument(tokens, [i])
 
 
 def generate_doc2vec_model(train_corpus):
@@ -88,6 +75,7 @@ def tokenizer(required_files):
         parsed_text = nlp(text)
         parsed_documents[file_path_] = parsed_text
         document_meta[file_path_] = dict()
+        is_empty = True
         for token in parsed_text:
             if token.pos_ is "NUM":
                 token_key = "<NUM>"
@@ -96,7 +84,9 @@ def tokenizer(required_files):
                 token_key = token.text.strip()
             if len(token_key) > 0 and token_key not in stopwords_en:
                 document_meta[file_path_][token_key] = 1.0
-        modified_texts[file_path_] = text
+                is_empty = False
+        if not is_empty:
+            modified_texts[file_path_] = text
     return document_meta, modified_texts
 
 
@@ -194,21 +184,21 @@ def run():
     process_start = time.time()
     log.info(("Train corpus: ", time.localtime(process_start)))
     train_corpus_list = [tcd for tcd in train_modified_texts]
-    train_corpus_preprocessed = preprocess_doc2vec(train_corpus_list)
+    train_corpus_preprocessed = PreprocessGenerator(train_corpus_list)
     log.info("train_corpus size: " + str(len(train_corpus_list)))
     timer.time_executed(process_start, "Train corpus")
 
     # generate tokens only train corpus
     process_start = time.time()
     log.info(("Train corpus: ", time.localtime(process_start)))
-    train_corpus_tokens_only = preprocess_doc2vec(train_corpus_list, tokens_only=True)
+    train_corpus_tokens_only = PreprocessGenerator(train_corpus_list, tokens_only=True)
     timer.time_executed(process_start, "Train corpus")
 
     # generate tokens only Test corpus
     process_start = time.time()
     log.info(("Test corpus: ", time.localtime(process_start)))
     test_corpus_list = [tcd for tcd in test_modified_texts]
-    test_corpus_tokens_only = preprocess_doc2vec(test_corpus_list, tokens_only=True)
+    test_corpus_tokens_only = PreprocessGenerator(test_corpus_list, tokens_only=True)
     log.info("test_corpus size: " + str(len(test_corpus_list)))
     timer.time_executed(process_start, "Test corpus")
 
@@ -216,7 +206,7 @@ def run():
     process_start = time.time()
     log.info(("Val corpus: ", time.localtime(process_start)))
     val_corpus_list = [tcd for tcd in val_modified_texts]
-    val_corpus_tokens_only = preprocess_doc2vec(val_corpus_list, tokens_only=True)
+    val_corpus_tokens_only = PreprocessGenerator(val_corpus_list, tokens_only=True)
     log.info("val_corpus size: " + str(len(val_corpus_list)))
     timer.time_executed(process_start, "Val corpus")
 
