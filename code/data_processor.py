@@ -7,7 +7,7 @@ import file_collector as fc
 import object_pickler as op
 import global_variables as gv
 import data_labeller as dl
-import PreprocessGenerator
+from preprocessGenerator import PreprocessGenerator
 from random import randrange
 from sklearn.feature_extraction import DictVectorizer
 from gensim.models.doc2vec import Doc2Vec
