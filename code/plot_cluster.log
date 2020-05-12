@@ -1,11 +1,17 @@
-INFO:root:('PLot cluster started: ', time.struct_time(tm_year=2020, tm_mon=5, tm_mday=2, tm_hour=12, tm_min=0, tm_sec=58, tm_wday=5, tm_yday=123, tm_isdst=1))
+INFO:root:('PLot cluster started: ', time.struct_time(tm_year=2020, tm_mon=5, tm_mday=2, tm_hour=13, tm_min=36, tm_sec=58, tm_wday=5, tm_yday=123, tm_isdst=1))
+DEBUG:root:['Letter', 'Form', 'Email', 'Advertisement', 'Scientific report', 'Scientific publication', 'Specification', 'File folder', 'News article', 'Budget', 'Invoice', 'Presentation', 'Questionnaire', 'Resume', 'Memo']
+DEBUG:root:15
+DEBUG:root:36316
+DEBUG:root:{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}
+DEBUG:root:15
+DEBUG:root:(37467, 2)
 ERROR:root:Length of values does not match length of index
 Traceback (most recent call last):
-  File "plot_cluster.py", line 68, in <module>
+  File "plot_cluster.py", line 74, in <module>
     main()
-  File "plot_cluster.py", line 61, in main
+  File "plot_cluster.py", line 67, in main
     run()
-  File "plot_cluster.py", line 53, in run
+  File "plot_cluster.py", line 59, in run
     df["ground_truth"] = [target_names[l] for l in labels]
   File "/media/remote/tmandal/document-clustering-with-deep-neural-networks/code/.venv/lib/python3.6/site-packages/pandas/core/frame.py", line 3487, in __setitem__
     self._set_item(key, value)
@@ -16,5 +22,5 @@ Traceback (most recent call last):
   File "/media/remote/tmandal/document-clustering-with-deep-neural-networks/code/.venv/lib/python3.6/site-packages/pandas/core/internals/construction.py", line 612, in sanitize_index
     raise ValueError("Length of values does not match length of index")
 ValueError: Length of values does not match length of index
-INFO:root:Plot cluster ended: time.struct_time(tm_year=2020, tm_mon=5, tm_mday=2, tm_hour=12, tm_min=23, tm_sec=35, tm_wday=5, tm_yday=123, tm_isdst=1)
-INFO:root:('Plot cluster', ' executed for 00:22:36.51')
+INFO:root:Plot cluster ended: time.struct_time(tm_year=2020, tm_mon=5, tm_mday=2, tm_hour=13, tm_min=36, tm_sec=58, tm_wday=5, tm_yday=123, tm_isdst=1)
+INFO:root:('Plot cluster', ' executed for 00:00:00.03')
