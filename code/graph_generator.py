@@ -18,6 +18,8 @@ def plot_chart(y, y_label, title, kind, data, pad, plot_name, fig_num):
 
 
 def plot_cluster(title, data, pad, plot_name, fig_num, l_col, hue):
+    palette = ["#32a852", "#36cccf", "#011414", "#2345c2", "#8494cf", "#ced62f", "#d9851e", "#d12d17", "#8513d6",
+              "#d911d2", "#80777f", "#deb4d9", "#2ccadb", "#bff2f1", "#86d60d"]
     classes = data[hue].unique()
     num_classes = classes.shape[0]
     log.debug(title + "num_classes:" + str(num_classes))
@@ -25,7 +27,7 @@ def plot_cluster(title, data, pad, plot_name, fig_num, l_col, hue):
     log.debug(classes)
     plt.figure(num=fig_num, figsize=(15, 15))
     plt.title(title, pad=pad)
-    sns_plot = sns.scatterplot(x="x", y="y", hue=hue, palette=sns.color_palette("bright", num_classes), data=data,
+    sns_plot = sns.scatterplot(x="x", y="y", hue=hue, palette=sns.color_palette(palette), data=data,
                                legend="full")
     plt.legend(loc='upper left', bbox_to_anchor=(0.57, 1.13),
                ncol=l_col, fancybox=True, shadow=True)
