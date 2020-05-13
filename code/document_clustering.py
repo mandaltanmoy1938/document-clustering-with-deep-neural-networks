@@ -6,8 +6,7 @@ import timer
 
 from sklearn import svm
 from sklearn.linear_model import LogisticRegression
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.cluster import KMeans, MeanShift
+from sklearn.cluster import KMeans
 
 log.basicConfig(filename='document_clustering.log', level=log.DEBUG, filemode="w")
 
