@@ -23,9 +23,11 @@ def train_test():
                   {"data": "train_vector", "label": "train_labels",
                    "test_data": "test_vector", "test_label": "test_labels"}]
 
-    try_algorithms = {"supervised": {"SVC": svm.SVC(kernel='linear', C=1, random_state=0), "NB": MultinomialNB(),
+    try_algorithms = {"supervised": {"SVC_linear": svm.SVC(kernel='linear', C=1, random_state=0),
+                                     "SVC_poly": svm.SVC(kernel='poly', C=1, random_state=0),
+                                     "SVC_rbf": svm.SVC(kernel='rbf', C=1, random_state=0),
                                      "LogisticRegression": LogisticRegression()},
-                      "unsupervised": {"KMeans": KMeans(n_clusters=15), "MeanShift": MeanShift()}
+                      "unsupervised": {"KMeans": KMeans(n_clusters=15)}
                       }
     for dl in data_label:
         data = loadPickle(dl["data"])
