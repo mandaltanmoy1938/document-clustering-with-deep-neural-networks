@@ -18,13 +18,13 @@ def load_pickle(filename):
 
 def run():
     predicted_label = {"unsupervised": ["KMeans_"],
-                       "supervised": ["LogisticRegression_", "NB_", "SVC_"]}
+                       "supervised": ["LogisticRegression_", "SVC_"]}
     target_names = [gv.label_name[i] for i in gv.translation_rev]
 
     # dimension reduction dictvectorizer
-    test_transformed = load_pickle("test_data_transformed")
-    test_transformed_embedded = TSNE(n_components=2).fit_transform(test_transformed)
-    op.save_object(test_transformed_embedded, gv.prj_src_path + "python_objects/test_2d_data_transformed")
+    # test_transformed = load_pickle("test_data_transformed")
+    # test_transformed_embedded = TSNE(n_components=2).fit_transform(test_transformed)
+    # op.save_object(test_transformed_embedded, gv.prj_src_path + "python_objects/test_2d_data_transformed")
 
     # dimension reduction doc2vec
     test_vector = load_pickle("test_vector")

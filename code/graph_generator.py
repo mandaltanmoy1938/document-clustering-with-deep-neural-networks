@@ -18,8 +18,8 @@ def plot_chart(y, y_label, title, kind, data, pad, plot_name, fig_num):
 
 
 def plot_cluster(title, data, pad, plot_name, fig_num, l_col, hue):
-    palette = ["#32a852", "#36cccf", "#011414", "#2345c2", "#8494cf", "#ced62f", "#d9851e", "#d12d17", "#8513d6",
-              "#d911d2", "#80777f", "#deb4d9", "#2ccadb", "#bff2f1", "#86d60d"]
+    palette = ["#273eff", "#f37c04", "#4bc938", "#e82007", "#8b2be2", "#9f4700", "#f24cc1", "#a3a3a3", "#f7c401",
+               "#56d8fe", "#cd88a8", "#5ea55a", "#f15357", "#2d70b1", "#000200"]
     classes = data[hue].unique()
     num_classes = classes.shape[0]
     log.debug(title + "num_classes:" + str(num_classes))
