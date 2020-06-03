@@ -17,35 +17,38 @@ def loadPickle(filename):
 
 def run():
     predicted_label = {"unsupervised": ["KMeans_"],
-                       "supervised": ["LogisticRegression_", "NB_", "SVC_"]}
+                       "supervised": ["LogisticRegression_", "SVC_linear_", "SVC_poly_", "SVC_rbf_"]}
+    processes={"test_data_transformed_predict", "test_vector"}
 
     test_labels = loadPickle("test_labels")
     y_true = [gv.translation[x] for x in test_labels]
     target_names = [gv.label_name[i] for i in gv.translation_rev]
     for algo in predicted_label["supervised"]:
-        predict = loadPickle(algo + "test_data_transformed_predict")
-        # predict = loadPickle(algo + "test_vector")
-        accuracy = accuracy_score(y_true, predict)
-        f1 = f1_score(y_true, predict, average='macro')
-        recall = recall_score(y_true, predict, average='macro')
-        precision = precision_score(y_true, predict, average='macro')
-        log.info("Algorithm supervised: %s \n\taccuracy:\t%s"
-                 "\n\t f1_macro:\t%s\n\trecall_macro:\t%s\n\tprecision_macro:\t%s" %
-                 (algo, accuracy, f1, recall, precision))
-        cr = classification_report(y_true=y_true, y_pred=predict, target_names=target_names)
-        log.info(cr)
+        for process in processes:
+            predict = loadPickle(algo + process)
+            # predict = loadPickle(algo + "test_vector")
+            accuracy = accuracy_score(y_true, predict)
+            f1 = f1_score(y_true, predict, average='macro')
+            recall = recall_score(y_true, predict, average='macro')
+            precision = precision_score(y_true, predict, average='macro')
+            log.info("Algorithm supervised: %s \n\taccuracy:\t%s"
+                     "\n\t f1_macro:\t%s\n\trecall_macro:\t%s\n\tprecision_macro:\t%s" %
+                     (algo + process, accuracy, f1, recall, precision))
+            cr = classification_report(y_true=y_true, y_pred=predict, target_names=target_names)
+            log.info(cr)
 
     for algo in predicted_label["unsupervised"]:
-        predict = loadPickle(algo + "test_data_transformed_predict")
-        # predict = loadPickle(algo + "test_vector")
-        score_h = homogeneity_score(y_true, predict)
-        score_c = completeness_score(y_true, predict)
-        score_v = v_measure_score(y_true, predict)
-        score_a = adjusted_rand_score(y_true, predict)
-        score_am = adjusted_mutual_info_score(y_true, predict)
-        log.info("Algorithm unsupervised: %s \n\thomogeneity:\t%s\n\t completeness:\t%s\n\tv_measure:\t%s"
-                 "\n\tadjusted_rand:\t%s\n\tadjusted_mutual_info:\t%s" %
-                 (algo, score_h, score_c, score_v, score_a, score_am))
+        for process in processes:
+            predict = loadPickle(algo + "test_data_transformed_predict")
+            # predict = loadPickle(algo + "test_vector")
+            score_h = homogeneity_score(y_true, predict)
+            score_c = completeness_score(y_true, predict)
+            score_v = v_measure_score(y_true, predict)
+            score_a = adjusted_rand_score(y_true, predict)
+            score_am = adjusted_mutual_info_score(y_true, predict)
+            log.info("Algorithm unsupervised: %s \n\thomogeneity:\t%s\n\t completeness:\t%s\n\tv_measure:\t%s"
+                     "\n\tadjusted_rand:\t%s\n\tadjusted_mutual_info:\t%s" %
+                     (algo + process, score_h, score_c, score_v, score_a, score_am))
 
 
 def main():

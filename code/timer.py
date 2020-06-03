@@ -11,6 +11,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import cross_validate
 from sklearn.cluster import KMeans, AffinityPropagation, MeanShift
 
+
 def time_executed(start_time, process_name):
     end_time = time.time()
     log.info("%s ended: %s" % (process_name, time.localtime(end_time)))
