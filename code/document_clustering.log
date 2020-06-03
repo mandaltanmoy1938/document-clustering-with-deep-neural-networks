@@ -2,3 +2,17 @@ INFO:root:('Document clustering started: ', time.struct_time(tm_year=2020, tm_mo
 INFO:root:supervised  starts at time.struct_time(tm_year=2020, tm_mon=5, tm_mday=13, tm_hour=20, tm_min=58, tm_sec=21, tm_wday=2, tm_yday=134, tm_isdst=1)
 INFO:root:	Algorithm: SVC_linear 
 		training starts at time.struct_time(tm_year=2020, tm_mon=5, tm_mday=13, tm_hour=20, tm_min=58, tm_sec=21, tm_wday=2, tm_yday=134, tm_isdst=1)
+INFO:root:		training ended: time.struct_time(tm_year=2020, tm_mon=5, tm_mday=15, tm_hour=6, tm_min=52, tm_sec=52, tm_wday=4, tm_yday=136, tm_isdst=1)
+INFO:root:('\t\ttraining', ' executed for 33:54:31.47')
+INFO:root:		SVC_linear predict starts at time.struct_time(tm_year=2020, tm_mon=5, tm_mday=15, tm_hour=6, tm_min=52, tm_sec=52, tm_wday=4, tm_yday=136, tm_isdst=1)
+INFO:root:		predict ended: time.struct_time(tm_year=2020, tm_mon=5, tm_mday=15, tm_hour=9, tm_min=1, tm_sec=5, tm_wday=4, tm_yday=136, tm_isdst=1)
+INFO:root:('\t\tpredict', ' executed for 02:08:12.52')
+INFO:root:	Algorithm: SVC_poly 
+		training starts at time.struct_time(tm_year=2020, tm_mon=5, tm_mday=15, tm_hour=9, tm_min=1, tm_sec=5, tm_wday=4, tm_yday=136, tm_isdst=1)
+INFO:root:		training ended: time.struct_time(tm_year=2020, tm_mon=5, tm_mday=16, tm_hour=20, tm_min=27, tm_sec=8, tm_wday=5, tm_yday=137, tm_isdst=1)
+INFO:root:('\t\ttraining', ' executed for 35:26:03.16')
+INFO:root:		SVC_poly predict starts at time.struct_time(tm_year=2020, tm_mon=5, tm_mday=16, tm_hour=20, tm_min=27, tm_sec=8, tm_wday=5, tm_yday=137, tm_isdst=1)
+INFO:root:		predict ended: time.struct_time(tm_year=2020, tm_mon=5, tm_mday=16, tm_hour=22, tm_min=35, tm_sec=2, tm_wday=5, tm_yday=137, tm_isdst=1)
+INFO:root:('\t\tpredict', ' executed for 02:07:54.23')
+INFO:root:	Algorithm: SVC_rbf 
+		training starts at time.struct_time(tm_year=2020, tm_mon=5, tm_mday=16, tm_hour=22, tm_min=35, tm_sec=2, tm_wday=5, tm_yday=137, tm_isdst=1)
