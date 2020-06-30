@@ -63,7 +63,7 @@ def run():
     df_doc2vec = pd.DataFrame(test_embedded_doc2vec, columns=["x", "y"])
     for algo in predicted_label["supervised"]:
         fig_num += 1
-        predict = load_pickle(algo + "test_vector")
+        predict = load_pickle(algo + "est_vector_predict")
         df_doc2vec[algo + "prediction"] = [target_names[p] for p in predict]
         gg.plot_cluster(title=algo + "test_doc2vec_predict", data=df_doc2vec, pad=30,
                         plot_name=gv.prj_src_path + "generated_plots/" + algo + "test_doc2vec_predict",
@@ -71,7 +71,7 @@ def run():
 
     for algo in predicted_label["unsupervised"]:
         fig_num += 1
-        predict = load_pickle(algo + "test_vector")
+        predict = load_pickle(algo + "est_vector_predict")
         df_doc2vec[algo + "prediction"] = predict
         gg.plot_cluster(title=algo + "test_doc2vec_predict", data=df_doc2vec, pad=30,
                         plot_name=gv.prj_src_path + "generated_plots/" + algo + "test_doc2vec_predict",
