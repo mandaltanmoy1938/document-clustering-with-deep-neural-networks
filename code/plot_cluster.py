@@ -43,13 +43,13 @@ def run():
                         plot_name=gv.prj_src_path + "generated_plots/" + algo + "test_dictvectorizer_predict",
                         fig_num=fig_num, l_col=3, hue=algo + "prediction")
 
-    for algo in predicted_label["unsupervised"]:
-        fig_num += 1
-        predict = load_pickle(algo + "test_data_transformed_predict")
-        df_dictvectorizer[algo + "prediction"] = predict
-        gg.plot_cluster(title=algo + "test_dictvectorizer_predict", data=df_dictvectorizer, pad=30,
-                        plot_name=gv.prj_src_path + "generated_plots/" + algo + "test_dictvectorizer_predict",
-                        fig_num=fig_num, l_col=2, hue=algo + "prediction")
+    # for algo in predicted_label["unsupervised"]:
+    #     fig_num += 1
+    #     predict = load_pickle(algo + "test_data_transformed_predict")
+    #     df_dictvectorizer[algo + "prediction"] = predict
+    #     gg.plot_cluster(title=algo + "test_dictvectorizer_predict", data=df_dictvectorizer, pad=30,
+    #                     plot_name=gv.prj_src_path + "generated_plots/" + algo + "test_dictvectorizer_predict",
+    #                     fig_num=fig_num, l_col=2, hue=algo + "prediction")
 
     labels = load_pickle("test_labels")
     labels = [gv.translation[x] for x in labels]
@@ -69,13 +69,13 @@ def run():
                         plot_name=gv.prj_src_path + "generated_plots/" + algo + "test_doc2vec_predict",
                         fig_num=fig_num, l_col=3, hue=algo + "prediction")
 
-    for algo in predicted_label["unsupervised"]:
-        fig_num += 1
-        predict = load_pickle(algo + "est_vector_predict")
-        df_doc2vec[algo + "prediction"] = predict
-        gg.plot_cluster(title=algo + "test_doc2vec_predict", data=df_doc2vec, pad=30,
-                        plot_name=gv.prj_src_path + "generated_plots/" + algo + "test_doc2vec_predict",
-                        fig_num=fig_num, l_col=2, hue=algo + "prediction")
+    # for algo in predicted_label["unsupervised"]:
+    #     fig_num += 1
+    #     predict = load_pickle(algo + "est_vector_predict")
+    #     df_doc2vec[algo + "prediction"] = predict
+    #     gg.plot_cluster(title=algo + "test_doc2vec_predict", data=df_doc2vec, pad=30,
+    #                     plot_name=gv.prj_src_path + "generated_plots/" + algo + "test_doc2vec_predict",
+    #                     fig_num=fig_num, l_col=2, hue=algo + "prediction")
 
     labels = load_pickle("test_labels")
     labels = [gv.translation[x] for x in labels]
