@@ -50,7 +50,7 @@ def preprocess_for_lda(train_corpus_tokens_only):
 
 def generate_lda_model(corpus, dictionary):
     # Set training parameters.
-    num_topics = 10  # 20 #50 #30
+    num_topics = 20  # 20 #50 #30
     chunksize = 2000
     passes = 20  # 20 #10 #20
     iterations = 400
@@ -71,7 +71,7 @@ def generate_lda_model(corpus, dictionary):
         passes=passes,
         eval_every=eval_every
     )
-    lda_model.save(gv.prj_src_path + "python_objects/document_model.lda")
+    lda_model.save(gv.prj_src_path + "python_objects/document_model_20_20.lda")
 
 
 def load_doc2vec_model():
@@ -247,63 +247,63 @@ def run():
     train_corpus_tokens_only = PreprocessGenerator(train_corpus_list, tokens_only=True)
     timer.time_executed(process_start, "Train corpus")
 
-    # generate tokens only Test corpus
-    process_start = time.time()
-    log.info(("Test corpus: ", time.localtime(process_start)))
-    test_corpus_list = [tcd for key, tcd in test_modified_texts.items()]
-    test_corpus_tokens_only = PreprocessGenerator(test_corpus_list, tokens_only=True)
-    log.info("test_corpus size: " + str(len(test_corpus_list)))
-    timer.time_executed(process_start, "Test corpus")
-
-    # generate tokens only val corpus
-    process_start = time.time()
-    log.info(("Val corpus: ", time.localtime(process_start)))
-    val_corpus_list = [tcd for key, tcd in val_modified_texts.items()]
-    val_corpus_tokens_only = PreprocessGenerator(val_corpus_list, tokens_only=True)
-    log.info("val_corpus size: " + str(len(val_corpus_list)))
-    timer.time_executed(process_start, "Val corpus")
-
-    # generate doc2vec model
-    process_start = time.time()
-    log.info(("Doc2Vec: ", time.localtime(process_start)))
-    generate_doc2vec_model(train_corpus_preprocessed)
-    timer.time_executed(process_start, "Doc2Vec")
-
-    # load doc2vec model
-    model = load_doc2vec_model()
-
-    # get train vector from the doc2vec
-    infer_vector_start = time.time()
-    log.info(("Infer vector train: ", time.localtime(process_start)))
-    train_vector = list(map(model.infer_vector, train_corpus_tokens_only))
-    log.info("train_vector size: " + str(len(train_vector)))
-    rand_index = randrange(len(train_vector))
-    log.info("train_vector[" + str(rand_index) + "] feature size: " + str(len(train_vector[rand_index - 1])))
-    log.info(train_vector[rand_index])
-    timer.time_executed(infer_vector_start, "Infer vector train")
-    op.save_object(train_vector, gv.prj_src_path + "python_objects/train_vector")
-
-    # get test vector from the doc2vec
-    infer_vector_start = time.time()
-    log.info(("Infer vector test: ", time.localtime(process_start)))
-    test_vector = list(map(model.infer_vector, test_corpus_tokens_only))
-    log.info("test_vector size: " + str(len(test_vector)))
-    rand_index = randrange(len(test_vector))
-    log.info("test_vector[" + str(rand_index) + "] feature size: " + str(len(test_vector[rand_index - 1])))
-    log.info(test_vector[rand_index])
-    timer.time_executed(infer_vector_start, "Infer vector test")
-    op.save_object(test_vector, gv.prj_src_path + "python_objects/test_vector")
-
-    # get val vector from the doc2vec
-    infer_vector_start = time.time()
-    log.info(("Infer vector val: ", time.localtime(process_start)))
-    val_vector = list(map(model.infer_vector, val_corpus_tokens_only))
-    log.info("val_vector size: " + str(len(val_vector)))
-    rand_index = randrange(len(val_vector))
-    log.info("val_vector[" + str(rand_index) + "] feature size: " + str(len(val_vector[rand_index - 1])))
-    log.info(val_vector[rand_index])
-    timer.time_executed(infer_vector_start, "Infer vector val")
-    op.save_object(val_vector, gv.prj_src_path + "python_objects/val_vector")
+    # # generate tokens only Test corpus
+    # process_start = time.time()
+    # log.info(("Test corpus: ", time.localtime(process_start)))
+    # test_corpus_list = [tcd for key, tcd in test_modified_texts.items()]
+    # test_corpus_tokens_only = PreprocessGenerator(test_corpus_list, tokens_only=True)
+    # log.info("test_corpus size: " + str(len(test_corpus_list)))
+    # timer.time_executed(process_start, "Test corpus")
+    #
+    # # generate tokens only val corpus
+    # process_start = time.time()
+    # log.info(("Val corpus: ", time.localtime(process_start)))
+    # val_corpus_list = [tcd for key, tcd in val_modified_texts.items()]
+    # val_corpus_tokens_only = PreprocessGenerator(val_corpus_list, tokens_only=True)
+    # log.info("val_corpus size: " + str(len(val_corpus_list)))
+    # timer.time_executed(process_start, "Val corpus")
+    #
+    # # generate doc2vec model
+    # process_start = time.time()
+    # log.info(("Doc2Vec: ", time.localtime(process_start)))
+    # generate_doc2vec_model(train_corpus_preprocessed)
+    # timer.time_executed(process_start, "Doc2Vec")
+    #
+    # # load doc2vec model
+    # model = load_doc2vec_model()
+    #
+    # # get train vector from the doc2vec
+    # infer_vector_start = time.time()
+    # log.info(("Infer vector train: ", time.localtime(process_start)))
+    # train_vector = list(map(model.infer_vector, train_corpus_tokens_only))
+    # log.info("train_vector size: " + str(len(train_vector)))
+    # rand_index = randrange(len(train_vector))
+    # log.info("train_vector[" + str(rand_index) + "] feature size: " + str(len(train_vector[rand_index - 1])))
+    # log.info(train_vector[rand_index])
+    # timer.time_executed(infer_vector_start, "Infer vector train")
+    # op.save_object(train_vector, gv.prj_src_path + "python_objects/train_vector")
+    #
+    # # get test vector from the doc2vec
+    # infer_vector_start = time.time()
+    # log.info(("Infer vector test: ", time.localtime(process_start)))
+    # test_vector = list(map(model.infer_vector, test_corpus_tokens_only))
+    # log.info("test_vector size: " + str(len(test_vector)))
+    # rand_index = randrange(len(test_vector))
+    # log.info("test_vector[" + str(rand_index) + "] feature size: " + str(len(test_vector[rand_index - 1])))
+    # log.info(test_vector[rand_index])
+    # timer.time_executed(infer_vector_start, "Infer vector test")
+    # op.save_object(test_vector, gv.prj_src_path + "python_objects/test_vector")
+    #
+    # # get val vector from the doc2vec
+    # infer_vector_start = time.time()
+    # log.info(("Infer vector val: ", time.localtime(process_start)))
+    # val_vector = list(map(model.infer_vector, val_corpus_tokens_only))
+    # log.info("val_vector size: " + str(len(val_vector)))
+    # rand_index = randrange(len(val_vector))
+    # log.info("val_vector[" + str(rand_index) + "] feature size: " + str(len(val_vector[rand_index - 1])))
+    # log.info(val_vector[rand_index])
+    # timer.time_executed(infer_vector_start, "Infer vector val")
+    # op.save_object(val_vector, gv.prj_src_path + "python_objects/val_vector")
 
     # preprocess for lda
     process_start = time.time()
