@@ -1,4 +1,5 @@
-INFO:root:('PLot cluster started: ', time.struct_time(tm_year=2020, tm_mon=6, tm_mday=30, tm_hour=23, tm_min=38, tm_sec=10, tm_wday=1, tm_yday=182, tm_isdst=1))
+INFO:root:('PLot cluster started: ', time.struct_time(tm_year=2020, tm_mon=7, tm_mday=1, tm_hour=9, tm_min=50, tm_sec=2, tm_wday=2, tm_yday=183, tm_isdst=1))
+DEBUG:root:plotting: LogisticRegression_test_dictvectorizer_predict
 DEBUG:root:LogisticRegression_test_dictvectorizer_predictnum_classes:15
 DEBUG:root:LogisticRegression_test_dictvectorizer_predictclasses:
 DEBUG:root:['Resume' 'Email' 'News article' 'Questionnaire' 'File folder' 'Letter'
@@ -1730,42 +1731,60 @@ DEBUG:matplotlib.font_manager:findfont: score(<Font 'Rachana' (Rachana-Regular.t
 DEBUG:matplotlib.font_manager:findfont: score(<Font 'Pothana2000' (Pothana2000.ttf) normal normal 400 normal>) = 10.05
 DEBUG:matplotlib.font_manager:findfont: score(<Font 'Noto Sans Osmanya' (NotoSansOsmanya-Regular.ttf) normal normal regular normal>) = 10.05
 DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/media/remote/tmandal/document-clustering-with-deep-neural-networks/code/.venv/lib/python3.6/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+DEBUG:root:plotting: SVC_linear_test_dictvectorizer_predict
 DEBUG:root:SVC_linear_test_dictvectorizer_predictnum_classes:15
 DEBUG:root:SVC_linear_test_dictvectorizer_predictclasses:
 DEBUG:root:['Resume' 'Email' 'News article' 'Questionnaire' 'File folder' 'Letter'
  'Specification' 'Form' 'Memo' 'Budget' 'Scientific publication'
  'Scientific report' 'Invoice' 'Advertisement' 'Presentation']
+DEBUG:root:plotting: SVC_poly_test_dictvectorizer_predict
 DEBUG:root:SVC_poly_test_dictvectorizer_predictnum_classes:15
 DEBUG:root:SVC_poly_test_dictvectorizer_predictclasses:
 DEBUG:root:['Resume' 'Email' 'File folder' 'Questionnaire' 'Letter' 'News article'
  'Specification' 'Invoice' 'Advertisement' 'Memo' 'Scientific publication'
  'Form' 'Budget' 'Scientific report' 'Presentation']
+DEBUG:root:plotting: SVC_rbf_test_dictvectorizer_predict
 DEBUG:root:SVC_rbf_test_dictvectorizer_predictnum_classes:15
 DEBUG:root:SVC_rbf_test_dictvectorizer_predictclasses:
 DEBUG:root:['Resume' 'Email' 'News article' 'Questionnaire' 'File folder' 'Letter'
  'Specification' 'Advertisement' 'Form' 'Memo' 'Presentation'
  'Scientific publication' 'Scientific report' 'Invoice' 'Budget']
-DEBUG:root:KMeans_test_dictvectorizer_predictnum_classes:9
-DEBUG:root:KMeans_test_dictvectorizer_predictclasses:
-DEBUG:root:[ 6  0  8  7 10 11  9 13  1]
-ERROR:root:The palette list has the wrong number of colors.
-Traceback (most recent call last):
-  File "plot_cluster.py", line 97, in <module>
-    main()
-  File "plot_cluster.py", line 90, in main
-    run()
-  File "plot_cluster.py", line 52, in run
-    fig_num=fig_num, l_col=2, hue=algo + "prediction")
-  File "/media/remote/tmandal/document-clustering-with-deep-neural-networks/code/graph_generator.py", line 31, in plot_cluster
-    legend="full")
-  File "/media/remote/tmandal/document-clustering-with-deep-neural-networks/code/.venv/lib/python3.6/site-packages/seaborn/relational.py", line 1335, in scatterplot
-    alpha=alpha, x_jitter=x_jitter, y_jitter=y_jitter, legend=legend,
-  File "/media/remote/tmandal/document-clustering-with-deep-neural-networks/code/.venv/lib/python3.6/site-packages/seaborn/relational.py", line 859, in __init__
-    self.parse_hue(plot_data["hue"], palette, hue_order, hue_norm)
-  File "/media/remote/tmandal/document-clustering-with-deep-neural-networks/code/.venv/lib/python3.6/site-packages/seaborn/relational.py", line 367, in parse_hue
-    data, order, palette
-  File "/media/remote/tmandal/document-clustering-with-deep-neural-networks/code/.venv/lib/python3.6/site-packages/seaborn/relational.py", line 221, in categorical_to_palette
-    raise ValueError(err)
-ValueError: The palette list has the wrong number of colors.
-INFO:root:Plot cluster ended: time.struct_time(tm_year=2020, tm_mon=7, tm_mday=1, tm_hour=0, tm_min=13, tm_sec=32, tm_wday=2, tm_yday=183, tm_isdst=1)
-INFO:root:('Plot cluster', ' executed for 00:35:22.03')
+DEBUG:root:(36316, 6)
+DEBUG:root:Ground truth Dictvectorizernum_classes:15
+DEBUG:root:Ground truth Dictvectorizerclasses:
+DEBUG:root:['Resume' 'Email' 'News article' 'Questionnaire' 'File folder' 'Letter'
+ 'Specification' 'Scientific report' 'Form' 'Memo'
+ 'Scientific publication' 'Invoice' 'Budget' 'Presentation'
+ 'Advertisement']
+DEBUG:root:plotting: LogisticRegression_test_doc2vec_predict
+DEBUG:root:LogisticRegression_test_doc2vec_predictnum_classes:15
+DEBUG:root:LogisticRegression_test_doc2vec_predictclasses:
+DEBUG:root:['Resume' 'Email' 'Advertisement' 'Questionnaire' 'File folder' 'Letter'
+ 'News article' 'Specification' 'Scientific publication' 'Form' 'Budget'
+ 'Scientific report' 'Invoice' 'Presentation' 'Memo']
+DEBUG:root:plotting: SVC_linear_test_doc2vec_predict
+DEBUG:root:SVC_linear_test_doc2vec_predictnum_classes:15
+DEBUG:root:SVC_linear_test_doc2vec_predictclasses:
+DEBUG:root:['Resume' 'Email' 'News article' 'Questionnaire' 'File folder' 'Letter'
+ 'Specification' 'Scientific publication' 'Scientific report'
+ 'Presentation' 'Budget' 'Form' 'Memo' 'Invoice' 'Advertisement']
+DEBUG:root:plotting: SVC_poly_test_doc2vec_predict
+DEBUG:root:SVC_poly_test_doc2vec_predictnum_classes:15
+DEBUG:root:SVC_poly_test_doc2vec_predictclasses:
+DEBUG:root:['Resume' 'Email' 'Advertisement' 'Questionnaire' 'File folder' 'Letter'
+ 'News article' 'Specification' 'Form' 'Scientific report'
+ 'Scientific publication' 'Memo' 'Invoice' 'Budget' 'Presentation']
+DEBUG:root:plotting: SVC_rbf_test_doc2vec_predict
+DEBUG:root:SVC_rbf_test_doc2vec_predictnum_classes:15
+DEBUG:root:SVC_rbf_test_doc2vec_predictclasses:
+DEBUG:root:['Resume' 'Email' 'News article' 'Questionnaire' 'File folder' 'Letter'
+ 'Specification' 'Scientific publication' 'Form' 'Presentation'
+ 'Scientific report' 'Advertisement' 'Invoice' 'Budget' 'Memo']
+DEBUG:root:Ground truth Doc2Vecnum_classes:15
+DEBUG:root:Ground truth Doc2Vecclasses:
+DEBUG:root:['Resume' 'Email' 'News article' 'Questionnaire' 'File folder' 'Letter'
+ 'Specification' 'Scientific report' 'Form' 'Memo'
+ 'Scientific publication' 'Invoice' 'Budget' 'Presentation'
+ 'Advertisement']
+INFO:root:Plot cluster ended: time.struct_time(tm_year=2020, tm_mon=7, tm_mday=1, tm_hour=9, tm_min=50, tm_sec=23, tm_wday=2, tm_yday=183, tm_isdst=1)
+INFO:root:('Plot cluster', ' executed for 00:00:20.68')
