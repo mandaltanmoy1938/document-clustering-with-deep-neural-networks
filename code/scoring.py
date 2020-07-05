@@ -39,7 +39,7 @@ def run():
 
     for algo in predicted_label["unsupervised"]:
         for process in processes:
-            predict = loadPickle(algo + "test_data_transformed_predict")
+            predict = loadPickle(algo + process)
             # predict = loadPickle(algo + "test_vector")
             score_h = homogeneity_score(y_true, predict)
             score_c = completeness_score(y_true, predict)
