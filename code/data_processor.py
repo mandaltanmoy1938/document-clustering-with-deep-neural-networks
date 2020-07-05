@@ -50,9 +50,9 @@ def preprocess_for_lda(train_corpus_tokens_only):
 
 def generate_lda_model(corpus, dictionary):
     # Set training parameters.
-    num_topics = 50  # 20 #50 #30
+    num_topics = 30  # 20 #50 #30
     chunksize = 2000
-    passes = 10  # 20 #10 #20
+    passes = 20  # 20 #10 #20
     iterations = 400
     eval_every = None  # Don't evaluate model perplexity, takes too much time.
 
@@ -71,7 +71,7 @@ def generate_lda_model(corpus, dictionary):
         passes=passes,
         eval_every=eval_every
     )
-    lda_model.save(gv.prj_src_path + "python_objects/document_model_50_10.lda")
+    lda_model.save(gv.prj_src_path + "python_objects/document_model_30_20.lda")
 
 
 def load_doc2vec_model():
