@@ -18,16 +18,16 @@ def loadPickle(filename):
 
 def train_test():
     data_label = [{"data": "train_vector", "label": "train_labels",
-                   "test_data": "test_vector", "test_label": "test_labels"}
-                  # ,
-                  # {"data": "train_data_transformed", "label": "train_labels",
-                   # "test_data": "test_data_transformed", "test_label": "test_labels"}
-                 ]
+                   "test_data": "test_vector", "test_label": "test_labels"},
+                  {"data": "train_data_transformed", "label": "train_labels",
+                   "test_data": "test_data_transformed", "test_label": "test_labels"}
+                  ]
 
-    try_algorithms = {"supervised": {"SVC_linear": svm.SVC(kernel='linear', C=1, random_state=0),
-                                     "SVC_poly": svm.SVC(kernel='poly', C=1, random_state=0),
-                                     "SVC_rbf": svm.SVC(kernel='rbf', C=1, random_state=0),
-                                     "LogisticRegression": LogisticRegression()},
+    try_algorithms = {
+        # "supervised": {"SVC_linear": svm.SVC(kernel='linear', C=1, random_state=0),
+        #                              "SVC_poly": svm.SVC(kernel='poly', C=1, random_state=0),
+        #                              "SVC_rbf": svm.SVC(kernel='rbf', C=1, random_state=0),
+        #                              "LogisticRegression": LogisticRegression()},
                       "unsupervised": {"KMeans": KMeans(n_clusters=15)}
                       }
     for dl in data_label:
