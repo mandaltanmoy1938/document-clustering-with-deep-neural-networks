@@ -1,4 +1,19 @@
-INFO:root:('Document clustering started: ', time.struct_time(tm_year=2020, tm_mon=6, tm_mday=18, tm_hour=18, tm_min=16, tm_sec=44, tm_wday=3, tm_yday=170, tm_isdst=1))
-INFO:root:supervised  starts at time.struct_time(tm_year=2020, tm_mon=6, tm_mday=18, tm_hour=18, tm_min=16, tm_sec=49, tm_wday=3, tm_yday=170, tm_isdst=1)
-INFO:root:	Algorithm: SVC_linear 
-		training starts at time.struct_time(tm_year=2020, tm_mon=6, tm_mday=18, tm_hour=18, tm_min=16, tm_sec=49, tm_wday=3, tm_yday=170, tm_isdst=1)
+INFO:root:('Document clustering started: ', time.struct_time(tm_year=2020, tm_mon=7, tm_mday=5, tm_hour=14, tm_min=21, tm_sec=28, tm_wday=6, tm_yday=187, tm_isdst=1))
+INFO:root:unsupervised  starts at time.struct_time(tm_year=2020, tm_mon=7, tm_mday=5, tm_hour=14, tm_min=21, tm_sec=29, tm_wday=6, tm_yday=187, tm_isdst=1)
+INFO:root:	Algorithm: KMeans 
+		training starts at time.struct_time(tm_year=2020, tm_mon=7, tm_mday=5, tm_hour=14, tm_min=21, tm_sec=29, tm_wday=6, tm_yday=187, tm_isdst=1)
+INFO:root:		training ended: time.struct_time(tm_year=2020, tm_mon=7, tm_mday=5, tm_hour=14, tm_min=25, tm_sec=14, tm_wday=6, tm_yday=187, tm_isdst=1)
+INFO:root:('\t\ttraining', ' executed for 00:03:45.33')
+INFO:root:		KMeans predict starts at time.struct_time(tm_year=2020, tm_mon=7, tm_mday=5, tm_hour=14, tm_min=25, tm_sec=14, tm_wday=6, tm_yday=187, tm_isdst=1)
+INFO:root:		predict ended: time.struct_time(tm_year=2020, tm_mon=7, tm_mday=5, tm_hour=14, tm_min=25, tm_sec=14, tm_wday=6, tm_yday=187, tm_isdst=1)
+INFO:root:('\t\tpredict', ' executed for 00:00:00.11')
+INFO:root:unsupervised  starts at time.struct_time(tm_year=2020, tm_mon=7, tm_mday=5, tm_hour=14, tm_min=25, tm_sec=20, tm_wday=6, tm_yday=187, tm_isdst=1)
+INFO:root:	Algorithm: KMeans 
+		training starts at time.struct_time(tm_year=2020, tm_mon=7, tm_mday=5, tm_hour=14, tm_min=25, tm_sec=20, tm_wday=6, tm_yday=187, tm_isdst=1)
+INFO:root:		training ended: time.struct_time(tm_year=2020, tm_mon=7, tm_mday=6, tm_hour=4, tm_min=8, tm_sec=29, tm_wday=0, tm_yday=188, tm_isdst=1)
+INFO:root:('\t\ttraining', ' executed for 13:43:08.69')
+INFO:root:		KMeans predict starts at time.struct_time(tm_year=2020, tm_mon=7, tm_mday=6, tm_hour=4, tm_min=8, tm_sec=29, tm_wday=0, tm_yday=188, tm_isdst=1)
+INFO:root:		predict ended: time.struct_time(tm_year=2020, tm_mon=7, tm_mday=6, tm_hour=4, tm_min=8, tm_sec=30, tm_wday=0, tm_yday=188, tm_isdst=1)
+INFO:root:('\t\tpredict', ' executed for 00:00:00.63')
+INFO:root:Document clustering ended: time.struct_time(tm_year=2020, tm_mon=7, tm_mday=6, tm_hour=4, tm_min=8, tm_sec=30, tm_wday=0, tm_yday=188, tm_isdst=1)
+INFO:root:('Document clustering', ' executed for 13:47:02.36')
