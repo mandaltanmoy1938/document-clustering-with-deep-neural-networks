@@ -27,7 +27,7 @@ def get_file_content_meta(lines):
     return len(lines), empty_line_count, word_count, space_count, total_character_count
 
 
-def get_all_file_content_meta(file_paths, src_path, skipped_files, required_files):
+def get_all_file_content_meta(file_paths, src_path, required_files):
     empty_file_count = 0
     empty_file_count_by_class = dict()
     log.info(("Total number of file:", len(file_paths)))
@@ -36,7 +36,7 @@ def get_all_file_content_meta(file_paths, src_path, skipped_files, required_file
                                    "total_character_count": 0}) for file_path in file_paths)
     for file_path in file_paths:
         file_path_ = file_path.replace(src_path, "").replace("\\", "/")
-        if file_path_ not in skipped_files and file_path_ in required_files:
+        if file_path_ in required_files:
             all_file_content_meta[file_path_]["total_line_count"], \
             all_file_content_meta[file_path_]["empty_line_count"], \
             all_file_content_meta[file_path_]["word_count"], \
@@ -74,25 +74,19 @@ def get_all_label_content_meta(meta_dict, label_dict_list, empty_document_class)
 def main():
     test_paths_by_label, test_labels_by_path = dl.get_labels(fc.read_file(gv.data_src_path + gv.test_label_file_name),
                                                              gv.test_label_file_name)
-    log.info(("number of handwritten files in test: ", len(test_paths_by_label["3"])))
-
     train_paths_by_label, train_labels_by_path = dl.get_labels(
         fc.read_file(gv.data_src_path + gv.train_label_file_name),
         gv.train_label_file_name)
-    log.info(("number of handwritten files in train: ", len(train_paths_by_label["3"])))
-
     val_paths_by_label, val_labels_by_path = dl.get_labels(fc.read_file(gv.data_src_path + gv.val_label_file_name),
                                                            gv.val_label_file_name)
-    log.info(("number of handwritten files in val: ", len(val_paths_by_label["3"])))
 
     file_paths = fc.get_all_files_from_directory(gv.data_src_path)
     test_meta_dict, test_empty_file_count, test_empty_file_count_by_class = \
-        get_all_file_content_meta(file_paths, gv.data_src_path, test_paths_by_label["3"], test_labels_by_path)
+        get_all_file_content_meta(file_paths, gv.data_src_path, test_labels_by_path)
     test_label_content_meta = get_all_label_content_meta(test_meta_dict, [test_paths_by_label],
                                                          test_empty_file_count_by_class)
     op.save_object(test_label_content_meta, gv.prj_src_path + "python_objects/test_label_content_meta")
     test_label_content_meta = op.load_object(gv.prj_src_path + "python_objects/test_label_content_meta")
-    # del test_label_content_meta["3"]
     test_label_content_meta_pd = pd.DataFrame.from_dict(test_label_content_meta, orient='index')
     test_label_content_meta_pd["class_avg_line"] = test_label_content_meta_pd["total_line_count"] / \
                                                    test_label_content_meta_pd["number_of_documents"]
@@ -142,12 +136,11 @@ def main():
                   fig_num=fig_num)
 
     train_meta_dict, train_empty_file_count, train_empty_file_count_by_class = \
-        get_all_file_content_meta(file_paths, gv.data_src_path, train_paths_by_label["3"], train_labels_by_path)
+        get_all_file_content_meta(file_paths, gv.data_src_path, train_labels_by_path)
     train_label_content_meta = get_all_label_content_meta(train_meta_dict, [train_paths_by_label],
                                                           train_empty_file_count_by_class)
     op.save_object(train_label_content_meta, gv.prj_src_path + "python_objects/train_label_content_meta")
     train_label_content_meta = op.load_object(gv.prj_src_path + "python_objects/train_label_content_meta")
-    # del train_label_content_meta["3"]
     train_label_content_meta_pd = pd.DataFrame.from_dict(train_label_content_meta, orient='index')
     train_label_content_meta_pd["class_avg_line"] = train_label_content_meta_pd["total_line_count"] / \
                                                     train_label_content_meta_pd["number_of_documents"]
@@ -193,12 +186,11 @@ def main():
                   fig_num=fig_num)
 
     val_meta_dict, val_empty_file_count, val_empty_file_count_by_class = \
-        get_all_file_content_meta(file_paths, gv.data_src_path, val_paths_by_label["3"], val_labels_by_path)
+        get_all_file_content_meta(file_paths, gv.data_src_path, val_labels_by_path)
     val_label_content_meta = get_all_label_content_meta(val_meta_dict, [val_paths_by_label],
                                                         val_empty_file_count_by_class)
     op.save_object(val_label_content_meta, gv.prj_src_path + "python_objects/val_label_content_meta")
     val_label_content_meta = op.load_object(gv.prj_src_path + "python_objects/val_label_content_meta")
-    # del val_label_content_meta["3"]
     val_label_content_meta_pd = pd.DataFrame.from_dict(val_label_content_meta, orient='index')
     val_label_content_meta_pd["class_avg_line"] = val_label_content_meta_pd["total_line_count"] / \
                                                   val_label_content_meta_pd["number_of_documents"]
