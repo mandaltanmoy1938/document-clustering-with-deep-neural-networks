@@ -146,6 +146,12 @@ def main():
                                                     train_label_content_meta_pd["number_of_documents"]
     train_label_content_meta_pd["class_avg_word"] = train_label_content_meta_pd["word_count"] / \
                                                     train_label_content_meta_pd["number_of_documents"]
+    train_label_content_meta_pd["class_avg_line_wo_empty_documents"] = \
+        train_label_content_meta_pd["total_line_count"] / train_label_content_meta_pd["number_of_documents"] - \
+        train_label_content_meta_pd["number_of_empty_documents"]
+    train_label_content_meta_pd["class_avg_word_wo_empty_documents"] = \
+        train_label_content_meta_pd["word_count"] / train_label_content_meta_pd["number_of_documents"] - \
+        train_label_content_meta_pd["number_of_empty_documents"]
     train_label_content_meta_pd = train_label_content_meta_pd.round({"class_avg_line": 0, "class_avg_word": 0})
     fig_num += 1
     gg.plot_chart(y="number_of_documents", y_label="number of documents",
@@ -196,6 +202,12 @@ def main():
                                                   val_label_content_meta_pd["number_of_documents"]
     val_label_content_meta_pd["class_avg_word"] = val_label_content_meta_pd["word_count"] / val_label_content_meta_pd[
         "number_of_documents"]
+    val_label_content_meta_pd["class_avg_line_wo_empty_documents"] = \
+        val_label_content_meta_pd["total_line_count"] / val_label_content_meta_pd["number_of_documents"] - \
+        val_label_content_meta_pd["number_of_empty_documents"]
+    val_label_content_meta_pd["class_avg_word_wo_empty_documents"] = \
+        val_label_content_meta_pd["word_count"] / val_label_content_meta_pd["number_of_documents"] - \
+        val_label_content_meta_pd["number_of_empty_documents"]
     val_label_content_meta_pd = val_label_content_meta_pd.round({"class_avg_line": 0, "class_avg_word": 0})
     fig_num += 1
     gg.plot_chart(y="number_of_documents", y_label="number of documents",
