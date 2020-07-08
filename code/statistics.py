@@ -72,12 +72,12 @@ def get_all_label_content_meta(meta_dict, label_dict_list, empty_document_class)
 
 
 def main():
-    test_paths_by_label, test_labels_by_path = dl.get_labels(fc.read_file(gv.data_src_path + gv.test_label_file_name),
+    test_paths_by_label, test_labels_by_path = dl.get_labels_w_3(fc.read_file(gv.data_src_path + gv.test_label_file_name),
                                                              gv.test_label_file_name)
-    train_paths_by_label, train_labels_by_path = dl.get_labels(
+    train_paths_by_label, train_labels_by_path = dl.get_labels_w_3(
         fc.read_file(gv.data_src_path + gv.train_label_file_name),
         gv.train_label_file_name)
-    val_paths_by_label, val_labels_by_path = dl.get_labels(fc.read_file(gv.data_src_path + gv.val_label_file_name),
+    val_paths_by_label, val_labels_by_path = dl.get_labels_w_3(fc.read_file(gv.data_src_path + gv.val_label_file_name),
                                                            gv.val_label_file_name)
 
     file_paths = fc.get_all_files_from_directory(gv.data_src_path)
