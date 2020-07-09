@@ -142,13 +142,13 @@ def main():
     # test
     test_paths_by_label, test_labels_by_path = dl.get_labels_w_3(
         fc.read_file(gv.data_src_path + gv.test_label_file_name), gv.test_label_file_name)
-    # file_paths = fc.get_all_files_from_directory(gv.data_src_path)
-    # test_meta_dict, test_empty_file_count, test_empty_file_count_by_class = \
-    #     get_all_file_content_meta(file_paths, gv.data_src_path, test_labels_by_path)
-    # op.save_object(test_empty_file_count, gv.prj_src_path + "python_objects/test_empty_file_count")
-    # test_label_content_meta = get_all_label_content_meta(test_meta_dict, [test_paths_by_label],
-    #                                                      test_empty_file_count_by_class)
-    # op.save_object(test_label_content_meta, gv.prj_src_path + "python_objects/test_label_content_meta")
+    file_paths = fc.get_all_files_from_directory(gv.data_src_path)
+    test_meta_dict, test_empty_file_count, test_empty_file_count_by_class = \
+        get_all_file_content_meta(file_paths, gv.data_src_path, test_labels_by_path)
+    op.save_object(test_empty_file_count, gv.prj_src_path + "python_objects/test_empty_file_count")
+    test_label_content_meta = get_all_label_content_meta(test_meta_dict, [test_paths_by_label],
+                                                         test_empty_file_count_by_class)
+    op.save_object(test_label_content_meta, gv.prj_src_path + "python_objects/test_label_content_meta")
     fig_num = plot_statistics(label_content_meta_object_name="test_label_content_meta",
                               labels_by_path=test_labels_by_path, empty_file_count_object_name="test_empty_file_count",
                               data_type="test")
@@ -156,12 +156,12 @@ def main():
     # train
     train_paths_by_label, train_labels_by_path = dl.get_labels_w_3(
         fc.read_file(gv.data_src_path + gv.train_label_file_name), gv.train_label_file_name)
-    # train_meta_dict, train_empty_file_count, train_empty_file_count_by_class = \
-    #     get_all_file_content_meta(file_paths, gv.data_src_path, train_labels_by_path)
-    # op.save_object(train_empty_file_count, gv.prj_src_path + "python_objects/train_empty_file_count")
-    # train_label_content_meta = get_all_label_content_meta(train_meta_dict, [train_paths_by_label],
-    #                                                       train_empty_file_count_by_class)
-    # op.save_object(train_label_content_meta, gv.prj_src_path + "python_objects/train_label_content_meta")
+    train_meta_dict, train_empty_file_count, train_empty_file_count_by_class = \
+        get_all_file_content_meta(file_paths, gv.data_src_path, train_labels_by_path)
+    op.save_object(train_empty_file_count, gv.prj_src_path + "python_objects/train_empty_file_count")
+    train_label_content_meta = get_all_label_content_meta(train_meta_dict, [train_paths_by_label],
+                                                          train_empty_file_count_by_class)
+    op.save_object(train_label_content_meta, gv.prj_src_path + "python_objects/train_label_content_meta")
     fig_num = plot_statistics(label_content_meta_object_name="train_label_content_meta",
                               labels_by_path=train_labels_by_path,
                               empty_file_count_object_name="train_empty_file_count", data_type="train", fig_num=fig_num)
@@ -169,15 +169,14 @@ def main():
     # val
     val_paths_by_label, val_labels_by_path = dl.get_labels_w_3(fc.read_file(gv.data_src_path + gv.val_label_file_name),
                                                                gv.val_label_file_name)
-    # val_meta_dict, val_empty_file_count, val_empty_file_count_by_class = \
-    #     get_all_file_content_meta(file_paths, gv.data_src_path, val_labels_by_path)
-    # op.save_object(val_empty_file_count, gv.prj_src_path + "python_objects/val_empty_file_count")
-    # val_label_content_meta = get_all_label_content_meta(val_meta_dict, [val_paths_by_label],
-    #                                                     val_empty_file_count_by_class)
-    # op.save_object(val_label_content_meta, gv.prj_src_path + "python_objects/val_label_content_meta")
+    val_meta_dict, val_empty_file_count, val_empty_file_count_by_class = \
+        get_all_file_content_meta(file_paths, gv.data_src_path, val_labels_by_path)
+    op.save_object(val_empty_file_count, gv.prj_src_path + "python_objects/val_empty_file_count")
+    val_label_content_meta = get_all_label_content_meta(val_meta_dict, [val_paths_by_label],
+                                                        val_empty_file_count_by_class)
+    op.save_object(val_label_content_meta, gv.prj_src_path + "python_objects/val_label_content_meta")
     plot_statistics(label_content_meta_object_name="val_label_content_meta", labels_by_path=val_labels_by_path,
                     empty_file_count_object_name="val_empty_file_count", data_type="val", fig_num=fig_num)
-    # plot_chart(all_label_content_meta)
 
     log.error(("Number of error file:", gv.error_file_count))
 
