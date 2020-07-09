@@ -26,14 +26,6 @@ def load_stop_words():
         return stopwords_en
 
 
-def load_lda_model(num_topics, passes):
-    return LdaModel.load("%spython_objects/document_model_%s_%s.lda" % (gv.prj_src_path, str(num_topics), str(passes)))
-
-
-def load_lda_dictionary(dict_name):
-    return Dictionary.load_from_text("%spython_objects/%s.dict" % (gv.prj_src_path, dict_name))
-
-
 def preprocess_for_lda(train_corpus_tokens_only):
     lemmatizer = WordNetLemmatizer()
     docs = [[lemmatizer.lemmatize(token) for token in doc] for doc in train_corpus_tokens_only]
@@ -330,10 +322,6 @@ def run():
     log.info(("LDA_30_20: ", time.localtime(process_start)))
     generate_lda_model(corpus, dictionary, num_topics=30, passes=20)
     timer.time_executed(process_start, "LDA_30_20")
-
-    # load lda model
-    model = load_lda_model(num_topics=30, passes=20)
-    dictionary = load_lda_dictionary("dataset")
 
 
 def main():
