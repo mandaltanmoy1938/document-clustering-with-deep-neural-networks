@@ -4,13 +4,13 @@ import object_pickler as op
 import global_variables as gv
 import timer
 from sklearn.metrics import homogeneity_score, completeness_score, v_measure_score, adjusted_rand_score, \
-    adjusted_mutual_info_score, silhouette_score
+    adjusted_mutual_info_score
 from sklearn.metrics import classification_report, accuracy_score, precision_score, recall_score, f1_score
 
 log.basicConfig(filename='scoring.log', level=log.DEBUG, filemode="w")
 
 
-def loadPickle(filename):
+def load_pickle(filename):
     # filename without extension
     return op.load_object(gv.prj_src_path + "python_objects/" + filename)
 
@@ -20,12 +20,12 @@ def run():
                        "supervised": ["LogisticRegression_", "SVC_linear_", "SVC_poly_", "SVC_rbf_"]}
     processes={"test_data_transformed_predict", "test_vector_predict"}
 
-    test_labels = loadPickle("test_labels")
+    test_labels = load_pickle("test_labels")
     y_true = [gv.translation[x] for x in test_labels]
     target_names = [gv.label_name[i] for i in gv.translation_rev]
     for algo in predicted_label["supervised"]:
         for process in processes:
-            predict = loadPickle(algo + process)
+            predict = load_pickle(algo + process)
             # predict = loadPickle(algo + "test_vector")
             accuracy = accuracy_score(y_true, predict)
             f1 = f1_score(y_true, predict, average='macro')
@@ -39,7 +39,7 @@ def run():
 
     for algo in predicted_label["unsupervised"]:
         for process in processes:
-            predict = loadPickle(algo + process)
+            predict = load_pickle(algo + process)
             # predict = loadPickle(algo + "test_vector")
             score_h = homogeneity_score(y_true, predict)
             score_c = completeness_score(y_true, predict)

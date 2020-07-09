@@ -55,7 +55,7 @@ def run():
     labels = load_pickle("test_labels")
     labels = [gv.translation[x] for x in labels]
     log.debug(df_dictvectorizer.shape)
-    df_dictvectorizer["ground_truth"] = [target_names[l] for l in labels]
+    df_dictvectorizer["ground_truth"] = [target_names[label] for label in labels]
     fig_num += 1
     gg.plot_cluster(title="Ground truth Dictvectorizer", data=df_dictvectorizer, pad=30,
                     plot_name=gv.prj_src_path + "generated_plots/ground_truth_dictvectorizer", fig_num=fig_num, l_col=3,
@@ -81,7 +81,7 @@ def run():
 
     labels = load_pickle("test_labels")
     labels = [gv.translation[x] for x in labels]
-    df_doc2vec["ground_truth"] = [target_names[l] for l in labels]
+    df_doc2vec["ground_truth"] = [target_names[label] for label in labels]
     fig_num += 1
     gg.plot_cluster(title="Ground truth Doc2Vec", data=df_doc2vec, pad=30,
                     plot_name=gv.prj_src_path + "generated_plots/ground_truth_doc2vec", fig_num=fig_num, l_col=3,

@@ -11,7 +11,7 @@ from sklearn.cluster import KMeans
 log.basicConfig(filename='document_clustering.log', level=log.DEBUG, filemode="w")
 
 
-def loadPickle(filename):
+def load_pickle(filename):
     # filename without extension
     return op.load_object(gv.prj_src_path + "python_objects/" + filename)
 
@@ -31,9 +31,9 @@ def train_test():
                       "unsupervised": {"KMeans": KMeans(n_clusters=15)}
                       }
     for dl in data_label:
-        data = loadPickle(dl["data"])
-        test_data = loadPickle(dl["test_data"])
-        labels = loadPickle(dl["label"])
+        data = load_pickle(dl["data"])
+        test_data = load_pickle(dl["test_data"])
+        labels = load_pickle(dl["label"])
         labels = [gv.translation[x] for x in labels]
 
         for s_u, algos in try_algorithms.items():
