@@ -39,7 +39,7 @@ def get_all_file_content_meta(file_paths, src_path, required_files):
     for file_path in file_paths:
         file_path_ = file_path.replace(src_path, "").replace("\\", "/")
         if file_path_ in required_files:
-            all_file_content_meta[file_path_]["total_line_count"], \
+            all_file_content_meta[file_path_]["total_line_count"],\
             all_file_content_meta[file_path_]["empty_line_count"], \
             all_file_content_meta[file_path_]["word_count"], \
             all_file_content_meta[file_path_]["space_count"], \
@@ -73,207 +73,107 @@ def get_all_label_content_meta(meta_dict, label_dict_list, empty_document_class)
     return label_content_meta
 
 
-def main():
-    test_paths_by_label, test_labels_by_path = dl.get_labels_w_3(
-        fc.read_file(gv.data_src_path + gv.test_label_file_name),
-        gv.test_label_file_name)
-    train_paths_by_label, train_labels_by_path = dl.get_labels_w_3(
-        fc.read_file(gv.data_src_path + gv.train_label_file_name),
-        gv.train_label_file_name)
-    val_paths_by_label, val_labels_by_path = dl.get_labels_w_3(fc.read_file(gv.data_src_path + gv.val_label_file_name),
-                                                               gv.val_label_file_name)
-
-    file_paths = fc.get_all_files_from_directory(gv.data_src_path)
-    test_meta_dict, test_empty_file_count, test_empty_file_count_by_class = \
-        get_all_file_content_meta(file_paths, gv.data_src_path, test_labels_by_path)
-    op.save_object(test_empty_file_count, gv.prj_src_path + "python_objects/test_empty_file_count")
-    test_label_content_meta = get_all_label_content_meta(test_meta_dict, [test_paths_by_label],
-                                                         test_empty_file_count_by_class)
-    op.save_object(test_label_content_meta, gv.prj_src_path + "python_objects/test_label_content_meta")
+def plot_statistics(label_content_meta_object_name, labels_by_path, empty_file_count_object_name, fig_num=0):
     # load objects
-    test_label_content_meta = op.load_object(gv.prj_src_path + "python_objects/test_label_content_meta")
-    test_empty_file_count = op.load_object(gv.prj_src_path + "python_objects/test_empty_file_count")
-    test_label_content_meta_pd = pd.DataFrame.from_dict(test_label_content_meta, orient='index')
-    test_label_content_meta_pd["class_avg_line"] = test_label_content_meta_pd["total_line_count"] / \
-                                                   test_label_content_meta_pd["number_of_documents"]
-    test_label_content_meta_pd["class_avg_word"] = test_label_content_meta_pd["word_count"] / \
-                                                   test_label_content_meta_pd["number_of_documents"]
-    test_label_content_meta_pd["class_avg_line_wo_empty_documents"] = \
-        test_label_content_meta_pd["total_line_count"] / (test_label_content_meta_pd["number_of_documents"] - \
-                                                          test_label_content_meta_pd["number_of_empty_documents"])
-    test_label_content_meta_pd["class_avg_word_wo_empty_documents"] = \
-        test_label_content_meta_pd["word_count"] / (test_label_content_meta_pd["number_of_documents"] - \
-                                                    test_label_content_meta_pd["number_of_empty_documents"])
-    test_label_content_meta_pd = test_label_content_meta_pd.round({"class_avg_line": 0, "class_avg_word": 0})
-    fig_num = 1
-    gg.plot_chart(y="number_of_documents", y_label="number of documents",
-                  title="Number of documents vs Classes for\n" + str(
-                      len(test_labels_by_path)) + " test documents\nincluding " + str(
-                      test_empty_file_count) + "documents", kind="bar", data=test_label_content_meta_pd, pad=40,
-                  plot_name=gv.prj_src_path + "generated_plots/test_document_number", fig_num=fig_num)
-    fig_num += 1
-    gg.plot_chart(y="number_of_empty_documents", y_label="number of empty documents",
-                  title="Number of empty documents vs Classes for\n" + str(
-                      len(test_labels_by_path)) + " test documents\nincluding " + str(
-                      test_empty_file_count) + "documents", kind="bar", data=test_label_content_meta_pd, pad=40,
-                  plot_name=gv.prj_src_path + "generated_plots/test_empty_document_number", fig_num=fig_num)
-    fig_num += 1
-    gg.plot_chart(y="total_line_count", y_label="Total number of lines", title="Total number of lines vs Classes",
-                  kind="bar", data=test_label_content_meta_pd, pad=20,
-                  plot_name=gv.prj_src_path + "generated_plots/test_total_line_count",
-                  fig_num=fig_num)
-    fig_num += 1
-    gg.plot_chart(y="word_count", y_label="Total number of words", title="Total number of words vs Classes", kind="bar",
-                  data=test_label_content_meta_pd, pad=20,
-                  plot_name=gv.prj_src_path + "generated_plots/test_word_count", fig_num=fig_num)
-    fig_num += 1
-    gg.plot_chart(y="class_avg_line", y_label="Average number of lines", title="Average number of lines vs Classes",
-                  kind="bar", data=test_label_content_meta_pd, pad=20,
-                  plot_name=gv.prj_src_path + "generated_plots/test_avg_line_count", fig_num=fig_num)
-    fig_num += 1
-    gg.plot_chart(y="class_avg_word", y_label="Average number of words", title="Average number of words vs Classes",
-                  kind="bar", data=test_label_content_meta_pd, pad=20,
-                  plot_name=gv.prj_src_path + "generated_plots/test_avg_word_count", fig_num=fig_num)
-    fig_num += 1
-    gg.plot_chart(y="class_avg_line_wo_empty_documents", y_label="Average number of lines",
-                  title="Average number of lines vs Classes\n(excluding empty documents)", kind="bar",
-                  data=test_label_content_meta_pd, pad=30,
-                  plot_name=gv.prj_src_path + "generated_plots/test_avg_line_count_wo_empty_documents",
-                  fig_num=fig_num)
-    fig_num += 1
-    gg.plot_chart(y="class_avg_word_wo_empty_documents", y_label="Average number of words",
-                  title="Average number of words vs Classes\n(excluding empty documents)", kind="bar",
-                  data=test_label_content_meta_pd, pad=30,
-                  plot_name=gv.prj_src_path + "generated_plots/test_avg_word_count_wo_empty_documents",
-                  fig_num=fig_num)
+    label_content_meta = op.load_object("%spython_objects/%s" % (gv.prj_src_path, label_content_meta_object_name))
+    empty_file_count = op.load_object("%spython_objects/%s" % (gv.prj_src_path, empty_file_count_object_name))
 
-    train_meta_dict, train_empty_file_count, train_empty_file_count_by_class = \
-        get_all_file_content_meta(file_paths, gv.data_src_path, train_labels_by_path)
-    op.save_object(train_empty_file_count, gv.prj_src_path + "python_objects/train_empty_file_count")
-    train_label_content_meta = get_all_label_content_meta(train_meta_dict, [train_paths_by_label],
-                                                          train_empty_file_count_by_class)
-    op.save_object(train_label_content_meta, gv.prj_src_path + "python_objects/train_label_content_meta")
-    # load objects
-    train_label_content_meta = op.load_object(gv.prj_src_path + "python_objects/train_label_content_meta")
-    train_empty_file_count = op.load_object(gv.prj_src_path + "python_objects/test_empty_file_count")
-    train_label_content_meta_pd = pd.DataFrame.from_dict(train_label_content_meta, orient='index')
-    train_label_content_meta_pd["class_avg_line"] = train_label_content_meta_pd["total_line_count"] / \
-                                                    train_label_content_meta_pd["number_of_documents"]
-    train_label_content_meta_pd["class_avg_word"] = train_label_content_meta_pd["word_count"] / \
-                                                    train_label_content_meta_pd["number_of_documents"]
-    train_label_content_meta_pd["class_avg_line_wo_empty_documents"] = \
-        train_label_content_meta_pd["total_line_count"] / (train_label_content_meta_pd["number_of_documents"] - \
-                                                           train_label_content_meta_pd["number_of_empty_documents"])
-    train_label_content_meta_pd["class_avg_word_wo_empty_documents"] = \
-        train_label_content_meta_pd["word_count"] / (train_label_content_meta_pd["number_of_documents"] - \
-                                                     train_label_content_meta_pd["number_of_empty_documents"])
-    train_label_content_meta_pd = train_label_content_meta_pd.round({"class_avg_line": 0, "class_avg_word": 0})
+    label_content_meta_pd = pd.DataFrame.from_dict(label_content_meta, orient='index')
+    label_content_meta_pd["class_avg_line"] = label_content_meta_pd["total_line_count"] \
+                                              / label_content_meta_pd["number_of_documents"]
+    label_content_meta_pd["class_avg_word"] = label_content_meta_pd["word_count"] \
+                                              / label_content_meta_pd["number_of_documents"]
+    label_content_meta_pd["class_avg_line_wo_empty_documents"] = \
+        label_content_meta_pd["total_line_count"] / (label_content_meta_pd["number_of_documents"]
+                                                     - label_content_meta_pd["number_of_empty_documents"])
+    label_content_meta_pd["class_avg_word_wo_empty_documents"] = \
+        label_content_meta_pd["word_count"] / (label_content_meta_pd["number_of_documents"]
+                                               - label_content_meta_pd["number_of_empty_documents"])
+    label_content_meta_pd = label_content_meta_pd.round(
+        {"class_avg_line": 2, "class_avg_word": 2, "class_avg_line_wo_empty_documents": 2,
+         "class_avg_word_wo_empty_documents": 2, })
     fig_num += 1
     gg.plot_chart(y="number_of_documents", y_label="number of documents",
                   title="Number of documents vs Classes for\n" + str(
-                      len(train_labels_by_path)) + " train documents\nincluding " + str(
-                      train_empty_file_count) + "documents", kind="bar", data=train_label_content_meta_pd, pad=40,
-                  plot_name=gv.prj_src_path + "generated_plots/train_document_number", fig_num=fig_num)
-    fig_num += 1
-    gg.plot_chart(y="number_of_empty_documents", y_label="number of empty documents",
-                  title="Number of empty documents vs Classes for\n" + str(
-                      len(train_labels_by_path)) + " train documents\nincluding " + str(
-                      train_empty_file_count) + "documents", kind="bar", data=train_label_content_meta_pd, pad=40,
-                  plot_name=gv.prj_src_path + "generated_plots/train_empty_document_number", fig_num=fig_num)
-    fig_num += 1
-    gg.plot_chart(y="total_line_count", y_label="Total number of lines", title="Total number of lines vs Classes",
-                  kind="bar", data=train_label_content_meta_pd, pad=20,
-                  plot_name=gv.prj_src_path + "generated_plots/train_total_line_count",
-                  fig_num=fig_num)
-    fig_num += 1
-    gg.plot_chart(y="word_count", y_label="Total number of words", title="Total number of words vs Classes", kind="bar",
-                  data=train_label_content_meta_pd, pad=20,
-                  plot_name=gv.prj_src_path + "generated_plots/train_word_count", fig_num=fig_num)
-    fig_num += 1
-    gg.plot_chart(y="class_avg_line", y_label="Average number of lines", title="Average number of lines vs Classes",
-                  kind="bar", data=train_label_content_meta_pd, pad=20,
-                  plot_name=gv.prj_src_path + "generated_plots/train_avg_line_count",
-                  fig_num=fig_num)
-    fig_num += 1
-    gg.plot_chart(y="class_avg_word", y_label="Average number of words", title="Average number of words vs Classes",
-                  kind="bar", data=train_label_content_meta_pd, pad=20,
-                  plot_name=gv.prj_src_path + "generated_plots/train_avg_word_count",
-                  fig_num=fig_num)
-    fig_num += 1
-    gg.plot_chart(y="class_avg_line_wo_empty_documents", y_label="Average number of lines",
-                  title="Average number of lines vs Classes\n(excluding empty documents)", kind="bar",
-                  data=train_label_content_meta_pd, pad=30,
-                  plot_name=gv.prj_src_path + "generated_plots/train_avg_line_count_wo_empty_documents",
-                  fig_num=fig_num)
-    fig_num += 1
-    gg.plot_chart(y="class_avg_word_wo_empty_documents", y_label="Average number of words",
-                  title="Average number of words vs Classes\n(excluding empty documents)", kind="bar",
-                  data=train_label_content_meta_pd, pad=30,
-                  plot_name=gv.prj_src_path + "generated_plots/train_avg_word_count_wo_empty_documents",
-                  fig_num=fig_num)
-
-    val_meta_dict, val_empty_file_count, val_empty_file_count_by_class = \
-        get_all_file_content_meta(file_paths, gv.data_src_path, val_labels_by_path)
-    op.save_object(val_empty_file_count, gv.prj_src_path + "python_objects/val_empty_file_count")
-    val_label_content_meta = get_all_label_content_meta(val_meta_dict, [val_paths_by_label],
-                                                        val_empty_file_count_by_class)
-    op.save_object(val_label_content_meta, gv.prj_src_path + "python_objects/val_label_content_meta")
-    # load objects
-    val_label_content_meta = op.load_object(gv.prj_src_path + "python_objects/val_label_content_meta")
-    val_empty_file_count = op.load_object(gv.prj_src_path + "python_objects/test_empty_file_count")
-    val_label_content_meta_pd = pd.DataFrame.from_dict(val_label_content_meta, orient='index')
-    val_label_content_meta_pd["class_avg_line"] = val_label_content_meta_pd["total_line_count"] / \
-                                                  val_label_content_meta_pd["number_of_documents"]
-    val_label_content_meta_pd["class_avg_word"] = val_label_content_meta_pd["word_count"] / val_label_content_meta_pd[
-        "number_of_documents"]
-    val_label_content_meta_pd["class_avg_line_wo_empty_documents"] = \
-        val_label_content_meta_pd["total_line_count"] / (val_label_content_meta_pd["number_of_documents"] - \
-                                                         val_label_content_meta_pd["number_of_empty_documents"])
-    val_label_content_meta_pd["class_avg_word_wo_empty_documents"] = \
-        val_label_content_meta_pd["word_count"] / (val_label_content_meta_pd["number_of_documents"] - \
-                                                   val_label_content_meta_pd["number_of_empty_documents"])
-    val_label_content_meta_pd = val_label_content_meta_pd.round({"class_avg_line": 0, "class_avg_word": 0})
-    fig_num += 1
-    gg.plot_chart(y="number_of_documents", y_label="number of documents",
-                  title="Number of documents vs Classes for\n" + str(
-                      len(val_labels_by_path)) + " val documents\nincluding " + str(
-                      val_empty_file_count) + "documents", kind="bar", data=val_label_content_meta_pd, pad=40,
+                      len(labels_by_path)) + " val documents\nincluding " + str(
+                      empty_file_count) + "documents", kind="bar", data=label_content_meta_pd, pad=40,
                   plot_name=gv.prj_src_path + "generated_plots/val_document_number", fig_num=fig_num)
     fig_num += 1
     gg.plot_chart(y="number_of_empty_documents", y_label="number of empty documents",
                   title="Number of empty documents vs Classes for\n" + str(
-                      len(val_labels_by_path)) + " val documents\nincluding " + str(
-                      val_empty_file_count) + "documents", kind="bar", data=val_label_content_meta_pd, pad=40,
+                      len(labels_by_path)) + " val documents\nincluding " + str(
+                      empty_file_count) + "documents", kind="bar", data=label_content_meta_pd, pad=40,
                   plot_name=gv.prj_src_path + "generated_plots/val_empty_document_number", fig_num=fig_num)
     fig_num += 1
     gg.plot_chart(y="total_line_count", y_label="Total number of lines", title="Total number of lines vs Classes",
-                  kind="bar", data=val_label_content_meta_pd, pad=20,
+                  kind="bar", data=label_content_meta_pd, pad=20,
                   plot_name=gv.prj_src_path + "generated_plots/val_total_line_count",
                   fig_num=fig_num)
     fig_num += 1
     gg.plot_chart(y="word_count", y_label="Total number of words", title="Total number of words vs Classes", kind="bar",
-                  data=val_label_content_meta_pd, pad=20, plot_name=gv.prj_src_path + "generated_plots/val_word_count",
+                  data=label_content_meta_pd, pad=20, plot_name=gv.prj_src_path + "generated_plots/val_word_count",
                   fig_num=fig_num)
     fig_num += 1
     gg.plot_chart(y="class_avg_line", y_label="Average number of lines", title="Average number of lines vs Classes",
-                  kind="bar", data=val_label_content_meta_pd, pad=20,
+                  kind="bar", data=label_content_meta_pd, pad=20,
                   plot_name=gv.prj_src_path + "generated_plots/val_avg_line_count", fig_num=fig_num)
     fig_num += 1
     gg.plot_chart(y="class_avg_word", y_label="Average number of words", title="Average number of words vs Classes",
-                  kind="bar", data=val_label_content_meta_pd, pad=20,
+                  kind="bar", data=label_content_meta_pd, pad=20,
                   plot_name=gv.prj_src_path + "generated_plots/val_avg_word_count", fig_num=fig_num)
     fig_num += 1
     gg.plot_chart(y="class_avg_line_wo_empty_documents", y_label="Average number of lines",
                   title="Average number of lines vs Classes\n(excluding empty documents)", kind="bar",
-                  data=val_label_content_meta_pd, pad=30,
+                  data=label_content_meta_pd, pad=30,
                   plot_name=gv.prj_src_path + "generated_plots/val_avg_line_count_wo_empty_documents",
                   fig_num=fig_num)
     fig_num += 1
     gg.plot_chart(y="class_avg_word_wo_empty_documents", y_label="Average number of words",
                   title="Average number of words vs Classes\n(excluding empty documents)", kind="bar",
-                  data=val_label_content_meta_pd, pad=30,
+                  data=label_content_meta_pd, pad=30,
                   plot_name=gv.prj_src_path + "generated_plots/val_avg_word_count_wo_empty_documents",
                   fig_num=fig_num)
+    return fig_num
+
+
+def main():
+    # test
+    test_paths_by_label, test_labels_by_path = dl.get_labels_w_3(
+        fc.read_file(gv.data_src_path + gv.test_label_file_name), gv.test_label_file_name)
+    # file_paths = fc.get_all_files_from_directory(gv.data_src_path)
+    # test_meta_dict, test_empty_file_count, test_empty_file_count_by_class = \
+    #     get_all_file_content_meta(file_paths, gv.data_src_path, test_labels_by_path)
+    # op.save_object(test_empty_file_count, gv.prj_src_path + "python_objects/test_empty_file_count")
+    # test_label_content_meta = get_all_label_content_meta(test_meta_dict, [test_paths_by_label],
+    #                                                      test_empty_file_count_by_class)
+    # op.save_object(test_label_content_meta, gv.prj_src_path + "python_objects/test_label_content_meta")
+    fig_num = plot_statistics(label_content_meta_object_name="test_label_content_meta",
+                              labels_by_path=test_labels_by_path, empty_file_count_object_name="test_empty_file_count")
+
+    # train
+    train_paths_by_label, train_labels_by_path = dl.get_labels_w_3(
+        fc.read_file(gv.data_src_path + gv.train_label_file_name), gv.train_label_file_name)
+    # train_meta_dict, train_empty_file_count, train_empty_file_count_by_class = \
+    #     get_all_file_content_meta(file_paths, gv.data_src_path, train_labels_by_path)
+    # op.save_object(train_empty_file_count, gv.prj_src_path + "python_objects/train_empty_file_count")
+    # train_label_content_meta = get_all_label_content_meta(train_meta_dict, [train_paths_by_label],
+    #                                                       train_empty_file_count_by_class)
+    # op.save_object(train_label_content_meta, gv.prj_src_path + "python_objects/train_label_content_meta")
+    fig_num = plot_statistics(label_content_meta_object_name="train_label_content_meta",
+                              labels_by_path=train_labels_by_path,
+                              empty_file_count_object_name="train_empty_file_count", fig_num=fig_num)
+
+    # val
+    val_paths_by_label, val_labels_by_path = dl.get_labels_w_3(fc.read_file(gv.data_src_path + gv.val_label_file_name),
+                                                               gv.val_label_file_name)
+    # val_meta_dict, val_empty_file_count, val_empty_file_count_by_class = \
+    #     get_all_file_content_meta(file_paths, gv.data_src_path, val_labels_by_path)
+    # op.save_object(val_empty_file_count, gv.prj_src_path + "python_objects/val_empty_file_count")
+    # val_label_content_meta = get_all_label_content_meta(val_meta_dict, [val_paths_by_label],
+    #                                                     val_empty_file_count_by_class)
+    # op.save_object(val_label_content_meta, gv.prj_src_path + "python_objects/val_label_content_meta")
+    plot_statistics(label_content_meta_object_name="val_label_content_meta", labels_by_path=val_labels_by_path,
+                    empty_file_count_object_name="val_empty_file_count", fig_num=fig_num)
     # plot_chart(all_label_content_meta)
 
     log.error(("Number of error file:", gv.error_file_count))
