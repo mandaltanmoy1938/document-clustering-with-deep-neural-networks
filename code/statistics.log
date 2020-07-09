@@ -1,5 +1,6 @@
-INFO:root:('Statistics started: ', time.struct_time(tm_year=2020, tm_mon=7, tm_mday=9, tm_hour=15, tm_min=56, tm_sec=14, tm_wday=3, tm_yday=191, tm_isdst=1))
+INFO:root:('Statistics started: ', time.struct_time(tm_year=2020, tm_mon=7, tm_mday=9, tm_hour=16, tm_min=20, tm_sec=35, tm_wday=3, tm_yday=191, tm_isdst=1))
 INFO:root:('get labels from ', 'text_test.txt')
+INFO:root:('Total number of file:', 399999)
 DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0.
 DEBUG:matplotlib.font_manager:findfont: score(<Font 'STIXNonUnicode' (STIXNonUni.ttf) normal normal regular normal>) = 10.05
 DEBUG:matplotlib.font_manager:findfont: score(<Font 'STIXSizeThreeSym' (STIXSizThreeSymReg.ttf) normal normal regular normal>) = 10.05
@@ -864,7 +865,9 @@ DEBUG:matplotlib.font_manager:findfont: score(<Font 'Pothana2000' (Pothana2000.t
 DEBUG:matplotlib.font_manager:findfont: score(<Font 'Noto Sans Osmanya' (NotoSansOsmanya-Regular.ttf) normal normal regular normal>) = 10.05
 DEBUG:matplotlib.font_manager:findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/media/remote/tmandal/document-clustering-with-deep-neural-networks/code/.venv/lib/python3.6/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
 INFO:root:('get labels from ', 'text_train.txt')
+INFO:root:('Total number of file:', 399999)
 INFO:root:('get labels from ', 'text_val.txt')
+INFO:root:('Total number of file:', 399999)
 ERROR:root:('Number of error file:', 0)
-INFO:root:Statistics ended: time.struct_time(tm_year=2020, tm_mon=7, tm_mday=9, tm_hour=15, tm_min=56, tm_sec=36, tm_wday=3, tm_yday=191, tm_isdst=1)
-INFO:root:('Statistics', ' executed for 00:00:22.27')
+INFO:root:Statistics ended: time.struct_time(tm_year=2020, tm_mon=7, tm_mday=9, tm_hour=16, tm_min=42, tm_sec=50, tm_wday=3, tm_yday=191, tm_isdst=1)
+INFO:root:('Statistics', ' executed for 00:22:15.56')
