@@ -1,12 +1,13 @@
-import time
 import logging as log
-import object_pickler as op
-import global_variables as gv
-import timer
+import time
 
 from sklearn import svm
-from sklearn.linear_model import LogisticRegression
 from sklearn.cluster import KMeans
+from sklearn.linear_model import LogisticRegression
+
+import global_variables as gv
+import object_pickler as op
+import timer
 
 log.basicConfig(filename='document_clustering.log', level=log.DEBUG, filemode="w")
 
@@ -18,18 +19,19 @@ def load_pickle(filename):
 
 def train_test():
     data_label = [{"data": "train_vector", "label": "train_labels",
-                   "test_data": "test_vector", "test_label": "test_labels"},
-                  {"data": "train_data_transformed", "label": "train_labels",
-                   "test_data": "test_data_transformed", "test_label": "test_labels"}
+                   "test_data": "test_vector", "test_label": "test_labels"}
+                  # ,
+                  #           {"data": "train_data_transformed", "label": "train_labels",
+                  #            "test_data": "test_data_transformed", "test_label": "test_labels"}
                   ]
 
     try_algorithms = {
-        # "supervised": {"SVC_linear": svm.SVC(kernel='linear', C=1, random_state=0),
-        #                              "SVC_poly": svm.SVC(kernel='poly', C=1, random_state=0),
-        #                              "SVC_rbf": svm.SVC(kernel='rbf', C=1, random_state=0),
-        #                              "LogisticRegression": LogisticRegression()},
-                      "unsupervised": {"KMeans": KMeans(n_clusters=15)}
-                      }
+        "supervised": {"SVC_linear": svm.SVC(kernel='linear', C=1, random_state=0),
+                       "SVC_poly": svm.SVC(kernel='poly', C=1, random_state=0),
+                       "SVC_rbf": svm.SVC(kernel='rbf', C=1, random_state=0),
+                       "LogisticRegression": LogisticRegression()},
+        "unsupervised": {"KMeans": KMeans(n_clusters=15)}
+    }
     for dl in data_label:
         data = load_pickle(dl["data"])
         test_data = load_pickle(dl["test_data"])

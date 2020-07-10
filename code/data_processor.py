@@ -1,21 +1,20 @@
-import time
 import json
-import spacy
-import timer
 import logging as log
-import file_collector as fc
-import object_pickler as op
-import global_variables as gv
-import data_labeller as dl
+import time
 
-from preprocessGenerator import PreprocessGenerator
-from random import randrange
-from sklearn.feature_extraction import DictVectorizer
-from gensim.models.doc2vec import Doc2Vec
-from nltk.stem.wordnet import WordNetLemmatizer
-from gensim.models import Phrases
+import spacy
 from gensim.corpora import Dictionary
 from gensim.models import LdaModel
+from gensim.models import Phrases
+from gensim.models.doc2vec import Doc2Vec
+from nltk.stem.wordnet import WordNetLemmatizer
+from sklearn.feature_extraction import DictVectorizer
+
+import file_collector as fc
+import global_variables as gv
+import object_pickler as op
+import timer
+from preprocessGenerator import PreprocessGenerator
 
 log.basicConfig(filename='data_processor.log', level=log.DEBUG, filemode="w")
 
@@ -127,7 +126,7 @@ def tokenizer(required_files):
         for token in parsed_text:
             if token.pos_ is "NUM":
                 token_key = "<NUM>"
-                text = text.replace(token.text, token_key).replace("\r\n", "\n").replace("\r", "\n").replace("\n", " ")\
+                text = text.replace(token.text, token_key).replace("\r\n", "\n").replace("\r", "\n").replace("\n", " ") \
                     .replace("\t", " ")
             else:
                 token_key = token.text.strip()
