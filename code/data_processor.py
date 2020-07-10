@@ -42,6 +42,7 @@ def preprocess_for_lda(train_corpus_tokens_only):
     dictionary.save_as_text("%spython_objects/dataset.dict" % gv.prj_src_path)
     # Bag-of-words representation of the documents.
     corpus = [dictionary.doc2bow(doc) for doc in docs]
+    log.info("corpus length: %s" % len(corpus))
     return corpus, dictionary
 
 
@@ -229,19 +230,19 @@ def run():
     # val_modified_texts = op.load_object(gv.prj_src_path + "python_objects/val_modified_texts")
     #
     # # generate preprocessed train corpus
-    # process_start = time.time()
-    # log.info(("Train corpus: ", time.localtime(process_start)))
+    process_start = time.time()
+    log.info(("Train corpus: ", time.localtime(process_start)))
     train_corpus_list = [tcd for key, tcd in train_modified_texts.items()]
     # train_corpus_preprocessed = PreprocessGenerator(train_corpus_list)
-    # log.info("train_corpus size: " + str(len(train_corpus_list)))
-    # timer.time_executed(process_start, "Train corpus")
-    #
+    log.info("train_corpus size: " + str(len(train_corpus_list)))
+    timer.time_executed(process_start, "Train corpus")
+
     # generate tokens only train corpus
     process_start = time.time()
     log.info(("Train corpus: ", time.localtime(process_start)))
     train_corpus_tokens_only = PreprocessGenerator(train_corpus_list, tokens_only=True)
     timer.time_executed(process_start, "Train corpus")
-    #
+
     # # generate tokens only Test corpus
     # process_start = time.time()
     # log.info(("Test corpus: ", time.localtime(process_start)))
