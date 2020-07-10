@@ -25,6 +25,10 @@ def load_stop_words():
         return stopwords_en
 
 
+def load_lda_dictionary(dict_name):
+    return Dictionary.load_from_text("%spython_objects/%s.dict" % (gv.prj_src_path, dict_name))
+
+
 def preprocess_for_lda(train_corpus_tokens_only):
     lemmatizer = WordNetLemmatizer()
     docs = [[lemmatizer.lemmatize(token) for token in doc] for doc in train_corpus_tokens_only]
@@ -42,6 +46,7 @@ def preprocess_for_lda(train_corpus_tokens_only):
     dictionary.save_as_text("%spython_objects/dataset.dict" % gv.prj_src_path)
     # Bag-of-words representation of the documents.
     corpus = [dictionary.doc2bow(doc) for doc in docs]
+    op.save_object(corpus, gv.prj_src_path + "python_objects/corpus")
     log.info("corpus length: %s" % len(corpus))
     return corpus, dictionary
 
@@ -307,6 +312,8 @@ def run():
     corpus, dictionary = preprocess_for_lda(train_corpus_tokens_only)
     timer.time_executed(process_start, "Preprocess LDA")
 
+    dictionary = load_lda_dictionary("dataset")
+    corpus = op.load_object(gv.prj_src_path + "python_objects/corpus")
     # generate lda models
     process_start = time.time()
     log.info(("LDA_20_20: ", time.localtime(process_start)))
