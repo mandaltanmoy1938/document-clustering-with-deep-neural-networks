@@ -9,7 +9,7 @@ import global_variables as gv
 import object_pickler as op
 import timer
 
-log.basicConfig(filename='statistics.log', level=log.DEBUG, filemode="w")
+log.basicConfig(filename='ldavis.log', level=log.DEBUG, filemode="w")
 
 
 def load_lda_model(num_topics, passes):
@@ -44,7 +44,7 @@ def visualize(corpus, dictionary, num_topics_passes_tuple_list):
 
 
 def process_data(modified_texts):
-    text_list = [tcd.replace("\r\n", "\n").replace("\r", "\n").replace("\n", " ").replace("\t", " ").split(" ") for
+    text_list = [tcd.replace("\r\n", "\n").replace("\r", "\n").replace("\n", " ").replace("\t", " ") for
                  key, tcd in modified_texts.items()]
     corpus = list()
     for text in text_list:

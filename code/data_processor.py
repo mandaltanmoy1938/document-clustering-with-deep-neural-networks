@@ -8,6 +8,7 @@ from gensim.models import LdaModel
 from gensim.models import Phrases
 from gensim.models.doc2vec import Doc2Vec
 from nltk.stem.wordnet import WordNetLemmatizer
+from scipy.sparse import csr as _csr
 from sklearn.feature_extraction import DictVectorizer
 
 import file_collector as fc
