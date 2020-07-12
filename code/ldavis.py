@@ -4,6 +4,7 @@ import time
 import pyLDAvis
 from gensim.corpora import Dictionary
 from gensim.models import LdaModel, CoherenceModel
+from scipy.sparse import csr as _csr
 
 import global_variables as gv
 import object_pickler as op
