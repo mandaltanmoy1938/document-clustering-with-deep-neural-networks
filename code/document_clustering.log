@@ -1,0 +1,25 @@
+INFO:root:('Document clustering started: ', time.struct_time(tm_year=2020, tm_mon=7, tm_mday=11, tm_hour=10, tm_min=33, tm_sec=43, tm_wday=5, tm_yday=193, tm_isdst=1))
+WARNING:root:('In load error open file: ', '/media/remote/tmandal/document-clustering-with-deep-neural-networks/python_objects/train_labels')
+ERROR:root:[Errno 2] No such file or directory: '/media/remote/tmandal/document-clustering-with-deep-neural-networks/python_objects/train_labels.p'
+INFO:root:supervised  starts at time.struct_time(tm_year=2020, tm_mon=7, tm_mday=11, tm_hour=10, tm_min=33, tm_sec=45, tm_wday=5, tm_yday=193, tm_isdst=1)
+INFO:root:	Algorithm: SVC_linear 
+		training starts at time.struct_time(tm_year=2020, tm_mon=7, tm_mday=11, tm_hour=10, tm_min=33, tm_sec=45, tm_wday=5, tm_yday=193, tm_isdst=1)
+ERROR:root:Found input variables with inconsistent numbers of samples: [290651, 0]
+Traceback (most recent call last):
+  File "document_clustering.py", line 70, in <module>
+    main()
+  File "document_clustering.py", line 63, in main
+    run()
+  File "document_clustering.py", line 59, in run
+    train_test()
+  File "document_clustering.py", line 48, in train_test
+    clf.fit(data, labels)
+  File "/media/remote/tmandal/document-clustering-with-deep-neural-networks/code/.venv/lib/python3.6/site-packages/sklearn/svm/_base.py", line 148, in fit
+    accept_large_sparse=False)
+  File "/media/remote/tmandal/document-clustering-with-deep-neural-networks/code/.venv/lib/python3.6/site-packages/sklearn/utils/validation.py", line 765, in check_X_y
+    check_consistent_length(X, y)
+  File "/media/remote/tmandal/document-clustering-with-deep-neural-networks/code/.venv/lib/python3.6/site-packages/sklearn/utils/validation.py", line 212, in check_consistent_length
+    " samples: %r" % [int(l) for l in lengths])
+ValueError: Found input variables with inconsistent numbers of samples: [290651, 0]
+INFO:root:Document clustering ended: time.struct_time(tm_year=2020, tm_mon=7, tm_mday=11, tm_hour=10, tm_min=33, tm_sec=45, tm_wday=5, tm_yday=193, tm_isdst=1)
+INFO:root:('Document clustering', ' executed for 00:00:01.96')

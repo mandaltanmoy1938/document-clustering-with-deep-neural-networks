@@ -19,14 +19,14 @@ def load_object(file_name):
     return object
 
 
-def save_object(object, file_name):
+def save_object(python_object, file_name):
     try:
         if not path.exists(file_name + '.p'):
             os.mknod(file_name + '.p')
 
         with open(file_name + '.p', 'wb+') as fp:
             try:
-                pickle.dump(object, fp, protocol=pickle.HIGHEST_PROTOCOL)
+                pickle.dump(python_object, fp, protocol=pickle.HIGHEST_PROTOCOL)
             except Exception as e:
                 log.warning(("Error dump file: ", file_name))
                 log.error(e)

@@ -1,41 +1,41 @@
-import time
-import pandas as pd
 import logging as log
-import object_pickler as op
-import global_variables as gv
+import time
 
 from sklearn import svm
+from sklearn.cluster import KMeans
 from sklearn.linear_model import LogisticRegression
-from sklearn.linear_model import SGDClassifier
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.model_selection import cross_validate
-from sklearn.cluster import KMeans, AffinityPropagation, MeanShift
+
+import global_variables as gv
+import object_pickler as op
+import timer
 
 log.basicConfig(filename='document_clustering.log', level=log.DEBUG, filemode="w")
 
 
-def loadPickle(filename):
+def load_pickle(filename):
     # filename without extension
     return op.load_object(gv.prj_src_path + "python_objects/" + filename)
 
 
 def train_test():
-    data_label = [{"data": "train_data_transformed", "label": "train_labels",
-                   "test_data": "test_data_transformed", "test_label": "test_labels"},
-                  {"data": "train_data_hash_transformed", "label": "train_labels",
-                   "test_data": "test_data_hash_transformed", "test_label": "test_labels"}]
+    data_label = [{"data": "train_vector", "label": "train_labels",
+                   "test_data": "test_vector", "test_label": "test_labels"}
+                  # ,
+                  #           {"data": "train_data_transformed", "label": "train_labels",
+                  #            "test_data": "test_data_transformed", "test_label": "test_labels"}
+                  ]
 
-    try_algorithms = {"supervised": {"SVC": svm.SVC(kernel='linear', C=1, random_state=0),
-                                     "NB": MultinomialNB(),
-                                     "LogisticRegression": LogisticRegression()},
-                      #"unsupervised": {"KMeans": KMeans(n_clusters=15),
-                      #                "AffinityPropagation": AffinityPropagation(),
-                      #               "MeanShift": MeanShift()}
-                      }
+    try_algorithms = {
+        "supervised": {"SVC_linear": svm.SVC(kernel='linear', C=1, random_state=0),
+                       "SVC_poly": svm.SVC(kernel='poly', C=1, random_state=0),
+                       "SVC_rbf": svm.SVC(kernel='rbf', C=1, random_state=0),
+                       "LogisticRegression": LogisticRegression()},
+        "unsupervised": {"KMeans": KMeans(n_clusters=15)}
+    }
     for dl in data_label:
-        data = loadPickle(dl["data"])
-        test_data = loadPickle(dl["test_data"])
-        labels = loadPickle(dl["label"])
+        data = load_pickle(dl["data"])
+        test_data = load_pickle(dl["test_data"])
+        labels = load_pickle(dl["label"])
         labels = [gv.translation[x] for x in labels]
 
         for s_u, algos in try_algorithms.items():
@@ -46,71 +46,16 @@ def train_test():
                 algo_time = time.time()
                 log.info("\tAlgorithm: %s \n\t\ttraining starts at %s" % (algo, time.localtime(algo_time)))
                 clf.fit(data, labels)
-                time_executed(algo_time, "\t\ttraining")
+                timer.time_executed(algo_time, "\t\ttraining")
 
                 predict_time = time.time()
                 log.info("\t\t%s predict starts at %s" % (algo, time.localtime(predict_time)))
                 predict = clf.predict(test_data)
-                time_executed(predict_time, "\t\tpredict")
+                timer.time_executed(predict_time, "\t\tpredict")
                 op.save_object(predict, gv.prj_src_path + "python_objects/%s_%s_predict" % (algo, dl["test_data"]))
 
 
-def cross_validation():
-    data_label = [{"data": "train_data_transformed", "label": "train_labels"},
-                  {"data": "train_data_hash_transformed", "label": "train_labels"},
-                  {"data": "val_data_transformed", "label": "val_labels"},
-                  {"data": "val_data_hash_transformed", "label": "val_labels"},
-                  {"data": "test_data_transformed", "label": "test_labels"},
-                  {"data": "test_data_hash_transformed", "label": "test_labels"}]
-
-    try_algorithms = {"KMeans": KMeans(n_clusters=15), "AffinityPropagation": AffinityPropagation(),
-                      "MeanShift": MeanShift(), "SVC": svm.SVC(kernel='linear', C=1, random_state=0),
-                      "NB": MultinomialNB(), "LogisticRegression": LogisticRegression(),
-                      "SGDClassifier": SGDClassifier()}
-
-    for dl in data_label:
-        data = loadPickle(dl["data"])
-        labels = loadPickle(dl["label"])
-        labels = [gv.translation[x] for x in labels]
-
-        log.info("data: %s" % (dl["data"]))
-        for algo, clf in try_algorithms.items():
-            scoring = ['precision_macro', 'recall_macro', 'f1_macro', 'accuracy']
-            scores = cross_validate(clf, data, labels, scoring=scoring, cv=2,
-                                    return_train_score=False)
-
-            for k in sorted(scores.keys()):
-                print("\t%s %s %s: %0.2f (+/- %0.2f)" % (dl["data"], algo, k, scores[k].mean(), scores[k].std() * 2))
-                log.debug(
-                    "\t%s %s %s: %0.2f (+/- %0.2f)" % (dl["data"], algo, k, scores[k].mean(), scores[k].std() * 2))
-
-
-# def plot_cluster():
-#     data = loadPickle("test_data_transformed")
-#     labels = loadPickle("test_labels")
-#     data_by_labels = dict()
-#
-#     for index, l in enumerate(labels):
-#         data_by_labels[l] = data.get(index)
-#
-#     data_by_labels = pd.DataFrame.from_dict(data_by_labels)
-#
-# def cluster():
-#     data = loadPickle("train_data_transformed")
-#     try_algorithms = {"KMeans": KMeans(n_clusters=15), "AffinityPropagation": AffinityPropagation(),
-#                       "MeanShift": MeanShift()}
-
-def time_executed(start_time, process_name):
-    end_time = time.time()
-    log.info("%s ended: %s" % (process_name, time.localtime(end_time)))
-    execution_time = end_time - start_time
-    hours, rem = divmod(execution_time, 3600)
-    minutes, seconds = divmod(rem, 60)
-    log.info((process_name, " executed for {:0>2}:{:0>2}:{:05.2f}".format(int(hours), int(minutes), seconds)))
-
-
 def run():
-    # cross_validation()
     train_test()
 
 
@@ -124,5 +69,5 @@ if __name__ == '__main__':
     try:
         main()
     except Exception as ex:
-        log.error(ex)
-    time_executed(start, "Document clustering")
+        log.exception(ex)
+    timer.time_executed(start, "Document clustering")
